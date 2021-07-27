@@ -15,7 +15,7 @@ public class Downloader extends Thread {
 	private String files; //storage name
 	private int idx;
 	
-    public Downloader (URL urls, String files, int idx) {
+	public Downloader (URL urls, String files, int idx) {
 		this.urls = urls;
 		this.files = files;
 		this.idx = idx;
@@ -24,10 +24,10 @@ public class Downloader extends Thread {
 	@Override
     public void run() {
 		try {
-        System.out.println( urls );
-        download( urls, files);
+        System.out.println(urls);
+        download(urls, files);
         }
-		catch(Exception ex) {
+		catch (Exception ex) {
             ex.printStackTrace();
         }
 		finally {
@@ -42,13 +42,13 @@ public class Downloader extends Thread {
                 new URL("https://www.pku.edu.cn"),
                 new URL("https://www.baidu.com"),
                 new URL("https://www.sina.com.cn"),
-            };
+        };
         final String[] files = {
                 "pku.htm", 
                 "baidu.htm",
                 "sina.htm", 
-            };
-        for(int idx=0; idx<urls.length; idx++){
+        };
+        for (int idx=0; idx<urls.length; idx++) {
         	Downloader[] w = new Downloader[idx+1]; 
         	w[idx] = new Downloader(urls[idx], files[idx], idx);
         	w[idx].start();
@@ -60,7 +60,7 @@ public class Downloader extends Thread {
         		OutputStream output = new FileOutputStream(file)) {
             byte[] data = new byte[1024];
             int length;
-            while((length=input.read(data))!=-1) {
+            while ((length=input.read(data)) != -1) {
                 output.write(data,0,length);
             }
         }
