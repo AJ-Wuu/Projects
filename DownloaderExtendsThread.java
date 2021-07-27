@@ -57,12 +57,12 @@ public class Downloader extends Thread {
     
     	static void download(URL url, String file) throws IOException {
         	try (InputStream input = url.openStream();
-        		OutputStream output = new FileOutputStream(file)) {
-            	byte[] data = new byte[1024];
-            	int length;
-            	while ((length=input.read(data)) != -1) {
-                	output.write(data,0,length);
-            	}
+        	OutputStream output = new FileOutputStream(file)) {
+            		byte[] data = new byte[1024];
+            		int length;
+            		while ((length=input.read(data)) != -1) {
+                		output.write(data,0,length);
+            		}
         	}
         	catch (IOException e) {
         		e.printStackTrace();
