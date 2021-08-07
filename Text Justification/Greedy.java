@@ -58,6 +58,9 @@ public class Greedy {
         	}
         
         	return padResult(result.toString().trim(), limit);
+		//trim() eliminates leading and trailing spaces.
+		//The unicode value of space character is '\u0020'.
+		//trim() checks the unicode value before and after the string, if it exists then removes the spaces and returns the omitted string.
     	}
 	
 	public static void textJustification(String[] strings, int limit) {
