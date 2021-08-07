@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Greedy {
 
-	//Microsoft
+	//Microsoft Word uses Greedy.
 	//This code implements the greedy which pads the right side with spaces until reaching the max width for the line
 	
 	private static int findRight(int left, String[] strings, int limit) {
