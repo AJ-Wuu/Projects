@@ -92,6 +92,7 @@ public class DP {
 		print(strings, recordIndex, countSquare[0], n);
 	}
 
+	//This is more concrete than wrapDP1
 	private static void wrapDP2(String[] strings, int[][] wastedSquare, int n) {
 		int[] countSquare = new int[n];
 		int[] recordIndex = new int[n];
