@@ -6,7 +6,7 @@ package textJustification;
 
 public class DP {
 	
-	//LaTeX use DP to wrap up words 
+	//LaTeX use DP to wrap up words
 
 	private static int[][] getWastedSquare(int[] lengths, int limit, int n) {
 		int[][] wastedSquare = new int[n][n];
