@@ -7,7 +7,7 @@ package textJustification;
 public class DP {
 	
 	//LaTeX uses DP to wrap up words.
-	//This code implements the DP starting from the last word, could be done from the first word with some simple modifications
+	//This code implements the DP starting from the last word, could be done from the first word with some simple modifications.
 
 	private static int[][] getWastedSquare(int[] lengths, int limit, int n) {
 		int[][] wastedSquare = new int[n][n];
