@@ -22,11 +22,11 @@ public class TextJustification {
 	 */
 
 	public static void main(String[] args) {
-		//String[] string = {"This", "project", "is", "for", "self", "practicing", "Dynamic",
-		//"Programming", "and", "Greedy", "Algorithm"};
-		String[] string = {"Tushar","Roy","likes","to","code"};
-		DP.textJustification(string, 10);
-		Greedy.textJustification(string, 10);
+		String[] string = {"This", "project", "is", "for", "self", "practicing", "Dynamic",
+		                   "Programming", "and", "Greedy", "Algorithm"};
+		//If this maxLength is shorter than the longest word (eg. we put 10 here but "programming" has 11 letters), it will get an out-of-bound.
+		DP.textJustification(string, 20);
+		Greedy.textJustification(string, 20);
 	}
 
 }
