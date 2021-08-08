@@ -73,6 +73,7 @@ public class Greedy {
             		left = right + 1;
         	}
         
+		System.out.println("Greedy (Justify):");
         	for (int i=0; i<result.size(); i++) {
         		System.out.println(result.get(i));
         	}
