@@ -7,10 +7,7 @@ package textJustification;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class GreedyWithoutSpaceArrangement {
-
-	//Microsoft Word uses Greedy.
-	//This code implements the greedy from the first word, and pads the right side with spaces until reaching the max width of the line.
+public class GreedyWithoutSpaceArrangement { //This method applys the "Left Align" functionn in Microsoft Word.
 	
 	private static int[] findRight(int left, String[] strings, int limit, int totalWasteSquare) {
 		int right = left;
