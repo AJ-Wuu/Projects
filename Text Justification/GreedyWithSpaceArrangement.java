@@ -6,7 +6,7 @@ package textJustification;
 
 import java.util.ArrayList;
 
-public class GreedyWithSpaceArrangement {
+public class GreedyWithSpaceArrangement { //This method applys the "Justify" function in Microsoft Word.
 
 	//Microsoft Word uses Greedy.
 	//This code implements the greedy from the first word, and pads the right side with spaces until reaching the max width of the line.
