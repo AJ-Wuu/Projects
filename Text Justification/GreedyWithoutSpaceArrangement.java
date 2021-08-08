@@ -16,7 +16,7 @@ public class GreedyWithoutSpaceArrangement { //This method applys the "Left Alig
 		while (right < strings.length && (sum + 1 + strings[right].length()) <= limit) {
 			sum += 1 + strings[right++].length();
 		}
-        totalWasteSquare += Math.pow((limit - sum), 2);
+        	totalWasteSquare += Math.pow((limit - sum), 2);
 		return (new int[]{totalWasteSquare, (right - 1)});
 	}
 	
@@ -39,17 +39,17 @@ public class GreedyWithoutSpaceArrangement { //This method applys the "Left Alig
 		Queue<Integer> recordIndex = new PriorityQueue<Integer>();
 		int totalWasteSquare = 0;
 		
-        int left = 0, right = 0;
-        recordIndex.add(left);
-        while (left < strings.length) {
-            int[] temp = findRight(left, strings, limit, totalWasteSquare);
-            totalWasteSquare = temp[0];
-            right = temp[1];
-            left = right + 1;
-            recordIndex.add(left);
-        }
+        	int left = 0, right = 0;
+        	recordIndex.add(left);
+        	while (left < strings.length) {
+            		int[] temp = findRight(left, strings, limit, totalWasteSquare);
+            		totalWasteSquare = temp[0];
+            		right = temp[1];
+            		left = right + 1;
+            		recordIndex.add(left);
+        	}
         
-        print(strings, recordIndex, totalWasteSquare, n);
-    }
+        	print(strings, recordIndex, totalWasteSquare, n);
+    	}
     
 }
