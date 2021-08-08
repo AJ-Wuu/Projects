@@ -71,9 +71,10 @@ public class DP {
 		int last = 0;
 		for (int i=0; i<n; ) {
 			last = recordIndex[i];
-			for (int j=i; j<last; j++) {
+			for (int j=i; j<last-1; j++) {
 				System.out.print(strings[j] + " ");
 			}
+			System.out.print(strings[last-1]);
 			System.out.println();
 			i = last;
 		}
