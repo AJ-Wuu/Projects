@@ -11,7 +11,7 @@ public class Main {
 		int wt[] = new int[] { 10, 20, 30 };
 		int W = 50;
 		int n = val.length;
-		System.out.println(Recursive.knapSack(W, wt, val, n));
+		System.out.println(Greedy.knapSack(W, wt, val, n));
 		System.out.println(DP.knapSack(W, wt, val, n));
 	}
 
