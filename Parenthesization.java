@@ -2,7 +2,6 @@
  * @author AJWuu
  */
 
-
 package parenthesization;
 
 public class Parenthesization {
