@@ -6,7 +6,7 @@ package parenthesization;
 
 public class Parenthesization {
 	
-	public static int countParenth(char symb[], char oper[], int n) {
+	public static int countParenthesis(char symb[], char oper[], int n) {
 		int F[][] = new int[n][n];
 		int T[][] = new int[n][n];
 
@@ -55,7 +55,7 @@ public class Parenthesization {
 		char operators[] = "|&^".toCharArray();
 		int n = symbols.length;
 		//There are 4 ways in total: ((T|T)&(F^T)), (T|(T&(F^T))), (((T|T)&F)^T) and (T|((T&F)^T))
-		System.out.println(countParenth(symbols, operators, n));
+		System.out.println(countParenthesis(symbols, operators, n));
 	}
 
 }
