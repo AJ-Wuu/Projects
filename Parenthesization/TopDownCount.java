@@ -15,10 +15,10 @@ public class TopDownCount {
 				Arrays.fill(col, -1);
 			}
 		}
-		return parenthesis_count(S, 0, N - 1, 1, dp);
+		return countParenthesis(S, 0, N - 1, 1, dp);
 	}
 
-	public static int parenthesis_count(String str, int i, int j, int isTrue, int[][][] dp) {
+	private static int countParenthesis(String str, int i, int j, int isTrue, int[][][] dp) {
 		if (i > j) {
 			return 0;
 		}
