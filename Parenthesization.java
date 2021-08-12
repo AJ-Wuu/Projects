@@ -21,7 +21,7 @@ public class Parenthesization {
 			for (int i=0, j=gap; j<n; i++, j++) {
 				T[i][j] = F[i][j] = 0;
 				for (int g=0; g<gap; g++) {
-					//Find place of parenthesization using current value of gap
+					//Find place of parenthesization
 					int k = i + g;
 
 					//Store Total[i][k] and Total[k+1][j]
