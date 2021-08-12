@@ -25,17 +25,17 @@ public class Parenthesization {
 					int k = i + g;
 
 					//Store Total[i][k] and Total[k+1][j]
-					int tik = T[i][k] + F[i][k];
-					int tkj = T[k + 1][j] + F[k + 1][j];
+					int ikTotal = T[i][k] + F[i][k];
+					int kjTotal = T[k + 1][j] + F[k + 1][j];
 
 					//Follow the recursive formulas according to the current operator
 					if (oper[k] == '&') {
 						T[i][j] += T[i][k] * T[k + 1][j];
-						F[i][j]	+= (tik * tkj - T[i][k] * T[k + 1][j]);
+						F[i][j]	+= (ikTotal * kjTotal - T[i][k] * T[k + 1][j]);
 					}
 					if (oper[k] == '|')	{
 						F[i][j] += F[i][k] * F[k + 1][j];
-						T[i][j] += (tik * tkj - F[i][k] * F[k + 1][j]);
+						T[i][j] += (ikTotal * kjTotal - F[i][k] * F[k + 1][j]);
 					}
 					if (oper[k] == '^')	{
 						T[i][j] += F[i][k] * T[k + 1][j] + T[i][k] * F[k + 1][j];
