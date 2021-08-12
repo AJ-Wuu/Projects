@@ -37,8 +37,8 @@ public class MemoCount {
 						F[i][j]	+= (ikTotal * kjTotal - T[i][k] * T[k + 1][j]);
 					}
 					if (oper[k] == '|')	{
-						F[i][j] += F[i][k] * F[k + 1][j];
 						T[i][j] += (ikTotal * kjTotal - F[i][k] * F[k + 1][j]);
+						F[i][j] += F[i][k] * F[k + 1][j];
 					}
 					if (oper[k] == '^')	{
 						T[i][j] += F[i][k] * T[k + 1][j] + T[i][k] * F[k + 1][j];
