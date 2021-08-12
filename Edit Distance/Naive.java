@@ -6,7 +6,7 @@ package editDistance;
 
 public class Naive {
 
-	public static int editDist(String str1, String str2, int m,	int n) {
+	public static int editDist(String str1, String str2, int m, int n) {
 		//first string is empty, insert all characters of second string into first
 		if (m == 0) {
 			return n;
@@ -24,10 +24,10 @@ public class Naive {
 
 		//last characters are not same, consider all three operations on last character of first string, 
 		//recursively compute minimum cost for all three operations and take minimum of three values
-		return 1 + Min.min(editDist(str1, str2, m, n - 1), // Insert
-				editDist(str1, str2, m - 1, n), // Remove
-				editDist(str1, str2, m - 1,	n - 1) // Replace
-				);
+		return (1 + Min.min(editDist(str1, str2, m, n-1), //insert
+				    editDist(str1, str2, m-1, n), //remove
+				    editDist(str1, str2, m-1, n-1) //replace
+				   ));
 	}
 
 }
