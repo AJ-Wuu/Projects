@@ -10,7 +10,7 @@ public class MemoCount {
 	//Space Complexity: O(n^2)
 	
 	public static int countParenthesis(char symb[], char oper[], int n) {
-		int T[][] = new int[n][n]; //T(i, j) represents the number of ways to parenthesize the symbols between i and j (both inclusive)
+		int T[][] = new int[n][n]; //T[i][j] represents the number of ways to parenthesize the symbols between i and j (both inclusive)
 		int F[][] = new int[n][n];
 
 		//Fill diagonal entries
@@ -29,25 +29,25 @@ public class MemoCount {
 
 					//Store Total[i][k] and Total[k+1][j]
 					int ikTotal = T[i][k] + F[i][k];
-					int kjTotal = T[k + 1][j] + F[k + 1][j];
+					int kjTotal = T[k+1][j] + F[k+1][j];
 
 					//Follow the recursive formulas according to the current operator
 					if (oper[k] == '&') {
-						T[i][j] += T[i][k] * T[k + 1][j];
-						F[i][j]	+= (ikTotal * kjTotal - T[i][k] * T[k + 1][j]);
+						T[i][j] += T[i][k] * T[k+1][j];
+						F[i][j]	+= (ikTotal * kjTotal - T[i][k] * T[k+1][j]);
 					}
 					if (oper[k] == '|')	{
-						T[i][j] += (ikTotal * kjTotal - F[i][k] * F[k + 1][j]);
-						F[i][j] += F[i][k] * F[k + 1][j];
+						T[i][j] += (ikTotal * kjTotal - F[i][k] * F[k+1][j]);
+						F[i][j] += F[i][k] * F[k+1][j];
 					}
 					if (oper[k] == '^')	{
-						T[i][j] += F[i][k] * T[k + 1][j] + T[i][k] * F[k + 1][j];
-						F[i][j] += T[i][k] * T[k + 1][j] + F[i][k] * F[k + 1][j];
+						T[i][j] += F[i][k] * T[k+1][j] + T[i][k] * F[k+1][j];
+						F[i][j] += T[i][k] * T[k+1][j] + F[i][k] * F[k+1][j];
 					}
 				}
 			}
 		}
-		return T[0][n - 1];
+		return T[0][n-1];
 	}
 
 }
