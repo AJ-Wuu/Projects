@@ -12,8 +12,8 @@ public class Parenthesization {
 
 		//Fill diagonal entries
 		for (int i=0; i<n; i++) {
-			F[i][i] = (symb[i] == 'F') ? 1 : 0;
 			T[i][i] = (symb[i] == 'T') ? 1 : 0;
+			F[i][i] = (symb[i] == 'F') ? 1 : 0;
 		}
 
 		//Fill Matrix[i][i+1], Matrix[i][i+2], Matrix[i][i+3], ...
