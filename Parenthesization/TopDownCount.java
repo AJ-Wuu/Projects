@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class TopDownCount {
 
 	public static int countWays(int N, String S) {
-		int dp[][][] = new int[N + 1][N + 1][2];
+		int dp[][][] = new int[N+1][N+1][2];
 		for (int row[][] : dp) {
 			for (int col[] : row) {
 				Arrays.fill(col, -1);
