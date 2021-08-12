@@ -30,8 +30,8 @@ public class BasicDP {
 				}
 				else { //If the last character is different, consider all possibilities and find the minimum
 					dp[i][j] = 1 + Min.min(dp[i][j-1], //insert
-							               dp[i-1][j], //remove
-							               dp[i-1][j-1]); //replace
+							       dp[i-1][j], //remove
+							       dp[i-1][j-1]); //replace
 				}
 			}
 		}
