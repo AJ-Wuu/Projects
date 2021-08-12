@@ -15,7 +15,7 @@ public class TopDownCount {
 				Arrays.fill(col, -1);
 			}
 		}
-		return countParenthesis(S, 0, N - 1, 1, dp);
+		return countParenthesis(S, 0, N-1, 1, dp);
 	}
 
 	private static int countParenthesis(String str, int i, int j, int isTrue, int[][][] dp) {
@@ -36,34 +36,34 @@ public class TopDownCount {
 
 		int temp_ans = 0;
 		int leftTrue, rightTrue, leftFalse, rightFalse;
-		for (int k = i + 1; k <= j - 1; k = k + 2) {
-			if (dp[i][k - 1][1] != -1) {
-				leftTrue = dp[i][k - 1][1];
+		for (int k=i+1; k<=j-1; k+=2) {
+			if (dp[i][k-1][1] != -1) {
+				leftTrue = dp[i][k-1][1];
 			}
 			else {
 				//Count number of True in left Partition
-				leftTrue = countParenthesis(str, i, k - 1, 1, dp);
+				leftTrue = countParenthesis(str, i, k-1, 1, dp);
 			}
-			if (dp[i][k - 1][0] != -1) {
-				leftFalse = dp[i][k - 1][0];
+			if (dp[i][k-1][0] != -1) {
+				leftFalse = dp[i][k-1][0];
 			}
 			else {
 				//Count number of False in left Partition
-				leftFalse = countParenthesis(str, i, k - 1, 0, dp);
+				leftFalse = countParenthesis(str, i, k-1, 0, dp);
 			}
-			if (dp[k + 1][j][1] != -1) {
-				rightTrue = dp[k + 1][j][1];
+			if (dp[k+1][j][1] != -1) {
+				rightTrue = dp[k+1][j][1];
 			}
 			else {
 				//Count number of True in right Partition
-				rightTrue = countParenthesis(str, k + 1, j, 1, dp);
+				rightTrue = countParenthesis(str, k+1, j, 1, dp);
 			}
-			if (dp[k + 1][j][0] != -1) {
-				rightFalse = dp[k + 1][j][0];
+			if (dp[k+1][j][0] != -1) {
+				rightFalse = dp[k+1][j][0];
 			}
 			else {
 				//Count number of False in right Partition
-				rightFalse = countParenthesis(str, k + 1, j, 0, dp);
+				rightFalse = countParenthesis(str, k+1, j, 0, dp);
 			}
 
 			//Evaluate AND operation
