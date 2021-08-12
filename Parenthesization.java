@@ -5,9 +5,7 @@
 package parenthesization;
 
 public class Parenthesization {
-
-	//Count all possible parenthesizations that lead to result true for a boolean expression 
-	//with symbols like true and false and operators like &, | and ^ filled between symbols
+	
 	public static int countParenth(char symb[], char oper[], int n) {
 		int F[][] = new int[n][n];
 		int T[][] = new int[n][n];
