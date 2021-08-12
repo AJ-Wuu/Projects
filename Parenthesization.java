@@ -7,8 +7,8 @@ package parenthesization;
 public class Parenthesization {
 	
 	public static int countParenthesis(char symb[], char oper[], int n) {
+		int T[][] = new int[n][n]; //T(i, j) represents the number of ways to parenthesize the symbols between i and j (both inclusive)
 		int F[][] = new int[n][n];
-		int T[][] = new int[n][n];
 
 		//Fill diagonal entries
 		for (int i=0; i<n; i++) {
