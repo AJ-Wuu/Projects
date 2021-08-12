@@ -10,23 +10,23 @@ public class Main {
 
 	public static void main(String[] args) {
 		String Symbols = "TTFT";
-        	String Operators = "|&^";
+        String Operators = "|&^"; //'^' is XOR
         
 		char symbols[] = Symbols.toCharArray();
 		char operators[] = Operators.toCharArray();
 		int n = symbols.length;
 		System.out.println(MemoCount.countParenthesis(symbols, operators, n));
 
-        	StringBuilder S = new StringBuilder();
-        	int j = 0;
-        	for (int i=0; i<Symbols.length(); i++){
-            		S.append(Symbols.charAt(i));
-            		if (j < Operators.length()) {
-                		S.append(Operators.charAt(j++));
-			}
-        	}
-        	int N = S.length();
-        	System.out.println(TopDownCount.countWays(N, S.toString()));
+        StringBuilder S = new StringBuilder();
+        int j = 0;
+        for (int i=0; i<Symbols.length(); i++){
+            S.append(Symbols.charAt(i));
+            if (j < Operators.length()) {
+                S.append(Operators.charAt(j++));
+            }
+        }
+        int N = S.length();
+        System.out.println(TopDownCount.countWays(N, S.toString()));
 	}
 	
 }
