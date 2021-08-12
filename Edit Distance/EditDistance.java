@@ -21,7 +21,7 @@ public class EditDistance {
 		String str5 = "voldemort";
 		String str6 = "dumbledore";
 		int m = str5.length(), n = str6.length();
-		int[][] dp = new int[m + 1][n + 1];
+		int[][] dp = new int[m+1][n+1];
 		for(int i=0; i<m+1; i++) {
 			Arrays.fill(dp[i], -1);
 		}
