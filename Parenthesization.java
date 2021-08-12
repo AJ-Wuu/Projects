@@ -16,8 +16,7 @@ public class Parenthesization {
 			T[i][i] = (symb[i] == 'T') ? 1 : 0;
 		}
 
-		//Fill T[i][i+1], T[i][i+2], T[i][i+3]... in order,
-		//and F[i][i+1], F[i][i+2], F[i][i+3]... in order
+		//Fill Matrix[i][i+1], Matrix[i][i+2], Matrix[i][i+3], ...
 		for (int gap=1; gap<n; gap++) {
 			for (int i=0, j=gap; j<n; i++, j++) {
 				T[i][j] = F[i][j] = 0;
