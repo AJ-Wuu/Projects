@@ -42,28 +42,28 @@ public class TopDownCount {
 			}
 			else {
 				//Count number of True in left Partition
-				leftTrue = parenthesis_count(str, i, k - 1, 1, dp);
+				leftTrue = countParenthesis(str, i, k - 1, 1, dp);
 			}
 			if (dp[i][k - 1][0] != -1) {
 				leftFalse = dp[i][k - 1][0];
 			}
 			else {
 				//Count number of False in left Partition
-				leftFalse = parenthesis_count(str, i, k - 1, 0, dp);
+				leftFalse = countParenthesis(str, i, k - 1, 0, dp);
 			}
 			if (dp[k + 1][j][1] != -1) {
 				rightTrue = dp[k + 1][j][1];
 			}
 			else {
 				//Count number of True in right Partition
-				rightTrue = parenthesis_count(str, k + 1, j, 1, dp);
+				rightTrue = countParenthesis(str, k + 1, j, 1, dp);
 			}
 			if (dp[k + 1][j][0] != -1) {
 				rightFalse = dp[k + 1][j][0];
 			}
 			else {
 				//Count number of False in right Partition
-				rightFalse = parenthesis_count(str, k + 1, j, 0, dp);
+				rightFalse = countParenthesis(str, k + 1, j, 0, dp);
 			}
 
 			//Evaluate AND operation
