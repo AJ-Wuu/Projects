@@ -10,9 +10,7 @@ public class Parenthesization {
 		int F[][] = new int[n][n];
 		int T[][] = new int[n][n];
 
-		//Fill diagonal entries first
-		//All diagonal entries in T[i][i] are 1 if symbol[i] is T (true)
-		//Similarly, all F[i][i] entries are 1 if symbol[i] is F (False)
+		//Fill diagonal entries
 		for (int i=0; i<n; i++) {
 			F[i][i] = (symb[i] == 'F') ? 1 : 0;
 			T[i][i] = (symb[i] == 'T') ? 1 : 0;
