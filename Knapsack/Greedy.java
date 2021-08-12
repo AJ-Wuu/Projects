@@ -12,9 +12,7 @@ public class Greedy {
 			return 0;
 		}
 
-		//If weight of the nth item is more than Knapsack capacity W,
-		//then this item cannot be included in the optimal solution
-		if (wt[n-1] > W) {
+		if (wt[n-1] > W) { //If weight of the nth item is more than Knapsack capacity W, then this item cannot be included in the optimal solution
 			return knapSack(W, wt, val, n-1);
 		}
 		else { //Return the maximum of two cases: nth item included OR not included
