@@ -40,33 +40,28 @@ public class TopDownCount {
 			if (dp[i][k-1][1] != -1) {
 				leftTrue = dp[i][k-1][1];
 			}
-			else {
-				//Count number of True in left Partition
+			else { //Count number of True in left Partition
 				leftTrue = countParenthesis(str, i, k-1, 1, dp);
 			}
 			if (dp[i][k-1][0] != -1) {
 				leftFalse = dp[i][k-1][0];
 			}
-			else {
-				//Count number of False in left Partition
+			else { //Count number of False in left Partition
 				leftFalse = countParenthesis(str, i, k-1, 0, dp);
 			}
 			if (dp[k+1][j][1] != -1) {
 				rightTrue = dp[k+1][j][1];
 			}
-			else {
-				//Count number of True in right Partition
+			else { //Count number of True in right Partition
 				rightTrue = countParenthesis(str, k+1, j, 1, dp);
 			}
 			if (dp[k+1][j][0] != -1) {
 				rightFalse = dp[k+1][j][0];
 			}
-			else {
-				//Count number of False in right Partition
+			else { //Count number of False in right Partition
 				rightFalse = countParenthesis(str, k+1, j, 0, dp);
 			}
 
-			//Evaluate AND operation
 			if (str.charAt(k) == '&') {
 				if (isTrue == 1) {
 					temp_ans = temp_ans + leftTrue * rightTrue;
@@ -75,7 +70,6 @@ public class TopDownCount {
 					temp_ans = temp_ans + leftTrue * rightFalse + leftFalse * rightTrue + leftFalse * rightFalse;
 				}
 			}
-			//Evaluate OR operation
 			else if (str.charAt(k) == '|') {
 				if (isTrue == 1) {
 					temp_ans = temp_ans + leftTrue * rightTrue + leftTrue * rightFalse + leftFalse * rightTrue;
@@ -84,7 +78,6 @@ public class TopDownCount {
 					temp_ans = temp_ans + leftFalse * rightFalse;
 				}
 			}
-			//Evaluate XOR operation
 			else if (str.charAt(k) == '^') {
 				if (isTrue == 1) {
 					temp_ans = temp_ans + leftTrue * rightFalse + leftFalse * rightTrue;
@@ -95,6 +88,7 @@ public class TopDownCount {
 			}
 			dp[i][j][isTrue] = temp_ans;
 		}
+		
 		return temp_ans;
 	}
 	
