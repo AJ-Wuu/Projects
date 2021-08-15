@@ -7,8 +7,7 @@ package blackjack;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Card {
-	//This initialization is unnecessarily complex; it's just for practicing enums
+public class Card { //This initialization is unnecessarily complex; it's just for practicing enums
 	private final int value;
 	private final Rank rank; //Queen, Ace, etc.
 	private final Suit suit; //Diamond, Club, Heart and Spade. Not necessary for this program, but it's fun to add them LOL
