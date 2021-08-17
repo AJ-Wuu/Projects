@@ -7,6 +7,8 @@ package editDistance;
 import java.util.Arrays;
 
 public class EditDistance {
+	
+	//Used for DNA comparison, diff, CVS/SVN/..., spellchecking (typos), plagiarism detection, etc.
 
 	public static void main(String args[]) {
 		String str1 = "sunday";
