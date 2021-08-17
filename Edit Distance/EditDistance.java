@@ -9,6 +9,9 @@ import java.util.Arrays;
 public class EditDistance {
 	
 	//Used for DNA comparison, diff, CVS/SVN/..., spellchecking (typos), plagiarism detection, etc.
+	
+	//If insert & delete cost 1, replace costs 0, minimum edit distance equivalent to finding longest common subsequence.
+	//Note that a subsequence is sequential but not necessarily contiguous.
 
 	public static void main(String args[]) {
 		String str1 = "sunday";
