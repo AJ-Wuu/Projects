@@ -37,7 +37,7 @@ public class Board {
 	
 	public static void start() {
 		System.out.println("Start");
-		freshBoard(squareSize);
+//		freshBoard(squareSize);
 //		Tiles tiles = new Tiles(squareSize, boardWidth, boardHeight, (int)(boardHeight/squareSize), (int)(boardWidth/squareSize), board);
 	}
 	
