@@ -75,8 +75,8 @@ public class Buttons extends Container implements ActionListener {
 			}
 			else {
 				pauseButton.setEnabled(true);
+				Board.start();
 			}
-			Board.start();
 		}
 		if(e.getSource() == Buttons.pauseButton) {
 			Board.pause();
