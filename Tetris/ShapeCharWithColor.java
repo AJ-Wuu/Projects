@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum ShapeCharWithColor {
-	Z (PieceShapeInChar.allShapesInChar[0], Color.black, 3, 2),
-	S (PieceShapeInChar.allShapesInChar[1], Color.blue, 3, 2),
+	Z (PieceShapeInChar.allShapesInChar[0], Color.blue, 3, 2),
+	S (PieceShapeInChar.allShapesInChar[1], Color.cyan, 3, 2),
 	I (PieceShapeInChar.allShapesInChar[2], Color.gray, 1, 4),
 	T (PieceShapeInChar.allShapesInChar[3], Color.green, 3, 2),
 	Square (PieceShapeInChar.allShapesInChar[4], Color.magenta, 2, 2),
