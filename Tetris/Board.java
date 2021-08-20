@@ -6,7 +6,6 @@ package tetris;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,29 +17,30 @@ public class Board {
 	public static JPanel board;
 	private static JLabel status;
 
-	public Board(JLabel label) {
+	public Board(Frame frame) {
 		board = new JPanel(null);
 		//1. change the Layout in the parenthesis (to BorderLayout, for example) for better arranging the place of buttons
 		//   Note that the locations would be strictly aligned to the layout defaults, and setBounds() would not work
 		//2. change the layout to null will make the panel in the "Absolute Layout",
 		//   where it's able to set the position of the JLabel and JButton with setBounds()
-		status = label;
+		status = frame.status;
+		boardWidth = frame.Width;
+		boardHeight = frame.Height;
 		freshBoard(squareSize);
 	}
 
-	private static void freshBoard(int squareSize) {
-		board.setPreferredSize(new Dimension(boardWidth = 300, boardHeight = 400));
+	private void freshBoard(int squareSize) {
+		board.setPreferredSize(new Dimension(boardWidth, boardHeight));
 		board.setBackground(Color.white);
 		board.add(new Buttons(board, status, boardWidth, boardHeight));
-		board.add(new KeyMoves(board, squareSize, boardWidth/2));
+		board.add(new KeyMoves(board, squareSize, boardWidth/2));  
 	}
-	
+
 	public static void start() {
 		System.out.println("Start");
-//		freshBoard(squareSize);
 //		Tiles tiles = new Tiles(squareSize, boardWidth, boardHeight, (int)(boardHeight/squareSize), (int)(boardWidth/squareSize), board);
 	}
-	
+
 	public static void pause() {
 		try {
 			Thread.sleep(5);
@@ -58,11 +58,7 @@ public class Board {
 		}
 		status.setText("You've earned: " + String.valueOf(Tiles.numLinesRemoved));
 	}
-	
-	public void paintComponent(Graphics g) {
-    	g.setColor(Color.black);
-        g.drawLine(0, 50, boardWidth, 50);
-    }
+
 
 	//	private Point[] getNewPiece() {
 	//		ShapePointWithColor shape = PieceShapeInPoint.getRandomShape();
