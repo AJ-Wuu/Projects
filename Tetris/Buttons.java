@@ -13,7 +13,7 @@ public class Buttons extends Container implements ActionListener {
 	boolean isPaused = false;
 	boolean isRestart = true;
 	public static JButton startButton, pauseButton;
-	public int buttonHeight = 30;
+	public static int buttonHeight = 30;
 
 	public Buttons(JPanel board, JLabel status, int boardWidth, int boardHeight) {		
 		//define
@@ -24,14 +24,19 @@ public class Buttons extends Container implements ActionListener {
 
 
 		//locate
-		startButton.setBounds(0, 0, boardWidth/2-1, buttonHeight);
-		pauseButton.setBounds(boardWidth/2+1, 0, boardWidth/2-1, buttonHeight);
+		startButton.setBounds(0, 0, boardWidth/2-10, buttonHeight);
+		pauseButton.setBounds(boardWidth/2+1, 0, boardWidth/2-10, buttonHeight);
 
 		//act
 		//There should be no loop in the button action
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				status.setText("Let's Go");
+				if (isRestart) {
+					status.setText("Let's Go");
+				}
+				else {
+					status.setText("Try Again");
+				}
 				pauseButton.setText("Pause");
 			}
 		});
