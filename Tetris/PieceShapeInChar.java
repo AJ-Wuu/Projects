@@ -9,11 +9,12 @@ import java.util.Random;
 
 public class PieceShapeInChar {
 	
-	private static int pieceWidth = 4;
-	private static int pieceHeight = 4;
+	public static int pieceNumber = 4;
+	public static int pieceWidth = 4;
+	public static int pieceHeight = 4;
 
 	public static final char[][] allShapesInChar = {
-			"....XX...XX.....".toCharArray(), //Z-shape
+			".....XX...XX....".toCharArray(), //Z-shape
 			".....XX.XX......".toCharArray(), //S-shape
 			"X...X...X...X...".toCharArray(), //I-shape (Line)
 			"XXX..X..........".toCharArray(), //T-shape
@@ -28,7 +29,7 @@ public class PieceShapeInChar {
 		for (int i=0; i<pieceWidth*pieceHeight; i++) {
 			x = i % 4;
 			y = i / 4;
-			newShape[12 + y - x * pieceWidth] = oldShape[i];
+			newShape[3 - y + x * pieceWidth] = oldShape[i];
 		}
 		return newShape; //Converting char Char to String can be done by String str = new String(charArray);
 	}
@@ -50,15 +51,15 @@ public class PieceShapeInChar {
 		for (int i=0; i<pieceWidth*pieceHeight; i++) {
 			x = i % 4;
 			y = i / 4;
-			newShape[3 + y + x * pieceWidth] = oldShape[i];
+			newShape[12 + y - x * pieceWidth] = oldShape[i];
 		}
 		return newShape;
 	}
 	
 	public static char[] rotateShapes(char[] shape, int degrees) {
-		degrees /= 90;
+		degrees /= 90; //rotate counterclockwise
 		switch (degrees) {
-		case 0: //0 degree
+		case 0: case 4: //0 degree OR 360 degrees
 			return shape;
 		case 1: //90 degrees
 			return rotateHelper90(shape);
@@ -74,6 +75,11 @@ public class PieceShapeInChar {
 		List<ShapeCharWithColor> list = ShapeCharWithColor.buildList();
 		Random rand = new Random();
 		return list.get(rand.nextInt(list.size()));
+	}
+	
+	public static int getRandomDegrees() {
+		Random rand = new Random();
+		return rand.nextInt(360);
 	}
 	
 }
