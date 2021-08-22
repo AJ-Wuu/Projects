@@ -28,6 +28,7 @@ public class Board extends JPanel implements ActionListener, KeyListener {
 
 	private static int squareSize, boardWidth, boardHeight, squareNumber, charRow, charCol;
 	private static Frame frame;
+	private JLabel status;
 	private static boolean isNewRound = true, isFinished = false;
 
 	Timer timer = new Timer(5, this);
@@ -38,17 +39,19 @@ public class Board extends JPanel implements ActionListener, KeyListener {
 	int degrees;
 	char[] currShapeArray;
 	Area shapeG2 = new Area();
-	ArrayList<Area> finalShapeG2 = new ArrayList<Area>(); //store every popped up area (NOTE that area carries the coordinates itself)
-	ArrayList<Color> finalShapeColor = new ArrayList<Color>(); //store the color of each corresponding area
+	ArrayList<Area> finalShapeG2 = new ArrayList<Area>(); //every popped up area (NOTE that area carries the coordinates itself)
+	ArrayList<Color> finalShapeColor = new ArrayList<Color>(); //the color of each corresponding area
 	int[] location;
-	Hashtable<Integer, Integer> heightsInShape = new Hashtable<Integer, Integer>(); //store the heights of each square (relative to the top-left one) in a shape as <x, height at x>
-	Hashtable<Integer, Integer> heightsInShapeWithBlank = new Hashtable<Integer, Integer>(); //store the heights of each square (relative to the top-left one) as <x, y_max>
-	boolean[][] squarePiled; //record the height of squares piled on each square of the board
-	int[] yPainted;
-	int bump; //record the absolute x_index of the square which meets the criteria that cause it to stop moving
+	Hashtable<Integer, Integer> heightsInShape = new Hashtable<Integer, Integer>(); //the heights of each square (relative to the top-left one) in a shape as <x, height at x>
+	Hashtable<Integer, Integer> heightsInShapeWithBlank = new Hashtable<Integer, Integer>(); //the heights of each square (relative to the top-left one) as <x, y_max>
+	boolean[][] squarePiled; //the height of squares piled on each square of the board
+	int[] yPainted; //the largest y of unpainted square for each x
+	int bump; //the absolute x_index of the square which meets the criteria that cause it to stop moving
+	int count = 0; //the number of full lines removed
 
 	public Board(Frame jframe) {
 		frame = jframe;
+		status = Frame.status;
 		boardWidth = frame.Width;
 		boardHeight = frame.Height - 3*frame.labelSize - frame.buttonSize;
 		squareSize = frame.squareSize;
@@ -80,19 +83,28 @@ public class Board extends JPanel implements ActionListener, KeyListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
+
+		//draw existing shapes
 		g2.setStroke(new BasicStroke(3));
 		g2.drawLine(0, squareSize*squareNumber, boardWidth, squareSize*squareNumber);
 		for (int i=0; i<finalShapeG2.size(); i++) {
 			g2.setColor(finalShapeColor.get(i));
 			g2.fill(finalShapeG2.get(i)); //paint every existing shapes
 		}
-		//		while (!isFinished) {
+
+		//go with new shape
 		if (isNewRound) {
 			if (shape != null) {
+				//check every movement
 				finalShapeG2.add(shapeG2);
 				finalShapeColor.add(shape.getColor()); //DO NOT use g2.getColor(), or it will constantly be black
-				piledUP();
-				System.out.println();
+				checkIfStop();
+				if (!isFinished) {
+					piledUP();
+				}
+				else {
+					return ;
+				}
 			}
 			x = xInit; //Go back to the original settings
 			y = yInit;
@@ -106,7 +118,6 @@ public class Board extends JPanel implements ActionListener, KeyListener {
 		g2.fill(shapeG2);
 		velY = 1; //set initial velocity on y
 		getNextShape();
-		//		}
 	}
 
 	private Area buildShape(ShapeCharWithColor shape, int degrees) {
@@ -161,7 +172,6 @@ public class Board extends JPanel implements ActionListener, KeyListener {
 	}
 
 	private void getNextShape() {
-		System.out.println(x/squareSize + ", " + y/squareSize + ", " + squarePiled[x/squareSize][y/squareSize]);
 		if (y == boardHeight - squareSize - yDown) { //reach the bottom of the board
 			isNewRound = true;
 			return ;
@@ -174,7 +184,6 @@ public class Board extends JPanel implements ActionListener, KeyListener {
 				isNewRound = true;
 			}
 		}
-
 	}
 
 	private void piledUP() {
@@ -187,35 +196,38 @@ public class Board extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		else { //bump with other squares
-			int length = location.length;
-			int[] reverseLocation = new int[length];
-			for (int i=0; i<length; i+=2) {
-				reverseLocation[i] = location[i];
-				reverseLocation[i+1] = charRow - location[i+1];
+			//find the bottom square of bumping x
+			int xRel = bump - x/squareSize; //xRel is the relative x_index
+			int xBottom = location[0] + xRel;
+			int yBottom = 0;
+			for (int i=0; i<location.length; i+=2) {
+				if (location[i] == xBottom) {
+					yBottom = Math.max(yBottom, location[i+1]);
+				}
 			}
-			int xRel = bump - location[0]; //xRel is the relative x_index
-			int yAbs = yPainted[bump]; //yAbs is the absolute y_index
-			for (int i=length-2; i>=0; i-=2) {
-				int temp = xRel+location[i];
-				squarePiled[temp][yPainted[temp]-reverseLocation[i+1]] = true;
-				yPainted[temp] -= 1;
+
+			//change location array in relative to (xBottom, yBottom)
+			for (int i=0; i<location.length; i+=2) {
+				location[i] -= xBottom;
+				location[i+1] -= yBottom;
 			}
-			
-			
-//			Arrays.fill(squarePiled[bump], yPainted[bump]-heightsInShape.get(xRel), yPainted[bump], true);
-//			yPainted[bump] -= heightsInShape.get(xRel);
-//			int yTopRel = yPainted[bump]; //yTopRel is the relative y_index of the top square
-//			System.out.println();
-//			for (int i=xLeft/squareSize; i<xRight/squareSize+1 && i!=xRel; i++) {
-//				Arrays.fill(squarePiled[bump+i], heightsInShapeWithBlank.get(i), yPainted[curr], true);
-//				yPainted[curr] -= heightsInShape.get(i);
-//			}
+
+			//mark in squarePiled[] and yPainted[] with the absolute x_index and y_index
+			int xAbs = bump;
+			int yAbs = yPainted[bump] - 1;
+			for (int i=0; i<location.length; i+=2) {
+				squarePiled[xAbs+location[i]][yAbs+location[i+1]] = true;
+				yPainted[xAbs+location[i]] = Math.min(yAbs+location[i+1], yPainted[xAbs+location[i]]);
+			}
 		}
-		
+
 	}
 
-	private void stop(Graphics2D g2) {
-		//		roundFinished = false;
+	private void checkIfStop() {
+		if (y <= squareSize*squareNumber) {
+			isFinished = true;
+			status.setText("Good Job! You've earned " + count);
+		}
 	}
 
 	@Override
