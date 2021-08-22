@@ -10,16 +10,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 @SuppressWarnings("serial")
 public class Buttons extends Container implements ActionListener {
 	boolean isPaused = false;
 	boolean isRestart = true;
+	private Frame frame;
+	private Board board;
 	public static JButton startButton, pauseButton;
 	public static int buttonHeight = 30;
 
-	public Buttons(JPanel board, JLabel status, int boardWidth, int boardHeight) {		
+	public Buttons(Frame frame, JLabel status, Board board, int Width, int Height) {	
+		this.frame = frame;
+		this.board = board;
+		
 		//define
 		startButton = new JButton("New Game");
 		startButton.addActionListener(this);
@@ -28,8 +33,8 @@ public class Buttons extends Container implements ActionListener {
 
 
 		//locate
-		startButton.setBounds(0, 0, boardWidth/2-10, buttonHeight);
-		pauseButton.setBounds(boardWidth/2+1, 0, boardWidth/2-10, buttonHeight);
+		startButton.setBounds(0, 0, Width/2-10, buttonHeight);
+		pauseButton.setBounds(Width/2+1, 0, Width/2-10, buttonHeight);
 
 		//act
 		//There should be no loop in the button action
@@ -58,11 +63,11 @@ public class Buttons extends Container implements ActionListener {
 			}
 		});
 
-		//add to board
-		//When using layouts, it would be like board.add(startButton, BorderLayout.NORTH);
-		//However, this layout being used should be the same as the one declared in board, otherwise, it won't work
-		board.add(startButton);
-		board.add(pauseButton);
+		//add to frame
+		//When using layouts, it would be like frame.add(startButton, BorderLayout.NORTH);
+		//However, this layout being used should be the same as the one declared in frame, otherwise, it won't work
+		frame.add(startButton);
+		frame.add(pauseButton);
 
 		pauseButton.setEnabled(false); //make pause disabled before the game starts, and enable it after clicking start
 	}
@@ -72,14 +77,33 @@ public class Buttons extends Container implements ActionListener {
 			isRestart = !isRestart;
 			if (isRestart) {
 				pauseButton.setEnabled(false);
+				frame.remove(board);
 			}
 			else {
 				pauseButton.setEnabled(true);
-				Board.start();
+				start();
 			}
 		}
 		if(e.getSource() == Buttons.pauseButton) {
-			Board.pause();
+			if (isPaused) {
+				try {
+					board.wait();
+//					Thread.sleep(3000);
+				} catch (InterruptedException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+			}
+			else { 
+				board.notify();
+			}
 		}
 	}
+	
+	private void start() {
+		board = new Board(frame);
+		frame.add(board);
+		SwingUtilities.updateComponentTreeUI(frame);
+	}
+	
 }
