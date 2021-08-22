@@ -16,4 +16,4 @@ See Frame.java instruction()
 **Reflection**  
 1. My shapes do not move per square, but move in length of 1, so it's a little bit too tricky to align them together and get a full line.  
 2. Board.java may not be in the perfect looking, as I didn't collect the relative position information of each square of a shape in an optimal way.  
-3. I found this code after finishing my code: https://zetcode.com/javagames/tetris/. I believe it's a good reference for comparasion.
+3. I found this code after finishing mine: https://zetcode.com/javagames/tetris/. I believe it's a good reference for later comparasion.
