@@ -16,12 +16,12 @@ import javax.swing.SwingUtilities;
 public class ButtonsManualMode extends Container implements ActionListener {
 	boolean isPaused = false;
 	boolean isRestart = true;
-	private FrameManualMode frame;
+	private Frame frame;
 	private BoardManualMode board;
 	public static JButton startButton, pauseButton;
 	public static int buttonHeight = 30;
 
-	public ButtonsManualMode(FrameManualMode frame, JLabel status, BoardManualMode board, int Width, int Height) {	
+	public ButtonsManualMode(Frame frame, JLabel status, BoardManualMode board, int Width, int Height) {	
 		this.frame = frame;
 		this.board = board;
 		
@@ -88,9 +88,7 @@ public class ButtonsManualMode extends Container implements ActionListener {
 			if (isPaused) {
 				try {
 					board.wait();
-//					Thread.sleep(3000);
 				} catch (InterruptedException e2) {
-					// TODO Manual-generated catch block
 					e2.printStackTrace();
 				}
 			}
