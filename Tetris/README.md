@@ -16,7 +16,9 @@ See *Frame.java instruction()*
 **Reflection on the Project**  
 1. My shapes do not move per square, but move in length of 1, so it's a little bit too tricky to align them together and get a full line.  
 2. Board.java may not be in the perfect looking, as I didn't collect the relative position information of each square of a shape in an optimal way.  
-3. I found this code after finishing mine: https://zetcode.com/javagames/tetris/. I believe it's a good reference for later comparasion.  
+3. I found this code after finishing mine: https://zetcode.com/javagames/tetris/. It's not running as it should be on my end somehow, but I believe it's a good reference for later comparasion.  
 
 **Soliloquy**  
-First time using Java GUI and first time building a game. Very exciting and very tiring. I could think of several different improvements (like how to optimize the data collected in Board.java), but I'll save them. This game has taken me 4 days, so I think it's the best (for both of us LOL) to cool down a little bit with other things.
+First time using Java GUI and first time building a game. Very exciting and very tiring. I could think of several different improvements (like how to optimize the structure in Board.java), but I'll save them now. This game has taken me four days, so I think it's the best (for both of us LOL) to cool down a little bit with other things.  
+It feels GREAT to do a whole small project on my own. At the beginning I thought this should be one of the simplest game, but it turns out that things always bite you in an unexpected situation. I learned by myself for all the problems, and I got to know so much more about Java GUI.  
+All in all, I'm so glad I decided to write this instead of letting it pass by reading sample codes ~~(mainly because there isn't any)~~, maybe I'll come back for it in the future to make it better.
