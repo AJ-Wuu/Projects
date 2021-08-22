@@ -16,12 +16,12 @@ import javax.swing.SwingUtilities;
 public class ButtonsAutoMode extends Container implements ActionListener {
 	boolean isPaused = false;
 	boolean isRestart = true;
-	private FrameAutoMode frame;
+	private Frame frame;
 	private BoardAutoMode board;
 	public static JButton startButton, pauseButton;
 	public static int buttonHeight = 30;
 
-	public ButtonsAutoMode(FrameAutoMode frame, JLabel status, BoardAutoMode board, int Width, int Height) {	
+	public ButtonsAutoMode(Frame frame, JLabel status, BoardAutoMode board, int Width, int Height) {	
 		this.frame = frame;
 		this.board = board;
 		
@@ -88,9 +88,7 @@ public class ButtonsAutoMode extends Container implements ActionListener {
 			if (isPaused) {
 				try {
 					board.wait();
-//					Thread.sleep(3000);
 				} catch (InterruptedException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 			}
