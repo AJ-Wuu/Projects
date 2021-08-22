@@ -16,13 +16,13 @@ public class Driver {
 		if (str.equals("A") || str.equals("a") || str.equals("AutoMode") || str.equals("automode")) {
 			EventQueue.invokeLater(() -> {
 				@SuppressWarnings("unused")
-				FrameAutoMode game = new FrameAutoMode(scan);
+				Frame game = new Frame(scan, 0);
 			});
 		}
 		else {
 			EventQueue.invokeLater(() -> {
 				@SuppressWarnings("unused")
-				FrameManualMode game = new FrameManualMode(scan);
+				Frame game = new Frame(scan, 1);
 			});
 		}
 	}
