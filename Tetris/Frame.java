@@ -17,13 +17,13 @@ public class Frame extends JFrame {
 	//By Composition -> public class Frame { JFrame frame; } -> Better & More Secure
 
 	public static JLabel status;
-	public int Width = 400, Height = 600, labelSize = 20, squareSize = 20, buttonSize = 30;
+	public int Width = 400, Height = 590, labelSize = 20, squareSize = 20, buttonSize = 30;
 	static Frame frame;
 	static Board board;
 
 	@SuppressWarnings("unused")
 	public Frame() {
-		instructions();
+//		instructions();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(new Dimension(Width, Height));
 		this.setTitle("Tetris");
@@ -38,7 +38,9 @@ public class Frame extends JFrame {
 
 		status = new JLabel("Come and Play Tetris!");
 		status.setSize(new Dimension(Width, labelSize));
-		status.setForeground(Color.darkGray);
+		status.setForeground(Color.darkGray); //change the word color
+		status.setOpaque(true); //a component must be opaque for its background do be effective, a JLabel's default is false
+		status.setBackground(Color.lightGray); //change the label background
 		status.setBounds(0, Height-labelSize*3, Width, labelSize); //WHY 3???
 		frame = this;
 		board = new Board(this);
