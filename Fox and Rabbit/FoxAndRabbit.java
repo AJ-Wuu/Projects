@@ -1,3 +1,7 @@
+/**
+ * @author AJWuu
+ */
+
 package foxandrabbit;
 
 import java.util.ArrayList;
