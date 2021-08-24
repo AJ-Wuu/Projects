@@ -21,7 +21,7 @@ public class Schedule {
 		//Model--> table--ScheduleData
 		//JTable--> View & Control (Combination, commonly used to get the user input from a GUI)
 		JFrame frame = new JFrame();
-		JTable table = new JTable(new ScheduleData());
+		JTable table = new JTable(new Data());
 		JScrollPane pane = new JScrollPane(table);
 		frame.add(pane);
 		frame.pack();
