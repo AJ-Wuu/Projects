@@ -15,6 +15,16 @@ public class Driver {
 		String str = scan.next();
 		if (str.equals("A") || str.equals("a") || str.equals("AutoMode") || str.equals("automode")) {
 			EventQueue.invokeLater(() -> {
+				//Swing is basically thread unsafe. i.e., all interaction with that API needs to be performed on a single thread (the EDT).
+				//If you need to do GUI updates from another thread (timer thread, networking thread, ...), 
+				//you need to use methods like SwingUtilities.invokeLater, SwingUtilities.invokeAndWait, ...
+				
+				//If the program is not on the EDT and needs to do GUI updates 
+				//(like updating the GUI from some timer thread, or from some network thread, etc.), 
+				//the actionPerformed methods is to schedule the update to be performed by the EDT.
+				
+				
+				
 				@SuppressWarnings("unused")
 				Frame game = new Frame(scan, 0);
 				//First, There is absolutely no need to close the System.in stream.
