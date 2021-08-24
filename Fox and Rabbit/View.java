@@ -1,3 +1,7 @@
+/**
+ * @author AJWuu
+ */
+
 package field;
 
 import java.awt.Color;
