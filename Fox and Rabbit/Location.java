@@ -1,3 +1,7 @@
+/**
+ * @author AJWuu
+ */
+
 package field;
 
 public class Location {
