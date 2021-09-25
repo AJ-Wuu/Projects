@@ -1,8 +1,8 @@
-package mementoDesignPattern;
-
 /**
  * @author AJWuu
  */
+
+package mementoDesignPattern;
 
 import java.util.Stack;
 
@@ -12,7 +12,7 @@ public class Editor {
 
     public Editor(EditorData editorData) {
         this.editorData = editorData;
-        this.snapshots = new Stack<>();
+        this.snapshots = new Stack<EditorData.Snapshot>();
     }
 
     public void changeText(String newText) {
