@@ -64,6 +64,8 @@ public class SkipList {
 	}
 
 	public void add(int num) {
+		//1. Flip coin for each LX (X > 0) from lowest to highest: head -> the new element is on the lane; tail -> stop flipping
+		//2. Do look-up for the new element and insert it into each of the lanes that it's on
 		Node pred = findPredecessor(num);
 		if (pred.next[0]!=null && pred.next[0].val==num) {
 			pred.next[0].count++;
@@ -80,6 +82,8 @@ public class SkipList {
 	}
 
 	public boolean erase(int num) {
+		//1. Do look-up for the value to delete
+		//2. Delete value from every lane it's on
 		Node pred = findPredecessor(num);
 		if (pred.next[0]==null || pred.next[0].val!=num) {
 			return false;
