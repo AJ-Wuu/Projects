@@ -6,7 +6,7 @@ import re
 #Preparation
 #browser driver, note that the version of chrome and chromedriver should match
 driver = webdriver.Chrome(executable_path='C:/Program Files/Google/Chrome/Application/chromedriver.exe')
-driver.get('https://www.biotech.wisc.edu/EventCalendar/calendar.asp?LoginGUID=&viewspan=month&uwbceventsonly=False&selectlocationid=&SelectEventMonth=10&SelectEventYear=2021')
+driver.get('https://www.biotech.wisc.edu/EventCalendar/calendar.asp?LoginGUID=&viewspan=month&uwbceventsonly=False&selectlocationid=&SelectEventMonth=6&SelectEventYear=2022')
 content = driver.page_source
 soup1 = BeautifulSoup(content, features="html.parser") #used for extracting data
     
@@ -41,11 +41,13 @@ for Calendar in Calendars:
             temp = temp.replace('\n            ', '') #remove the unnecassary parts
             temp = temp.replace('\n        ', '')
             Titles.append(temp)
-        if ('UWBC Conference Room' in Text or 'UWBC Auditorium' in Text):
+        if ('UWBC Conference Room' in Text or 'UWBC Auditorium' in Text or 'UWBC Atrium' in Text):
             if ('UWBC Conference Room' in Text):
                 Locations.append(Text.replace('                                                                                                                                                                               \n\t    ', ''))
             if ('UWBC Auditorium' in Text):
                 Locations.append(Text.replace('                                                                                                                                                                                         \n\t    ', ''))
+            if ('UWBC Atrium' in Text):
+                Locations.append(Text.replace('                                                                                                                                                                              \n\t    ',''))
         if ('January' in Text or 'February' in Text or 'March' in Text or 'April' in Text or 'May' in Text or 'June' in Text or 'July' in Text or 'August' in Text or 'September' in Text or 'October' in Text or 'November' in Text or 'December' in Text):
             Dates.append(Text.replace('\n      ', ''))
         if ('AM' in Text or 'PM' in Text):
