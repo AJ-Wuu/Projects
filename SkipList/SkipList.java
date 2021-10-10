@@ -20,8 +20,10 @@ class Node {
 
 public class SkipList {
 	
+	//Skip List introduces "express lanes" into a LinkedList to speed up the look-up operations (so L0, which is the original LinkedList, is the slowest in search)
+	
 	//Skip List is mainly used for small number of elements (not enough for BST)
-	//It is relatively fast and easy to compute
+	//It is relatively fast and easy to compute and only needs a little memory
 	
 	Node sentinel;
 	int topLevel;
