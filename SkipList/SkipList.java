@@ -65,6 +65,7 @@ public class SkipList {
 
 	public void add(int num) {
 		//1. Flip coin for each LX (X > 0) from lowest to highest: head -> the new element is on the lane; tail -> stop flipping
+		//   Probability that the element is on L0 -> 100%; L1 -> 50%; L2 -> 25%; L3 -> 12.5%; ...
 		//2. Do look-up for the new element and insert it into each of the lanes that it's on
 		Node pred = findPredecessor(num);
 		if (pred.next[0]!=null && pred.next[0].val==num) {
