@@ -22,15 +22,17 @@ public class SkipList {
 	
 	//Skip List introduces "express lanes" into a LinkedList to speed up the look-up operations (so L0, which is the original LinkedList, is the slowest in search)
 	//It's faster because it can skip several elements when searching (only taking half of the elements every time)
-	// 1 → 14 → 22 → 26 → 33 → 57 → 89 → 105 → 103    L0
+	// 1 → 14 → 22 → 26 → 33 → 57 → 89 → 105 → 103    L0 (slowest)
 	// ↓         ↓         ↓         ↓          ↓
 	// 1    →   22    →   33    →   89    →    103    L1
 	// ↓                   ↓                    ↓
 	// 1         →        33         →         103    L2
 	// ↓                                        ↓
-	// 1                   →                   103    L3
+	// 1                   →                   103    L3 (fastest)
+	//For searching process: start with the fastest (the last lane),
+	//                       then gradually move upwards (step down) to smaller lane or move one step right until the target is found
 	
-	//Skip List is mainly used for small number of elements (not enough for BST)
+	//Skip List is mainly used for small number of elements (not enough for BST) with all elements known
 	//It is relatively fast and easy to compute and only needs a little memory
 	
 	Node sentinel;
