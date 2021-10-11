@@ -1,3 +1,7 @@
+/**
+ * @author AJWuu
+ */
+
 package slidingWindow;
 
 public class SlidingWindow {
