@@ -1,0 +1,112 @@
+OCI Architecture: Regions -> Localized Geographic Area
+                  Avaliability Domains (AD) -> Fault tolerant, Datacenters within a region, low latency, high bandwidth
+                  Fault Domains (FD) -> Hardware + Infrastructure, Logical Datacenters
+                  
+Choosing a region: Location -> closest to your users for lowest latency and highest performance
+                   Data Residency & Compliance -> many countries have strict data residency requirements
+                   Service Availability -> new cloud services are made available based on regional demand, regulatory compliance, resource availability and other factors
+
+Availability Domains: Isolated from each other, fault tolerant, unlikely to fail simultaneously; physical infrastructure not shared
+Fault Domains: Logical data center within an AD; each availability domain has 3 FDs; resources placed in different FDs will not share single points of hardware failure
+
+https://docs.oracle.com/en-us/iaas/Content/services.htm
+
+1.	Proof of Concept (POC) environment which connects quickly from on-premises to OCI: IPSec VPN
+2.	Take backup data on OCI and also data can be retrieved quickly as possible: Object Storage
+3.	Main benefit of using OCI Autonomous Data Warehouse: Scale compute and storage without downtime
+4.	Required while logging a support request in My Oracle Support: Resource & Tenant Oracle Cloud Identifier (OCID), Customer Support Identifier (CSI). (NOT need Account Credential like password)
+5.	Service to get an alert notification when your budget might exceed the spending limit: Budgets
+6.	CapEx: Capital Expenditure; OpEx: Operational Expenditure
+7.	Examples of Edge Services in OCI: DNS Traffic Management & Web Application Firewall (WAF) (NOT File Storage nor Virtual Cloud Network)
+8.	Unavailable pricing model in OCI: Schedule Reserve Instance (Available: Universal Credits – Monthly Flex, Pay as you go, Bring your own license)
+9.	Host files that they can be accessed publicly from any location in the world: OCI Object Storage
+10.	Chargeable OCI resource: Fast Connect 1 GBPS
+11.	Gateway that can provide internet access when connecting to OCI compute instance in a private subnet: NAT Gateway
+12.	OCI compartment: Resources can be moved from one compartment to different compartments; Compartments and resources can be deleted or added as required; Each OCI resource belongs to a single compartment; Nesting of compartments is supported
+13.	Cloud model can used to host an application where customer wants to deploy an e-shopping application which uses multiple virtual machines, databases and block storage: Infrastructure As a Service (IaaS)
+14.	OCI architecture provides best resiliency when cost is not an issue for deploying an application: Deploy the application across multiple regions and availability domains
+15.	Shared file system: File Storage
+16.	In Shared Security Model, Oracle’s responsibility in OCI: Security of data center facilities
+17.	Storage service provides encryption for data-at-rest: Object Storage, File Storage, Block Volume (NOT Local NVMe)
+18.	On-premises wants a dedicated connection with lowest network latency to OCI: OCI Fast Connect
+19.	Protect sensitive and regulated data in OCI database services: Oracle Data Safe
+20.	Correct with respect to compute instance: A private IP is always getting assigned to computer instance
+21.	“Vertical Scaling” means in terms of compute instance: Switching to a larger or smaller shape for a compute instance
+22.	OCI service helps in distributing the incoming traffic’s load across different servers: Load Balancer
+23.	“Horizontal Scaling” means in terms of compute instance: Adding more compute instance
+24.	OCI resolves or creates an incident, which of the facility is available: Email notification & Text notification to mobile (Unavailable: Social media notification)
+25.	Deploy docker container for microservice based architecture: Container Engine for Kubernetes
+26.	OCI service enables to buy and let use of software: OCI Marketplace
+27.	Serverless architecture to run code without provisioning any infrastructure resource like virtual machine: Oracle Function
+28.	Use case of Dynamic Routing Gateway (DRG): Helps OCI compute resources to connect to on-prem network
+29.	In shared security model, customer’s responsibility: securing all data that is placed in OCI
+30.	Enables to create, modify, or delete resources from OCI: OCI console, Rest API, Command Line Interface (CLI)
+31.	Leverage Terraform to configure and manage Infrastructure As Code (IaaS), to automate the process: Resource Manager
+32.	Security resource: Web Application Firewall (WAF), Network Security Group (NSG), Security Lists (NOT Local NVMe)
+33.	Internally integrate with Key Management: Container Engine for Kubernetes, Block Volume, Object Storage
+34.	Storage service provides the cheapest pricing (per TB): Archive Storage
+35.	Deploy services and resources all around the world, subscribe: Region
+36.	Distribute the incoming traffic among a set of web servers over internet: Public Load Balancer
+37.	Chargeable in OCI: Egress data from a different region, Egress data to the internet
+38.	Compute shape doesn’t charge in a stopped state: Standard
+39.	Budget be set: Cost Tracking Tag Level, Compartment Level
+40.	Logically isolate and group resources: Compartments
+41.	Deploy OCI resources for first time into a different region other than home region: Subscribe to the new region other than home region
+42.	Customer’s responsibility in OCI as per shared security model: Securing Customer Data & Object Lifecycle Management
+43.	OCI database provides highest performance for OLTP workloads: OCI Exadata DB
+44.	OCI service securely moves petabytes of data from on-premises to OCI: Data Transfer Appliance
+45.	Supported in My Oracle Support (MOS): Request to increase service limit, Modify or Add a root administrator, Unlockc account for root administrator (NOT: Troubleshoot resources in OCI Free Trial Account)
+46.	Covered by OCI Service Level Agreement (SLA): Availability, Management and Performance (NOT Reliability)
+47.	OCI cost analysis tool that is a default feature: Filter costs by tags, Filter costs by compartments, Filter costs by date (NOT Filter costs by applications)
+48.	Security service: Key Management (NOT Intrusion Detection System, SQL Anomaly Detection or Certificate Management)
+49.	Manage database service offers a managed Real Application Cluster (RAC): VM DB
+50.	Compute services: either bare metal instance or a virtual machine can be launched at a time, it’s possible to attach a block volume to a compute instance, data on the boot volume is not deleted when a computer instance stopped, multiple public IPs can be attached to a compute instance.
+51.	Shared Responsibility Model for Security, customer’s responsibility: Identity and Access Management (IAM)
+52.	To identify potential issues, fixing issues and detect anomalies of log data so as to perform advanced analysis: Logging Analytics
+53.	Build modern cloud applications which can reduce cost and time by using an orchestration service: Container Engine for Kubernetes (OKE)
+54.	Peer two Virtual Cloud Network (VCN): VCNs Peering may exist in the same or different OCI region
+55.	Using Start VCN Wizard, networking component can be created: Route Table
+56.	Enable instance to be authorized principals, IAM service feature: Instance principal
+57.	Manage metadata support data governance: Data Catalogue
+58.	Time-limited access to resources that don’t have public endpoints: Bastion
+59.	An administrator needs to support changes in application workload as per demands, if a compute instance is in running state, then can be modified: Change in number of OCPU, Fault Domain, Memory (cannot be modified: Private IP address of the instance)
+60.	Logging an Oracle Support Service Request: Paid Account can only open service requests
+61.	Web Application Firewall (WAF): passes through a set of rules for HTTP & HTTPS traffic
+62.	OCI Object Storage: can store and retrieve data from the internet
+63.	Default task performed by Autonomous Database: Firmware Patching
+64.	Apache Spart applications: Data Flow
+65.	Pricing model not supported: Weekly Flex (Regional Credits); supported: Pay As You Go (PAYG), Monthly Flex (Universal Credits), Bring Your Own License (BYOL)
+66.	Advantage of Oracle Cloud Dedicated Region: Security of the Private Cloud
+67.	Manage container images that it can share among the developers working in the same team on an application: Container Registry
+68.	Monitor the timing of high CPU utilization and disk reads for compute instances: Monitoring
+69.	Pricing tier without pay upfront cost because the usage of OCI resources is irregular and with billing only for the services consumed: Pay As You Go
+70.	Correct with regard to Virtual Cloud Network: VCN subnet can be regional
+71.	7 Virtual Machine instances in OCI Dedicated Virtual Host: Deviated Virtual Host and boot volumes of each Virtual Machine
+72.	To protect against power failures within an Availability Domain: Fault Domain
+73.	Block Volume: clone an existing block volume to a larger new volume, expand size of a block volume, expand an existing volume with online resizing; NOT shrink size of a block volume
+74.	Deploy Autonomous Database as per business requirement, for Exadata infrastructure to be used: Dedicated Exadata Infrastructure
+75.	Logical isolation for resources is provided: Compartments
+76.	Dedicated low latency and high bandwidth connection from On-Prem to OCI: FastConnect
+77.	OCI Vault Service recognizes three types of encryption keys: Data Encryption Keys, Master Encryption Keys, Wrapping Keys (NOT Secret Keys)
+78.	Oracle Cloud VMware Solution: Customers can utilize same set of processes and tools which is used on on-premises and Customers gain full administrative control
+79.	Deploy a customized e-shopping website using multiple virtual machines, databases and block volume: Infrastructure As a Service (IaaS)
+80.	OCI compute instance: Private IP always get assigned.
+81.	True about an Oracle Cloud Infrastructure (OCI) Compute instance: It always gets a private IP address, can leverage the auto-scaling feature, use a boot volume.
+82.	Correct for opening an Oracle Support Service Request: Only Paid accounts can open service requests
+83.	True about the Oracle Cloud Infrastructure (OCI) Object Storage service: It supports private access from OCI resources in a VCN through a service gateway, it enables you to store or retrieve data directly from the Internet, it can store a infinite amount of unstructured data, analytical data, and rich content, it is not tied to a specific compute instance
+84.	Perform advanced analysis of the log data to find potential issues, detect anomalies, and fix the issues: Logging Analytics
+85.	Deploy the application to ensure the highest level of availability and resilience: Across multiple regions and availability domains
+86.	Customer's responsibilities in the shared responsibilities model for security: Identity and access management
+87.	Virtual Cloud Network (VCN) component is created by using the Start VCN Wizard: Route Table
+88.	Benefit of an Oracle Cloud Dedicated Region: Security of the private cloud
+89.	True about the Oracle Cloud Infrastructure Compute service: You can launch either virtual machines or bare metal instances, can attach a block volume to a compute instance, can attach more than one public IP to each compute instance, all data on the boot volume is not lost when you stop a compute instance
+90.	Run Apache Spark applications: Data Flow
+91.	Store and manage container images on Oracle Cloud Infrastructure (OCI) and share them with the other developers working on the same application: Oracle Cloud Infrastructure Registry
+92.	True about a Virtual Cloud Network (VCN): A subnet for a VCN can not only be availability domain specific, subnets can be private and public, a subnet for a VCN can be regional
+93.	Correctly describe attributes of OCI compartments: can be used to logically separate OCI resources, can have sub-compartments, can interact with other compartments, not local to a cloud region
+94.	Edit a compute instance in a running state, you can modify: number of OCPUs, amount of memory (Vertical Scaling), fault domain (chosen when creating or updating an instance), cannot modify Primary Private IP Address
+95.	True about OCI: You can increase the size of a block volume, clone an existing block volume to a new, larger volume, expand an existing block volume in place with online resizing, CANNOT decrease the size
+96.	Valid regarding Virtual Cloud Network (VCN) peering between two VCNs: Peered VCNs can exist in the same OCI region or in different OCI regions. A VCN peering connection is not a VPN based connection, Peered VCNs cannot have overlapping CIDRs, don’t need to be part of the same OCI tenancy (can exist in different tenancies)
+97.	True about OCI Logging service: It can analyze critical diagnostic information that describes how resources are performing and being accessed (Log Analytics), is a centralized single pane of glass for all logs in a tenancy, does NOT enable to analyze cloud resources using custom metrics, NOT monitor cloud resources using metrics and alarms, CANNOT index, enrich and aggregate log data from applications
+98.	Benefits of Oracle Cloud VMware Solution: Provide full administrative control to customers, runs the certified VMware product stack in the cloud, customers can leverage same set of tools and processes used on -premises
+99.	Two types of encryption keys that are recognized by the OCI Vault service: Master Encryption keys, Data Encryption keys

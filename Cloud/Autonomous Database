@@ -1,0 +1,5 @@
+Autonomous Transaction Processing: It is used for OLTP and mixed workloads; Missing indexes are detected and created; Data is stored in row format
+Two actions that can be performed from the OCI Console for an Oracle Autonomous Database: Scale up/down CPU; Increase Storage allocated for Database
+In Autonomous Data Warehouse: Data is stored in columnar format
+Oracle Cloud Infrastructure: It provides complete lifecycle automation; It enables you to run everything from small VMs to large bare metal clusters; It provides high availability and scability
+Operations are included in automated data center operations: Provisioning a database; Patching a database; Online backups of a database; Automatically handling failures and errors
