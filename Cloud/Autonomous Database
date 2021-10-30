@@ -3,3 +3,85 @@ Two actions that can be performed from the OCI Console for an Oracle Autonomous 
 In Autonomous Data Warehouse: Data is stored in columnar format
 Oracle Cloud Infrastructure: It provides complete lifecycle automation; It enables you to run everything from small VMs to large bare metal clusters; It provides high availability and scability
 Operations are included in automated data center operations: Provisioning a database; Patching a database; Online backups of a database; Automatically handling failures and errors
+
+OCI Console for an Oracle Autonomous Database cannot increase network bandwidth.
+Oracle Cloud Infrastructure: Provide high availability and scalability. Provide complete lifecycle automation. Enable to run everything from small VMs to large bare metal clusters. Support Bare Metal DB Systems, Virtual Machine and Exadata systems.
+Operations included in automated data center operations: Provisioning a database. Patching a database. Online backups of a database. Automatically handling failures and errors. 
+Autonomous Transaction Processing: Data is stored in row format, Missing indexes are detected and created. It is used for OLTP and mixed workloads. Response time is optimized for queries.
+Autonomous Data Warehouse: Data is stored in columnar format. Complex SQL queries are optimized.
+
+Autonomous Database allows to: 
+    Start instance instantly.
+    Stop instance on demand to conserve resources and pause billing.
+    Scale instance on demand without tedious manual steps.
+    (All can be done through clicking in the console.)
+Provisioning: 
+    Highly scalable, secure and available. 
+    Private software-defined network.
+    Fully encrypted database.
+    Scalable RAC Cluster running on Exadata.
+    Configures automatic processes like Backup.
+    Choose the number of CPUs and the storage size in terabytes.
+    Filter up to 20 different metrics for available, stopped and backup databases.
+Provisioning ADB: 
+    Extremely fast and easy.
+    No need to specify tablespaces, file system, operating system, or initialization parameters.
+    Self-contained, self-secure, self-managed, scalable.
+Scaling: (These two scaling can be done separately without influencing each other)
+    Scale up/down CPU. 
+    Scale up/down Storage.
+Auto Scaling: (Enabled by default except for always-free account)
+    Increase up to three times of the base number of OCPUs (up to 33 in total).
+    All the settings can be changed while the database is still running, no down time require.
+    Does not change the concurrency and parallelism settings for the predefined services.
+    Billed based on the average number of OCPUs consumed during an hour.
+ADB autonomously and continuously monitors the overall system performance.
+Moving ADB:
+    ADB shared resources can be moved from one compartment to another. Backups will be moved as well.
+    Require appropriate privileges in the compartments.
+    After moving, inherent policies apply immediately and affect access to that resource and its dependent resources through the console.
+Cloning: 
+    Possible to create a new ADB as a clone of an existing ADB, as a full copy or only metadata, 
+        from a live running database instance or a backup of the source, 
+        as a refreshable (read-only) clone (can trail the source DB for up to 7 days; becomes read-only after this period).
+    ADB can be configured to use Private endpoints by cloning from an existing ADB with Public endpoints.
+Managing Users: 
+    DWROLE (), specify only password, the DB password will not expire for 360 days by default, DWROLE includes all the necessary privileges for a DW developer / user.
+    Possible to create a DB user by logging in to the SQL Developer Web console as an ADMIN user for the event that there is no database client software configured.
+Alarms and Events: 
+    Events including Admin password expiration, ADB services going down, Wallet expiration warnings, etc.
+    Notification service provided broadcast messages to distributed components using a publish-subscribe model 
+        (event rules, alarms are triggered or directly publish a message). 
+    Topic is a communication channel for sending messages to the subscriptions in the topic (topics and their subscriptions can be managed.)
+Manage ADB backup and restores: 
+    Automatic backup.
+    Retention period 60 days.
+    Can be restores / recovered any time.
+    Manual backups possible --
+        using OCI Object Storage --
+            create bucket to hold backups, the name format must follow “backup_<databasename>” (NOT the display name), all in lower-case
+            set OCI Object Storage tenancy URL, add the database default_backup_bucket property
+            define OCI Object Storage credentials inside the database, add the database property default_credential
+        manual backup configuration task is a one-time operation.
+    Recovery using cloud console. Automatic restore / recover.
+Autonomous Data Guard:
+    Monitors primary database.
+    If ADB goes down, standby instance automatically assumes primary instance role.
+    Failover from primary to standby is seamless.
+    After failover, a new standby for primary is automatically provisioned.
+    Currently, standby database created in same region as primary database.
+    For better resilience, the standby database is provisioned: 
+        in regions with more than one availability domain, 
+            the standby database is provisioned automatically in a different availability domain than the primary database
+        in regions with a single availability domain, 
+            the standby database is provisioned automatically on a different physical machine than the primary database
+    Automatic Failover Scenario: 
+        If Primary is unavailable, Switchover button turns to a Failover one;
+        No user action needed;
+        Automatic failover allowed only when no data loss will occur;
+        RTO (Recovery Time Objective) = 2 minutes and RPO (Recovery Point Objective) = 0 minutes.
+    Manual Failover Scenario: 
+        If failover is unsuccessful, Switchover button turns into a Failover button and user can trigger a Manual Failover;
+        System automatically recovers as much data as possible;
+        Manual recommended only in a true disaster scenario;
+        RTO = 2 minutes, RPO = 5 minutes.
