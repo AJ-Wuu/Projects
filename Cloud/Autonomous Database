@@ -209,5 +209,24 @@ Provision Dedicated Resources (Exadata, Container Database and VM Cluster):
                    |               |                      |      Allow TCP on 3000-3010 from internet (hosted apps)
                    |               |                      |  Egress:
                    |               |                      |      Allow all outbound traffic to internet
-T
+Monitoring Dedicated Infrastructure: 
+    Autonomous Database Management Capabilities --
+        Automates most tasks for the infrastructure DBA.
+        Apps DBA still needs to monitor, diagnose, and perform basic application-level administrative operations. 
+        EM / Performance Hub / OCI Console provides management capabilities for 
+            database movement and cloning, 
+            monitoring and alerting, 
+            deep performance diagnostics and troubleshooting, 
+            performance and capacity insights based on historical data.
+    ADB-Dedicated Database Operations Available on Cloud Control Plane --
+        All administrative database actions are exposed through the UI and REST APIs --
+            Database, CDB, Cluster, or Exadata create / delete / start / stop, 
+            On-demand backup and restore, 
+            Scale CPU, storage or other resources, 
+            Download connection information, including wallet, for encrypted connections, 
+            Schedule updates for Exadata Infrastructure, VM Cluster, or Container Database.
+        Performance monitoring, scripting and schema design through SQL Developer --
+            Performance Hub and OCI Metrics and Notifications in Native Oracle Cloud Console, 
+            Can also monitor databases using existing Enterprise Manager Grid Control deployments.
+
 
