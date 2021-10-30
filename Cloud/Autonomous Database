@@ -141,3 +141,50 @@ Dedicated Infrastructure:
             using a ZDLRA (Zero-Data Loss Recovery Appliance)
             locally mounted NFS storage
             Oracle Public Cloud
+Describe Workflows and Functionality: 
+    Autonomous Private DB Cloud (typical) -- 
+        Fleet Administrator provisions the Exadata infrastructure by specifying its size, availability domain, and region within the Oracle Cloud; 
+        Partitions system by provisioning clusters and container databases; 
+        Developers, DBAs and users provision databases within container databases using self-service tools; 
+        Just specify DB compute (OCPUs) and storage; 
+        Billing based on the size of the Exadata infrastructure (quarter, half or full rack) and the number of CPUs that are being consumed;
+        Allow customers to use their existing Oracle database licenses with this service to reduce the cost.
+    Autonomous Database Dedicated --
+        Physical Characteristics and Constraints – support Exadata infrastructure models and shapes X7, X8, and X8M in either a quarter, half or full Exadata rack. 
+        Cluster / Virtual Cloud Network. 
+        Autonomous Container Database maximum -- 12 per VM Cluster. 
+        Autonomous Database maximum --
+            High Availability SLA with maximum of 100 databases
+            Extreme Availability SLA with a maximum of 25 databases
+            Placement Logic that opens on 1 server (< 17 OCPU)
+    Getting started with Autonomous Database on dedicated infrastructure -- 
+        Request service limit increase for Exadata rack via OCI Limits; 
+        Fleet and DBS user role setup; 
+        Private Cloud setup; 
+        Provide self-service access to end users to create and use Autonomous Databases.
+    General Selection Considerations -- 
+        Must subscribe to an Exadata Infrastructure (min term 48 hours); 
+        Include Availability Domain placement controls for latency-sensitive apps; 
+        Policy controls for patch scheduling and software versioning; 
+        Database migration via export and import from Object Store, Data Pump direct import – Network link, Golden Gate; 
+        Cloning and Auto Scaling capabilities are automatically available.
+    Feature                                                                     |  ADB-Dedicated                       |  ADB-Shared
+    Autonomous Resources                                                        |  Autonomous Database                 |  Autonomous Database
+                                                                                |  Autonomous VM Cluster               |
+                                                                                |  Autonomous Exadata Infrastructure   |
+    Private Single Tenant Exadata Infrastructure                                |  Yes                                 |  No
+    Availability Domain Placement Choice                                        |  Yes                                 |  No
+    Separate Development, Test, Production Life Cycle                           |  Yes                                 |  No
+    Maintenance Schedling for Planned and Unplanned (one-off critical) Updates  |  Yes                                 |  No
+    Skip Updates During Critical Business Periods                               |  Yes                                 |  No
+    Instant Update - Patch Now                                                  |  Yes                                 |  No
+    Configurable Backup Retention                                               |  Yes                                 |  No
+    Application Continuity                                                      |  Transparent Application Continuity  |  Application Continuity
+    Customer-Managed TDE Keys                                                   |  OCI Vault and Oracle Key Vault      |  No
+    Data Guard - Replication Mode                                               |  Sync - Max Availability             | Async
+                                                                                |  Async - Max Performance             |
+    Data Guard - Active Standby                                                 |  Yes                                 |  No
+    SQL Create / Drop Tablespace                                                |  Yes                                 |  No
+    Java in Database                                                            |  Yes                                 |  No
+    Predefined Service Connections                                              |  TCP and TCPS                        |  TCPS
+    OML Notebook                                                                |  No                                  |  Yes
