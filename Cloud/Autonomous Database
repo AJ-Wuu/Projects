@@ -134,4 +134,11 @@ Dedicated Infrastructure:
                 Infrastructure management (Manual OCPU scaling, VM cluster creation)
                 Management via OCI interfaces (Web UI, OCI CLI, REST API/SDK, Terraform)
                 Oracle Cloud Ops access to perform
-        
+        Encryption: 
+            All Oracle Autonomous databases encrypt data at rest.
+            Data is automatically encrypted as it's written to the storage.
+            Encryption is transparent to authorized users and applications (database automatically decrypts the data when it's being read from the storage).
+        Options for backing up the Autonomous Database Cloud@Customer: 
+            using a ZDLRA (Zero-Data Loss Recovery Appliance)
+            locally mounted NFS storage
+            Oracle Public Cloud
