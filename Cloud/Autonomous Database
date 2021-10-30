@@ -192,22 +192,22 @@ Provision Dedicated Resources (Exadata, Container Database and VM Cluster):
     Provision a Dedicated Autonomous Exadata Infrastructure (Network) -> Dedicated Autonomous Container Database -> Dedicated Autonomous Database
     Subnet         |  CIDR         |  Security List Name  |  Rules
     exadataSubnet  |  10.0.0.0/24  |  exaSubnet-seclist   |  Ingress:
-                                                          |      Allow all internode traffic within exadataSubnet only
-                                                          |      Allow TCP traffic on 1521 from appSubnet (DB)
-                                                          |      Allow TCP traffic on 2484 from appSubnet (DB encrypted)
-                                                          |      Allow TCP traffic on 6200 from appSubnet (ONS / App Cont.)
-                                                          |      Allow https traffic on 443 from appSubnet (Apex, SQLDevWeb)
-                                                          |  Egress:
-                                                          |      Allow all outbound traffic within exadataSubnet only
-                                                          |      Allow all outbound traffic to appSubnet only
+                   |               |                      |      Allow all internode traffic within exadataSubnet only
+                   |               |                      |      Allow TCP traffic on 1521 from appSubnet (DB)
+                   |               |                      |      Allow TCP traffic on 2484 from appSubnet (DB encrypted)
+                   |               |                      |      Allow TCP traffic on 6200 from appSubnet (ONS / App Cont.)
+                   |               |                      |      Allow https traffic on 443 from appSubnet (Apex, SQLDevWeb)
+                   |               |                      |  Egress:
+                   |               |                      |      Allow all outbound traffic within exadataSubnet only
+                   |               |                      |      Allow all outbound traffic to appSubnet only
     appSubnet      |  10.0.1.0/24  |  appSubnet-seclist   |  Ingress:
-                                                          |      Allow ssh traffic on port 22 from internet
-                                                          |      Allow https traffic on 443 from internet
-                                                          |      Allow UDP on 1194 from internet (OpenVPN)
-                                                          |      Allow TCP on 943 from internet (OpenVPN)
-                                                          |      Allow TCP on 5901, 5902 from internet (VNC)
-                                                          |      Allow TCP on 3000-3010 from internet (hosted apps)
-                                                          |  Egress:
-                                                          |      Allow all outbound traffic to internet
+                   |               |                      |      Allow ssh traffic on port 22 from internet
+                   |               |                      |      Allow https traffic on 443 from internet
+                   |               |                      |      Allow UDP on 1194 from internet (OpenVPN)
+                   |               |                      |      Allow TCP on 943 from internet (OpenVPN)
+                   |               |                      |      Allow TCP on 5901, 5902 from internet (VNC)
+                   |               |                      |      Allow TCP on 3000-3010 from internet (hosted apps)
+                   |               |                      |  Egress:
+                   |               |                      |      Allow all outbound traffic to internet
 T
 
