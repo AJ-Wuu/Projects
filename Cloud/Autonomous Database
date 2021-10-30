@@ -92,3 +92,46 @@ Autonomous Data Guard:
     Instant scaling of storage
     NOT Scaling of CPUs with very little downtime
 2.2 
+
+Dedicated Infrastructure:
+    Two deployment choices --
+        Shared Infrastructure (Public Cloud), Ultra-Simple, Standardized Config and Lifecycle Policies
+        Dedicated Infrastructure (Public Cloud or Customer’s Data Center), Customizable, IT Specifies Config and Lifecycle Policies
+    Primary Benefits -- 
+        Provides private Database Cloud running on dedicated Exadata Infrastructure, 
+        Highest Isolation, 
+        Customizable Operational Policies. 
+    Dedicated allows multiple levels of isolation: 
+        DB, Container DB, VM Cluster, Secure Isolation Zone within public cloud, Separate Hardware (Exadata Infrastructure).
+    Autonomous Management Model: 
+        Customer controls DB users, schemas and encryption keys;
+        Oracle owns, manages and controls (without customer access) DomU, container DBs, Hypervisor, DB servers, storage servers, network, etc.
+    Dedicated Network Architecture:
+        Full Virtual Cloud Network support,
+        Cloud compute native connections, 
+        Customer corporate network connections, 
+        Microsoft Azure secure cross-cloud interconnect.
+    ExadataCloud@Customer:
+        Address even stricter data security and sovereignty 
+            by delivering high-performance Exadata Cloud services capabilities in the customer’s data center behind the customer’s own firewall.
+        Primary Benefits --
+            Same service as ADB Dedicated running on Public Cloud;
+            Same simplicity, agility, performance and elasticity;
+            Simplest and fastest transition to Autonomous Cloud; Easily migrate existing on-premises databases;
+            Existing apps in data center simply reconnect and run;
+            No application changes needed; Data never leaves the customer’s data center.
+        Two lightweight Cloud Control Plane Servers in every ExaC@C rack communicate to the public cloud; Local Control Plane consolidates all cloud management.
+        Simple Connectivity to the Data Center Network --
+            Directly connect to the customer's network to communicate with application servers (10Gbps/25Gbps fiber or 10Gbps cooper);
+            Connect via standard switches just like on-premises Exadata (can optionally place switches inside the Exadata rack);
+            Customers control the client network configuration (support for flexiblie VLAN configurations; separate client application and backup networks).
+        Resilience to disrupted OCI connectivity --
+            Preserved functionality -- 
+                Customer access to databases
+                Automated backups
+                Auto scaling
+            Suspended functionality -- 
+                Infrastructure management (Manual OCPU scaling, VM cluster creation)
+                Management via OCI interfaces (Web UI, OCI CLI, REST API/SDK, Terraform)
+                Oracle Cloud Ops access to perform
+        
