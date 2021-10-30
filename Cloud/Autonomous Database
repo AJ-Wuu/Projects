@@ -25,6 +25,7 @@ Provisioning:
     Filter up to 20 different metrics for available, stopped and backup databases.
 Provisioning ADB: 
     Extremely fast and easy.
+    Require number of CPUs, database name, and workload type.
     No need to specify tablespaces, file system, operating system, or initialization parameters.
     Self-contained, self-secure, self-managed, scalable.
 Scaling: (These two scaling can be done separately without influencing each other)
@@ -85,3 +86,9 @@ Autonomous Data Guard:
         System automatically recovers as much data as possible;
         Manual recommended only in a true disaster scenario;
         RTO = 2 minutes, RPO = 5 minutes.
+2.1 The capabilities of OADB that can accelerate innovation:
+    Provisions a data warehouse in seconds
+    Built-in AI and ML helps find patterns that could identify undiscovered anomalies
+    Instant scaling of storage
+    NOT Scaling of CPUs with very little downtime
+2.2 
