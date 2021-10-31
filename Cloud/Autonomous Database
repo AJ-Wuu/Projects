@@ -481,6 +481,16 @@ Connecting to ADB:
     ADB uses certificate authentication and Secure Sockets Layer (SSL). 
     Certification authentication uses an encrypted key stored in a wallet on both the client and server.
 Wallet contains a collection of files, including the key and other information needed to connect to the ADB (truststore.jks, tnsnames.ora, sqlnet.ora, ojdbc.properties, keystore.jks, ewallet.p12, cwallet.sso)
+Data Safe:
+    Unified Database Security Control Center
+        Security Configuration Assessment
+        User Risk Assessment
+        User Activity Auditing
+        Sensitive Data Discovery
+        Data Masking
+    Saves time and mitigates security risks
+    Defense in depth for all customers
+    No special security expertise needed
 Q4.1 Automated tuning: Fast performance out of the box with zero tuning; Built-in resource management plans; Simple web-based monitoring console; Parallel execution of the queries does not need to be monitored manually; Partitioning covered under the automated tuning.
 Q4.2 REST APIs and RESTful services: REST APIs not only use JSON for communication; REST stands for Representational State Transfer; REST APIs also use the HTTP communication protocol but mainly use JSON for communication; RESTful services are not complex when compared to traditional XML SOAP communications.
 Q4.3 Scaling on demand: Independently scale compute or storage; Resizing occurs instantly, fully online.
@@ -494,6 +504,26 @@ Data Formats              |  Columnar                         |  Row
 Data Access Acceleration  |  Creates Data Summaries           |  RDMA for Messaging and IO
 Memory Usage              |  Parallel Joins and Aggregations  |  Data Caching to Avoid IO
 Statistics                |  part of bulk load operations     |  part of DML operations
+Developer Tools out of the box with Autonomous:
+    SQL Developer Web --
+        Execute SQL and PL/SQL
+        Build data models, generate DDL statements
+        Monitor and manage the DB
+    APEX --
+        Web-based function-rich, low-code development environment
+        No client software needed
+    Oracle REST Data Services:
+        Ability to REST-enable a schema and autogenerate REST endpoints for tables, views and procedures
+Auto ML: faster and easier machine learning for data scientists and developers
+    Auto Algorithm Selection -- identify best prediction algorithm for each workload
+    Auto Feature Selection -- identify data that best predicts outcome
+    Auto Model Tuning -- identify model parameters for best performance
+Data Analysis in the Traditional Market:
+    Best-of-breed, enterprise-class tools, tailored for the specialist
+    Data Load -> Oracle Data Integrator
+    Data Prep -> Oracle Enterprise Data Quality
+    Semantic Modeling
+    Data Analysis
 Q5.1 Built-in SQL Worksheet and Notebook: Quickly start running queries with built-in web-based notebooks; No need to install a client query tool; No need to install client query tool for the PL/SQL; Not based on Apache Tomcat.
 Q5.2 Oracle Machine Learning allow access to data in Autonomous Database with Data Ingestion and Selection and Data Viewing and Discovery, and Data Analysis
 Q5.3 Actions can be performed by a workspace administrator: Manage user accounts; Monitor workspace activity; View usage reports for a workspace.
