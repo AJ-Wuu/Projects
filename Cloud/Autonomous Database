@@ -50,6 +50,14 @@
 • Change the CPU/IO shares for the consumer groups: The 'Set Resource Management Rules' pop-up form on the administration section of the service console has been extended to allow the modification of CPU/IO shares across the different resource groups. It is also possible to change the resource shares within a script, application call and/or via a SQL prompt using the cs_resource_manager package.
 • Types of database workload are best to run on ADB-D: You can run all your transaction processing or data warehouse or mixed workload databases of any size, scale or criticality on ADB-D. As well as supporting application databases that may require highest governance, consistent performance and operational controls.
 
+Q1 Two infrastucture options supported for an ADB: Shared Exadata Infrastructure & Dedicated Exadata Infrastructure
+Q2 Retention period for the backups in ADB: 60 days
+Q3 Three resources included in ADB Dedicated Infrastructure: Autonomous Database, Autonomous Container Database, Autonomous Exadata Infrastructure
+Q4 Scaling on demand: Scale compute or storage independently; Resizing doesn't need to restart; Resizing occurs instantly, fully online.
+Q5 Four tools that can be accessed from the Database Actions Page: SQL, Data Modeler, Data Load, APEX (NO Machine Learning Notebooks, Cloud Shell)
+Q6 Oracle Autonomous JSON Database: It's a cloud document database service; It supports NoSQL-style document APIs, which enable developers to creat JSON-centric applications; It supports application developed using SODA.
+Q7 Procedure that can be used to move the Data Pump Import log file from ADB to Oracle Cloud Object Storage: DBMS_CLOUD.PUT_OBJECT
+
 Q1.1 Operations that are included in automated data center operations: Provisioning a database; Patching a database; Online backups of a database; Automatically handling failures and errors.
 Q1.2 Autonomous Data Warehouse: Data is stored in columnar format. Complex SQL queries are optimized.
 Q1.3 Oracle Cloud Infrastructure: Provide high availability and scalability. Provide complete lifecycle automation. Enable to run everything from small VMs to large bare metal clusters. Support Bare Metal DB Systems, Virtual Machine and Exadata systems.
