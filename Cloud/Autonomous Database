@@ -228,5 +228,33 @@ Monitoring Dedicated Infrastructure:
         Performance monitoring, scripting and schema design through SQL Developer --
             Performance Hub and OCI Metrics and Notifications in Native Oracle Cloud Console, 
             Can also monitor databases using existing Enterprise Manager Grid Control deployments.
+Creating OCI Policies for Autonomous Dedicated:
+    Fleet Administrators -- 
+        Fleet Admin provisions resources using 
+            GUI or APIs (Allocates budgets (service limits) by Compartment to the organizations), 
+            Exadata Infrastructure (Specifies Name, Region, AD, Size), 
+            Clusters (single cluster v1), 
+            Container Databases (CDB) in Clusters (Specifies Name, Software Version, Service Level (eg. Data Guard))
+    Database Administrators -- 
+        Create, monitor and manage ADBs to create an access ADBs DBAs need, 
+        Oracle Cloud Account with necessary permissions to create and access Autonomous Database, Autonomous Backups, Autonomous Container Databases
+    Developers and Users -- 
+        Do not required Oracle Cloud account, 
+        Use Network Connectivity and credentials to connect to ADB, the authorization information given to them by the DBAs, 
+        Securely connect to Autonomous DB using pre-defined services.
+    Service Lifecycle that can be managed -- 
+        Budget and Capacity Planning, 
+        Provision and Partition Infrastructure, 
+        LOB Self Service, 
+        Operate Auto-Scale, Auto-Tune, Auto-Backup, 
+        Maintain Update, 
+        Monitor
+    Dedicated Private Cloud Fleet and DB Admin IAM (Identity Access Management) setup --
+        Resource can be one of autonomous-exadata-infrastructure, autonomous-container-databases, autonomous-databases, autonomous-backups
+    Policy statement -- 
+        allow group <GROUP> to <VERB> <RESOURCE> in compartment <COMPARTMENT>
+        Group is a set of users with the same privileges.
+        Compartment is an operating context for a specific set of service resources only accessible to GROUPs who are explicitly granted access.
+        Policy is used to bind privileges for a GROUP to a specific set of resources in a COMPAREMENT.
 
 
