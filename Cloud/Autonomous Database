@@ -444,6 +444,43 @@ Security Zones of Control:
             By default, Data Discovery can search for a wide variety of sensitive data pertaining to identification, biographic, IT, financial, healthcare, employment, and academic information.
         Data Masking provides a way for you to mask sensitive data so that the data is safe for non-production purposes.
         Activity Auditing lets you audit user activity on your databases so you can monitor database usage and be alerted of unusual database activities.
+REST APIs: 
+    Mechanism for developing customized deployment and management scripts that can be saved and reused for deployments. 
+    Oracle Cloud Infrastructure APIs are typical REST APIs that use HTTPS requests and responses and support HTTPS and SSL protocol TLS 1.2, the most secure industry standards. 
+    Calls to the Oracle Cloud Infrastructure using REST APIs can be written in popular scripting languages such as node.js, Python, Ruby, Perl, Java, C#, bash or curl.
+Using OCI-CLI: 
+    Small Footprint; 
+    Same core functionality as the Service Console; 
+    Ability to tun scripts, extend the Console’s functionality; 
+    Built on Python; 
+    Run on Mac, Windows or Linus; 
+    Python code makes calls to Oracle Cloud Infrastructure APIs to provide the functionality implemented for the various services.
+ADB-Shared Patching and Upgrades: 
+    Oracle patches the database during scheduled maintenance windows. 
+    The database remains available throughout the maintenance project. 
+    The maintenance window generally takes no more than 2 hours. 
+    The date-time for the next scheduled maintenance is shown on the OCI console page for each instance. 
+    Currently, users cannot change the patching schedule.
+Predefined Services Minimize Application Impact: 
+    Maintenance proactively drains services (TP services have a 5-minute drain, Batch has a 1-hour drain); 
+    Applications connect to a predefined database service to control (Relative Priority, SQL parallelism, max concurrently executing users).
+Transparent Application Continuity: 
+    Transparent, completely safe, no thinking (protects all session states, such as Sequences, Temp Tables, Temp Lobs, Roles, PL/SQL, Global and Local Context, NLS, Alter Session, and DB Links); 
+    Side-effects automatically disabled at fine grain; 
+    Mutable on by default for SQL (no grants, no management costs) for nonprivileged users; 
+    Request boundaries on by default for database and drivers, standard with JDK 9; 
+    ORAchk detail report so protection level is known always (not after a failure); 
+    Included in ATP.
+TAC vs. AC: 
+    Both have a full view of sessions states, but AC gives customers the flexibility to keep their side-effects and to restore different more complex states, such as session duration LOBs at failover.
+Use the OraChk Protection Report to identify the protection level (100% or not) and where it is not protected (in order for a decision to be made).
+Mutable: Function that returns a different value each time they are called.
+Request Boundaries demark where applications and application servers borrow and return connections from their connection pools. Making request boundaries visible to the database allows functionality, such as draining for planned maintenance, load balancing, and mutiplecing, to be isolated at the RDBMS, so sessions can be re-established with no visible disruption to the application layers above.
+Connecting to ADB: 
+    All apps use secure connections. 
+    ADB uses certificate authentication and Secure Sockets Layer (SSL). 
+    Certification authentication uses an encrypted key stored in a wallet on both the client and server.
+Wallet contains a collection of files, including the key and other information needed to connect to the ADB (truststore.jks, tnsnames.ora, sqlnet.ora, ojdbc.properties, keystore.jks, ewallet.p12, cwallet.sso)
 Q4.1 Automated tuning: Fast performance out of the box with zero tuning; Built-in resource management plans; Simple web-based monitoring console; Parallel execution of the queries does not need to be monitored manually; Partitioning covered under the automated tuning.
 Q4.2 REST APIs and RESTful services: REST APIs not only use JSON for communication; REST stands for Representational State Transfer; REST APIs also use the HTTP communication protocol but mainly use JSON for communication; RESTful services are not complex when compared to traditional XML SOAP communications.
 Q4.3 Scaling on demand: Independently scale compute or storage; Resizing occurs instantly, fully online.
