@@ -424,7 +424,14 @@ Compartments:
     Newly-created compartments require at least one policy; 
     Can have sub-compartments up to six level deep.
 Data Safe Service: 
-    Unifies control center for Oracle Autonomous Databases; 
+    Unifies control center for Oracle Autonomous Databases --
+        understands the sensitivity of your data,
+        evaluates risks to data,
+        masks sensitive data,
+        implements and monitors security controls,
+        assesses user security,
+        monitors user activity,
+        addresses data security compliance requirements;
     Delivers essential data security capabilities on OCI; 
     Is included with ADB, ExaCS, and DBaaS at no additional cost.
 Security Zones of Control: 
