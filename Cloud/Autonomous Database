@@ -276,6 +276,123 @@ Q3.1 Create an Autonomous Exadata Infrastructure resource requires the input of 
 Q3.2 Actions can be performed from the Autonomous Container Database (CDB) details page: 
      Change maintenance schedule, Move CDB to a different compartment, Change backup retention policy for CDB, Restart CDB.
 
+Monitoring Performance from the Cloud Console:
+    Metrics page -- Storage, CPU Utilization (%), Session, Execute Count, Running SQL Statements, Queued Statements
+    Overview page -- CPU Utilization (%), Number of OCPUs Allocated, Running SQL Statements, SQL Statement Response Time(s), SQL Statements Executed Per Second.
+    Activity page -- Database Activity, CPU Utilization (%), Running Statements, Queued Statements
+    Storage (Used) -- The percentage of provisioned storage capacity currently in use; represents the total allocated space for all tablespaces.
+    CPU Utilization (%) -- 
+        The CPU utilization expresses as a percentage, aggregated across all consumer groups. 
+        The utilization percentage is reported with respect to the number of CPUs the database is allowed to use, which is two times the number of OCPUs.
+    Execute Count -- The number of user and recursive calls that executed SQL statements during the selected interval.
+    Running SQL Statements -- The number of running SQL statements, aggregated across all consumer groups, during the selected interval.
+    Queued Statements / Number of OCPUs Allocated -- The number of queued SQL statements, aggregated across all consumer groups, during the selected interval.
+    SQL Statement Response Time(s) -- The average response time of SQL statements historically.
+    Database Activity -- This chart shows the average number of sessions in the database using CPU or waiting on a wait event.
+Securing Application Connections with ACLs: 
+    By default, no network access control list is specified; the database is accessible from any IP address. 
+    Specifying an access control list blocks all IP addresses that are not in the list from accessing the database. 
+    When the ACL is set, the database will only accept connections from addresses in the access control. 
+    All other client connections will be rejected. 
+    Can be configured for an ADB at any time, while provisioning or being added to an existing ADB. 
+    Can be configured for individual IP addresses, CIDR block ranges and VCNs. 
+    Database restore does not overwrite existing ACLs. 
+    All services that are subset of an ADB, including SQL Developer Web, APEX and OML Notebooks, are also blocked by ACLs.
+Private Endpoints: 
+    Provides the ability to NOT permit any public access to your ADB database. 
+    Is a private IP address within your VCN that can be used to access a given service within OCI. 
+    Service sets up the private endpoint in a subnet of your choice. 
+    Just another VNIC in your VCN. 
+    Require Transit Routing + Service Gateway in your VCN. 
+    Can specify that an Autonomous Database uses a private endpoint and configure a Virtual Cloud Network (VCN) in your tenancy to use with the private endpoint. 
+    This allows you to keep all traffic to and from your ADB off the public internet. 
+    You can configure a private endpoint when you provision or clone your ADB.
+Set Up Private Endpoints with ADB: 
+    There must be a VCN within the region for the ADB (this cannot be changed after provisioning). 
+    A private subnet with default DHCP options. 
+    At least one Network Security Group (NSG) within your VCN (this can be changed or edited after provisioning).
+Network Security Group: 
+    NSGs create a virtual firewall for your Autonomous Database using security rules. 
+    You can specify up to five NSGs to control access to your Autonomous Database.
+Notifications: 
+    Security alerts; 
+    Ongoing quota breaches; 
+    Outages (ongoing or planned); 
+    Alerts related to order management (pending approval or activation); 
+    Promotions; 
+    Upcoming scheduled maintenance requests.
+Continuous Optimization -- Using Machine Learning: 
+    Machine Learning algorithms adapt to changes and find new optimal plans and indexes. 
+    Optimizer continuously captures new SQL statements and changes in data volume. 
+    SQL Plans adapt as the data volume changes. New indexes are created if they speed up new SQL.
+Auto-Indexing: (Indexes are added at different stages of an application’s life cycle.) 
+    Automatically captures all SQL statements and execution times. 
+    Identifies new candidate indexes and verifies use in new SQL plans. 
+    If any new SQL plan is slower, then the old plan is restored. 
+    Indexing activities are viewable, controllable, and auditable. Real-time optimizer statistics gathering keeps SQL plans current.
+Process of Auto-Indexing: 
+    Capture 
+        Periodically captures SQL statements into a SQL repository
+        Includes plans, bind values, execution statistics, etc.
+    Identify
+        Identifies candidate indexes that may benefit the newly captured SQL statements
+        Creates index candidates as unusable, invisible indexes (just metadata)
+    Verify
+        Ask the optimizer if index candidates will be used for these statements
+        Index candidates not used by the optimizer are automatically dropped
+        Complete the creating of chosen indexes and run captured statements to the indexes did improve performance
+    Decide
+        If performance is better for all statements, the indexes are marked visible
+        If performance is worse for all statements, the indexes are dropped
+        If performance is worse for some, the indexes are marked visible except for statements that regressed
+    Monitor
+        Index usage is continuously monitored
+        Automatically created indexes that have not been used in a long time will be dropped
+        Rebuilds decaying indexes
+Service Limits: 
+    Quota or allowance set on a resource; 
+    Set by the service subscribed to; 
+    May change automatically.
+Compartment Quotas: 
+    Similar to service limits; 
+    Set using policy statements (three types: Set, Unset, Zero). 
+    To manage quotas in a compartment, you must belong to a group that has the correct permissions 
+        (allow group QuotaAdmin to { QUOTA_READ, QUOTA_CREATE, QUOTA_DELETE, QUOTA_UPDATE, QUOTA_INSPECT } in tenancy). 
+    Quotas can also have a scope: Availability Domain, Region or Globally 
+        (when setting a quota at the Availability Domain or Region level, the quota is allocated at each AD or Region. 
+        Usage for sub-compartments counts toward usage from the Main compartment.)
+Service limits set by Oracle, compartment quotas set by customer administrators (fleet administrators in Dedicated).
+Service limits always take precedence over quotas.
+Tenancy limits, quotas, and usage can be viewed using your cloud console: 
+    The console may not display information for all the OCI services or resources. 
+    The usage may be greater than the limit if the limit was reduced after the resource was created. 
+    If limits are displayed as “0”, then the account has been suspended.
+Compartments: 
+    Inherit permissions or policies from their parent compartments; 
+    Newly-created compartments require at least one policy; 
+    Can have sub-compartments up to six level deep.
+Data Safe Service: 
+    Unifies control center for Oracle Autonomous Databases; 
+    Delivers essential data security capabilities on OCI; 
+    Is included with ADB, ExaCS, and DBaaS at no additional cost.
+Security Zones of Control: 
+    Assess (Data Discovery, Security Assessment, User Assessment, Privilege Analysis)
+    Detect (Activity Auditing, Reporting / Alerting, Audit Vault, Database Firewall)
+    Prevent (Encryption & Key Management, Data Masking, Data Redaction, Database Vault)
+    Data (Crypto Toolkit, Virtual Private Database, Label Security, Real Application Security)
+    Users (PKI, Kerberos, Radius (pluggable), Proxy Users, Oracle & Active Directory)
+        Security Assessment helps you access the security of your database configurations. 
+            It analyzes database configurations, user accounts, and security controls, 
+            and then reports the findings with recommendations for remediation activities that follow best practices to reduce or mitigate risk.
+        User Assessment helps you assess the security of your database users and identify high risk users. 
+            It reviews information about your users in the data dictionary on your target databases and calculates a risk score for each user.
+        Data Discovery helps you find sensitive data in your databases. 
+            You tell Data Discovery what kind of sensitive data to search for, 
+            and it inspects the actual data in your database and its data dictionary, and then returns to you a list of sensitive columns. 
+            By default, Data Discovery can search for a wide variety of sensitive data pertaining to identification, biographic, IT, financial, healthcare, employment, and academic information.
+        Data Masking provides a way for you to mask sensitive data so that the data is safe for non-production purposes.
+        Activity Auditing lets you audit user activity on your databases so you can monitor database usage and be alerted of unusual database activities.
+
 Q4.1 Automated tuning: Fast performance out of the box with zero tuning; Built-in resource management plans; Simple web-based monitoring console; Parallel execution of the queries does not need to be monitored manually; Partitioning covered under the automated tuning.
 Q4.2 REST APIs and RESTful services: REST APIs not only use JSON for communication; REST stands for Representational State Transfer; REST APIs also use the HTTP communication protocol but mainly use JSON for communication; RESTful services are not complex when compared to traditional XML SOAP communications.
 Q4.3 Scaling on demand: Independently scale compute or storage; Resizing occurs instantly, fully online.
