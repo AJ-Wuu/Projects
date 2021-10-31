@@ -284,3 +284,35 @@ Managing Encryption Keys:
 Q3.1 Create an Autonomous Exadata Infrastructure resource requires the input of Shape, Availability Domain, VCN (NO storage).
 Q3.2 Actions can be performed from the Autonomous Container Database (CDB) details page: 
      Change maintenance schedule, Move CDB to a different compartment, Change backup retention policy for CDB, Restart CDB.
+
+
+Migration Options and Considerations:
+    Optimizer statistics gathering --
+        ADW and ATP -- Statistics gathered automatically during direct-path load operations
+        ADW and ATP -- Users can gather statistics manually if needed
+        ATP -- Statistics are gathered automatically as data changes
+    Hints -- Optimizer and Parallel Hints ignored by default
+    Some database options / features are locked
+    ADW -- Managing DML Performance and Compression
+        ADW uses Hybrid Columnar Compressions for all tables by default.
+        It's recommended to use bulk operations like direct-path loads and CREATE TABLE AS SELECT statements.
+        Compression can be avoided with the "nocompress" create table keyword.
+        Compression levels for tables can be changed in real time with the ALTER TABLE MOVE statement.
+    Database Migration Service --
+        A fully-managed service for migrating databases to ADB.
+        Provides logical online and offline migration with minimal downtime.
+        Validates environment before migration.
+        Based on the Oracle Zero Downtime Migration engine utilizing Oracle GoldenGate replication.
+Migrating to Autonomous Database:
+    Oracle Database Pump --
+        is platform independent,
+        offers very fast bulk data and metadata movement between Oracle databases and ADB,
+        lets you import data from Data Pump files residing on OCI Object Storage, AWS S3, and Azure Blob Storage,
+        uses 4 mechanisms to move data in and out of databases,
+        expdp / impdp can be used for databases version 10.1 and above,
+        can save data to your OCI Object Store and use Oracle Data Pump to load data to ADB,
+        on ADB-Dedicated, can import Data Pump files from OCI Object Storage.
+    Export an Existing Oracle Database to Import into ADB --
+        Recommend schema mode for migrating to ADB to import schemas and ther data.
+        Set the parallel parameter to at least the number of OCPUs you have in your Autonomous Database to use parallelism for faster migration.
+        The exclude and data_options parameters ensure that object types not required in ADB will not be exported and partitions are grouped together so that they can be imported faster during the import to Autonomous Database.
