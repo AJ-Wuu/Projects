@@ -256,5 +256,27 @@ Creating OCI Policies for Autonomous Dedicated:
         Group is a set of users with the same privileges.
         Compartment is an operating context for a specific set of service resources only accessible to GROUPs who are explicitly granted access.
         Policy is used to bind privileges for a GROUP to a specific set of resources in a COMPAREMENT.
-
+Manage Maintenance Scheduling (Patching, ADB-Dedicated Update Policy): 
+    Oracle is responsible for all software update operations.
+    The database is continuously available to the application – 
+        Updates applied across RAC nodes and Exadata storage servers. 
+        Applications using Application Continuity best practices run without interruption.
+    Quarterly updates of all components (Firmware, OS, Storage, Network, Hypervisor, Clusterware, Database).
+    Updates automatically scheduled based on customer preferences.
+Managing Encryption Keys:
+    Techiniques --
+        TDE tablespace encryption for all data at rest
+        TLS 1.2 and Native Network encryption
+        HSM-based Key Management Service in OCI
+        Integration with on-premises Oracle Key Vault for ADB-ExaC@C
+    Customer-Controlled Encryption Key Management --
+        Master Encryption Keys stored on external HSM device.
+            FIPS-140 Security Level 3 Compliant Service
+        Customers control key generation and rotation.
+        Each ACD and ADB has a separate MEK.
+        Key Management is transparent to the ADB user for simpler developer experience.
+    End-to-End Data Protection --
+        Transparent Data Encryption
+        Oracle TLS 1.2 and Native Network Encryption
+        Database Vault
 
