@@ -493,7 +493,7 @@ Primary Goal              |  Fast Complex Analytics           |  Fast Transactio
 Data Formats              |  Columnar                         |  Row
 Data Access Acceleration  |  Creates Data Summaries           |  RDMA for Messaging and IO
 Memory Usage              |  Parallel Joins and Aggregations  |  Data Caching to Avoid IO
-Statistics                |  Automatically manages optimizer statistics as data changes
+Statistics                |  part of bulk load operations     |  part of DML operations
 Q5.1 Built-in SQL Worksheet and Notebook: Quickly start running queries with built-in web-based notebooks; No need to install a client query tool; No need to install client query tool for the PL/SQL; Not based on Apache Tomcat.
 Q5.2 Oracle Machine Learning allow access to data in Autonomous Database with Data Ingestion and Selection and Data Viewing and Discovery, and Data Analysis
 Q5.3 Actions can be performed by a workspace administrator: Manage user accounts; Monitor workspace activity; View usage reports for a workspace.
