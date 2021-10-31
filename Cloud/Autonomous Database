@@ -537,6 +537,89 @@ Q5.3 Actions can be performed by a workspace administrator: Manage user accounts
 Q5.4 A workspace in Oracle APEX can be associated with multiple schemas in the same database.
 Q5.5 Prerequisites for connecting to an Autonomous Database using SQL Developer: DB username and password; Service Name; Credential Wallet
 
+Autonomous JSON Database:
+    Oracle's Converged Database supports both NoSQL and SQL access
+    Applications developed using SODA APIs <--JSON--> JSON Documents Stored and Managed Using Oracle DB <--SQL--> SQL based reporting and analytical operations on JSON Document
+    Built for JSON-centric application development
+        Accessed via document APIs
+            Using database drivers, command-line interface, and REST
+            Applications can be built without SQL
+        SQL for cross-collction queries, reporting, and analysis
+        Native JSON storage, in-memory optimizations, advanced indexing
+    Based on the common ADB platform
+        Fully managed database - no DBA required
+        Instant auto-scaling
+        Life cycle operations controlled via user interface, APIs and CLIs
+        One-button in-place upgrade to full ADB for multi-model workloads
+Oracle Text:
+    Keyword searching and language analysis
+    Index documents and provide full-text content searching
+    No need for a separate search engine
+    Combine relational and content searching via SQL
+    Automatically enabled in ADB
+        Provides full-text search capabilities over Text / XML / JSON content
+            Extend current apps to make better use of textual fields
+            Build new apps specifically targeted at document searching
+        All the power of Oracle DB and a familiar development environment
+        Rock-solid ADB Infrastructure for your text apps
+Spatial Data: Location is a universal key relating otherwise unrelated entities
+Graphs:
+    Property Graph Data Model --
+        A collection of pointes (vertices) and lines between those points (edges)
+            Vertices and edges can have properties
+    Graph Operations --
+        Query
+        Analyze
+        Visualize
+    Detect anomalous patterns
+        eg. Uncover fraud, Money laundering
+    Clustering to detect communities
+        eg. Analyze churn, Product recommendations
+    Ranking of nodes 
+        Identify key nodes
+        eg. Detect influencers in a community
+    Path analysis
+        Fixed and variable length paths
+        Cycles
+        Specific patterns
+        eg. Find hidden connections, Dependency analysis
+Expanding the Data Ecosystem: (Much more complex than the following)
+    Discover (from Data Source)
+      ↓
+    Ingest (Data Refinery -- CDC (GoldenGate & Oracle Data Integration), Batch Ingest (Oracle Data Integrator & Data Integration))
+      ↓
+    Transform
+      ↓
+    Curate (Data Persistence Platform -- Serving ADW, Exadata)
+      ↓
+    Analyze, Learn & Predict (Access & Interpretation -- Visualize / Learn (Analytics Cloud), Learn (Data Science OML, OML Notebook))
+      ↓
+    Measure & Act
+              |  Data Warehouse    |  Data Lake
+Data          |  curated, trusted  |  mixed value
+Concurrency   |  high              |  lower
+Schema        |  on write          |  on read
+Subject Area  |  one (filtered)    |  multiple
+Performance   |  high              |  acceptable
+Self-Service Data Loading and Linking:
+    Simple "Drag and Drop" Data Loading --
+        Files on local computer
+        Files on Object Storage (including OCI, AWS S3, AWS-S3 compliant store, Azure Blob Storage, Google)
+        Oracle DB (on-prem and cloud)
+Partitioned External Tables:
+    All data outside the DB
+        Files in Object Store buckets
+    Exposes the power of Oracle partitioning to external data
+        Partition pruning
+        Parition maintenance
+    Predicate pushdown to Parquet and ORC files provides find-grained data pruning
+    Enables order-of-magnitudes faster query performance and enhanced data maintenance
+Hybrid Partitioned Tables:
+    Single table contains both internal (RDBMS) and external partitions
+        Full functional support, such as partial indexing, partial read-only, constraints, etc.
+    Partition maintenance for information lifecycle management
+        Currently limited support
+        Enhancements in progress
 Q6.1 Oracle Text provides full-text content searching and combines relational content searching via SQL.
 Q6.2 The most cost-effective storage to move some unstructured data consisting of images and videos to cloud storage is Object Storage.
 Q6.3 Oracle Autonomous JSON Database supports NoSQL-Style document-centric applications, allows to store JSON data in the database, supports autoscaling, does not support MySQL-Style database applications.
