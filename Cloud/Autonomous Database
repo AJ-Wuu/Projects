@@ -26,7 +26,7 @@
 • SQL Developer To Load and Import to ADB: SQL Developer provides a GUI front end for using Data Pump. They can automate the whole export and import process from an existing database to ADB. SQL Developer also includes an import wizard that can be used to import data from several file types into ADB.
 • The exclude and data_options parameters: These ensure that the object types not required in ADB are not exported and table partitions are grouped together so that they can be imported faster during the import to ADB.
 • Log files for Data Pump: The log files for Data Pump Import operations are stored in the directory DATA_PUMP_DIR. This is the only directory you can specify for the Data Pump directory parameter. To access the log file, you need to move the log file to your cloud object storage using the procedure DBMNS_CLOUD.PUT_OBJECT.
-• Use Cases for Oracle Golden Gate: Using it On Premises to replicate data to Autonomous Database for real-time data warehousing, replicate on premises data to the Autonomous Database to set up a staging environment for downstream ETL, or real-time data warehousing. This service can also be used to migrate data to the Autonomous Database.
+• Use Cases for Oracle GoldenGate: Using it On Premises to replicate data to Autonomous Database for real-time data warehousing, replicate on premises data to the Autonomous Database to set up a staging environment for downstream ETL, or real-time data warehousing. This service can also be used to migrate data to the Autonomous Database.
 • Data types not supported for replicating data the Oracle Autonomous Database: LONG, LONG RAW, XMLTYPE STORE AS OBJECT relational, XMLSTORE AS BINARY, BFILE, MEDIA, and SPATIAL.
 • Create User in ADB: Just specify the password. DWROLE is a predefined role that includes all necessary privileges for a DW developer/user.
 • Scaling in ADB: ADB allows for independently scaling of compute or storage. Resizing occurs instantly, fully online. Memory, IO bandwidth concurrency scales linearly with CPU, so when CPUs are scaled, the system automatically adjusts other resources to match.
@@ -210,7 +210,7 @@ Describe Workflows and Functionality:
         Include Availability Domain placement controls for latency-sensitive apps; 
         Policy controls for patch scheduling and software versioning; 
         Database migration via export and import from Object Store, 
-        Data Pump direct import – Network link, Golden Gate; 
+        Data Pump direct import – Network link, GoldenGate; 
         Cloning and Auto Scaling capabilities are automatically available.
     Feature                                                                     |  ADB-Dedicated                       |  ADB-Shared
     Autonomous Resources                                                        |  Autonomous Database                 |  Autonomous Database
@@ -651,11 +651,34 @@ Migrating to Autonomous Database:
         uses 4 mechanisms to move data in and out of databases,
         expdp / impdp can be used for databases version 10.1 and above,
         can save data to your OCI Object Store and use Oracle Data Pump to load data to ADB,
-        on ADB-Dedicated, can import Data Pump files from OCI Object Storage.
+        on ADB-Dedicated, can import Data Pump files from OCI Object Storage,
+        eliminates legacy formats, upgrades version, encrypts data, removes admin privileges,
+        GoldenGate replication can be used to keep DB online during process --
+            Has standard GoldenGate restrictions or rowIDs, nested tables, identity columns, etc.
     Export an Existing Oracle Database to Import into ADB --
         Recommend schema mode for migrating to ADB to import schemas and ther data.
         Set the parallel parameter to at least the number of OCPUs you have in your Autonomous Database to use parallelism for faster migration.
         The exclude and data_options parameters ensure that object types not required in ADB will not be exported and partitions are grouped together so that they can be imported faster during the import to Autonomous Database.
+    Physical DB cannot simply be migrated to ADB necause --
+        DB must be converted to PDB, upgraded if needed, and encrypted
+        Any changes to Oracle shipped stored procedures or views must be found and reverted
+        All uses of CDB admin privileges must be removed
+        All legacy features that are not supported must be removed (eg. legacy LOBs)
+Data Loading Tool                  |  Recommended for Larger Data Sets  |  Input Formats Supported  |  Third-Party DB Support  |  Object Store Support
+SQL Developer Data Import Wizard   |  Yes                               |  Flat files               |                          |  Yes
+SQL Developer Migration Workbench  |  Yes                               |  Third-Party DB           |  Yes                     |
+Oracle Data Pump                   |  Yes                               |  Oracle DB                |                          |  Yes
+SQL Loader                         |                                    |  Flat files               |                          |
+Database Link                      |                                    |  Oracle DB                |                          |  Yes
+DBMS_CLOUD Package                 |  Yes                               |  Flat files               |                          |  Yes
+External Tables                    |  Yes                               |  Flat files               |                          |  Yes
+Data Sync                          |  Yes                               |  DB, Flat files           |  Yes                     |  Yes
+Other ETL Tools/Scripts            |  Yes                               |  DB, Flat files           |  Yes                     |  Some
+Database Migration Service:
+    Is a fully-managed service for migrating DB to ADB
+    Provides logical online and offline migration with minimal down time
+    Validates the environment before migration
+    Is based on the Oracle Zero Downtime Migration engine utilizing Oracle GoldenGate replikcation
 Q7.1 DBMS_CLOUD.COPY_DATA can be used to load data directly into the existing Autonomous Database tables.
 Q7.2 DBMS_CLOUD provide support for loading data from files to tables in Autonomous Database for Azure Blob Storage, Amazon AWS S3, OCI Object Storage
 Q7.3 Data Pump and GoldenGate can be used to migrate an on-prem database to Oracle Autonomous Database.
