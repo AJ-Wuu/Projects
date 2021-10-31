@@ -1,14 +1,9 @@
-Autonomous Transaction Processing: It is used for OLTP and mixed workloads; Missing indexes are detected and created; Data is stored in row format
-Two actions that can be performed from the OCI Console for an Oracle Autonomous Database: Scale up/down CPU; Increase Storage allocated for Database
-In Autonomous Data Warehouse: Data is stored in columnar format
-Oracle Cloud Infrastructure: It provides complete lifecycle automation; It enables you to run everything from small VMs to large bare metal clusters; It provides high availability and scability
-Operations are included in automated data center operations: Provisioning a database; Patching a database; Online backups of a database; Automatically handling failures and errors
-
-OCI Console for an Oracle Autonomous Database cannot increase network bandwidth.
-Oracle Cloud Infrastructure: Provide high availability and scalability. Provide complete lifecycle automation. Enable to run everything from small VMs to large bare metal clusters. Support Bare Metal DB Systems, Virtual Machine and Exadata systems.
-Operations included in automated data center operations: Provisioning a database. Patching a database. Online backups of a database. Automatically handling failures and errors. 
-Autonomous Transaction Processing: Data is stored in row format, Missing indexes are detected and created. It is used for OLTP and mixed workloads. Response time is optimized for queries.
-Autonomous Data Warehouse: Data is stored in columnar format. Complex SQL queries are optimized.
+Q1.1 Operations that are included in automated data center operations: Provisioning a database; Patching a database; Online backups of a database; Automatically handling failures and errors.
+Q1.2 Autonomous Data Warehouse: Data is stored in columnar format. Complex SQL queries are optimized.
+Q1.3 Oracle Cloud Infrastructure: Provide high availability and scalability. Provide complete lifecycle automation. Enable to run everything from small VMs to large bare metal clusters. Support Bare Metal DB Systems, Virtual Machine and Exadata systems.
+Q1.4 Autonomous Transaction Processing: Data is stored in row format, Missing indexes are detected and created. It is used for OLTP and mixed workloads. Response time is optimized for queries.
+Q1.5 Two actions that can be performed from the OCI Console for an Oracle Autonomous Database: Scale up/down CPU; Increase Storage allocated for Database
+Q1.6 OCI Console for an Oracle Autonomous Database cannot increase network bandwidth.
 
 Autonomous Database allows to: 
     Start instance instantly.
@@ -86,11 +81,7 @@ Autonomous Data Guard:
         System automatically recovers as much data as possible;
         Manual recommended only in a true disaster scenario;
         RTO = 2 minutes, RPO = 5 minutes.
-Q2.1 The capabilities of OADB that can accelerate innovation:
-     Provisions a data warehouse in seconds
-     Built-in AI and ML helps find patterns that could identify undiscovered anomalies
-     Instant scaling of storage
-     NOT Scaling of CPUs with very little downtime
+Q2 The capabilities of OADB that can accelerate innovation: Provisions a data warehouse in seconds; Built-in AI and ML helps find patterns that could identify undiscovered anomalies; Instant scaling of storage; NOT Scaling of CPUs with very little downtime.
 
 Dedicated Infrastructure:
     Two deployment choices --
@@ -285,6 +276,24 @@ Q3.1 Create an Autonomous Exadata Infrastructure resource requires the input of 
 Q3.2 Actions can be performed from the Autonomous Container Database (CDB) details page: 
      Change maintenance schedule, Move CDB to a different compartment, Change backup retention policy for CDB, Restart CDB.
 
+Q4.1 Automated tuning: Fast performance out of the box with zero tuning; Built-in resource management plans; Simple web-based monitoring console; Parallel execution of the queries does not need to be monitored manually; Partitioning covered under the automated tuning.
+Q4.2 REST APIs and RESTful services: REST APIs not only use JSON for communication; REST stands for Representational State Transfer; REST APIs also use the HTTP communication protocol but mainly use JSON for communication; RESTful services are not complex when compared to traditional XML SOAP communications.
+Q4.3 Scaling on demand: Independently scale compute or storage; Resizing occurs instantly, fully online.
+Q4.4 OCI Command Line Interface: Is easy to use and lightweight to install; Calls OCI REST APIs.
+Q4.5 The main use case for REST APIs: Monitoring, DevOps & Development.
+Q4.6 When setting up the Config File using the oci setup config command, you need to enter: Location of the config file, User OCID, Tenancy OCID.
+
+Q5.1 Built-in SQL Worksheet and Notebook: Quickly start running queries with built-in web-based notebooks; No need to install a client query tool; No need to install client query tool for the PL/SQL; Not based on Apache Tomcat.
+Q5.2 Oracle Machine Learning allow access to data in Autonomous Database with Data Ingestion and Selection and Data Viewing and Discovery, and Data Analysis
+Q5.3 Actions can be performed by a workspace administrator: Manage user accounts; Monitor workspace activity; View usage reports for a workspace.
+Q5.4 A workspace in Oracle APEX can be associated with multiple schemas in the same database.
+Q5.5 Prerequisites for connecting to an Autonomous Database using SQL Developer: DB username and password; Service Name; Credential Wallet
+
+Q6.1 Oracle Text provides full-text content searching and combines relational content searching via SQL.
+Q6.2 The most cost-effective storage to move some unstructured data consisting of images and videos to cloud storage is Object Storage.
+Q6.3 Oracle Autonomous JSON Database supports NoSQL-Style document-centric applications, allows to store JSON data in the database, supports autoscaling, does not support MySQL-Style database applications.
+Q6.4 Spatial studio is a self-service application to create interactive maps, needs additional resources, is not a fully managed service available in OCI, does not come with an Autonomous Database at an additional cost.
+Q6.5 Clause used in Property Graph query language to specify patterns is Match.
 
 Migration Options and Considerations:
     Optimizer statistics gathering --
