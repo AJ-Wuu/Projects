@@ -86,11 +86,11 @@ Autonomous Data Guard:
         System automatically recovers as much data as possible;
         Manual recommended only in a true disaster scenario;
         RTO = 2 minutes, RPO = 5 minutes.
-Q1  The capabilities of OADB that can accelerate innovation:
-    Provisions a data warehouse in seconds
-    Built-in AI and ML helps find patterns that could identify undiscovered anomalies
-    Instant scaling of storage
-    NOT Scaling of CPUs with very little downtime
+Q2.1 The capabilities of OADB that can accelerate innovation:
+     Provisions a data warehouse in seconds
+     Built-in AI and ML helps find patterns that could identify undiscovered anomalies
+     Instant scaling of storage
+     NOT Scaling of CPUs with very little downtime
 
 Dedicated Infrastructure:
     Two deployment choices --
@@ -281,4 +281,6 @@ Managing Encryption Keys:
         Transparent Data Encryption
         Oracle TLS 1.2 and Native Network Encryption
         Database Vault
-
+Q3.1 Create an Autonomous Exadata Infrastructure resource requires the input of Shape, Availability Domain, VCN (NO storage).
+Q3.2 Actions can be performed from the Autonomous Container Database (CDB) details page: 
+     Change maintenance schedule, Move CDB to a different compartment, Change backup retention policy for CDB, Restart CDB.
