@@ -101,7 +101,7 @@ Dedicated Infrastructure:
         Highest Isolation, 
         Customizable Operational Policies. 
     Dedicated allows multiple levels of isolation: 
-        DB, Container DB, VM Cluster, Secure Isolation Zone within public cloud, Separate Hardware (Exadata Infrastructure).
+        DB, Container DB, Virtual Cloud Network (VCN), VM Cluster, Secure Isolation Zone within public cloud, Separate Hardware (Exadata Infrastructure).
     Autonomous Management Model: 
         Customer controls DB users, schemas and encryption keys;
         Oracle owns, manages and controls (without customer access) DomU, container DBs, Hypervisor, DB servers, storage servers, network, etc.
@@ -166,7 +166,8 @@ Describe Workflows and Functionality:
         Must subscribe to an Exadata Infrastructure (min term 48 hours); 
         Include Availability Domain placement controls for latency-sensitive apps; 
         Policy controls for patch scheduling and software versioning; 
-        Database migration via export and import from Object Store, Data Pump direct import – Network link, Golden Gate; 
+        Database migration via export and import from Object Store, 
+        Data Pump direct import – Network link, Golden Gate; 
         Cloning and Auto Scaling capabilities are automatically available.
     Feature                                                                     |  ADB-Dedicated                       |  ADB-Shared
     Autonomous Resources                                                        |  Autonomous Database                 |  Autonomous Database
@@ -256,6 +257,7 @@ Creating OCI Policies for Autonomous Dedicated:
         Group is a set of users with the same privileges.
         Compartment is an operating context for a specific set of service resources only accessible to GROUPs who are explicitly granted access.
         Policy is used to bind privileges for a GROUP to a specific set of resources in a COMPAREMENT.
+        Levels of access can be defined by policy -- manage, inspect, read, use.
 Manage Maintenance Scheduling (Patching, ADB-Dedicated Update Policy): 
     Oracle is responsible for all software update operations.
     The database is continuously available to the application – 
