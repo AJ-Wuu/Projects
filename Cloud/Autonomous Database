@@ -316,3 +316,6 @@ Migrating to Autonomous Database:
         Recommend schema mode for migrating to ADB to import schemas and ther data.
         Set the parallel parameter to at least the number of OCPUs you have in your Autonomous Database to use parallelism for faster migration.
         The exclude and data_options parameters ensure that object types not required in ADB will not be exported and partitions are grouped together so that they can be imported faster during the import to Autonomous Database.
+Q7.1 DBMS_CLOUD.COPY_DATA can be used to load data directly into the existing Autonomous Database tables.
+Q7.2 DBMS_CLOUD provide support for loading data from files to tables in Autonomous Database for Azure Blob Storage, Amazon AWS S3, OCI Object Storage
+Q7.3 Data Pump and GoldenGate can be used to migrate an on-prem database to Oracle Autonomous Database.
