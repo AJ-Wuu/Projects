@@ -50,13 +50,35 @@
 • Change the CPU/IO shares for the consumer groups: The 'Set Resource Management Rules' pop-up form on the administration section of the service console has been extended to allow the modification of CPU/IO shares across the different resource groups. It is also possible to change the resource shares within a script, application call and/or via a SQL prompt using the cs_resource_manager package.
 • Types of database workload are best to run on ADB-D: You can run all your transaction processing or data warehouse or mixed workload databases of any size, scale or criticality on ADB-D. As well as supporting application databases that may require highest governance, consistent performance and operational controls.
 
-Q1 Two infrastucture options supported for an ADB: Shared Exadata Infrastructure & Dedicated Exadata Infrastructure
-Q2 Retention period for the backups in ADB: 60 days
-Q3 Three resources included in ADB Dedicated Infrastructure: Autonomous Database, Autonomous Container Database, Autonomous Exadata Infrastructure
-Q4 Scaling on demand: Scale compute or storage independently; Resizing doesn't need to restart; Resizing occurs instantly, fully online.
-Q5 Four tools that can be accessed from the Database Actions Page: SQL, Data Modeler, Data Load, APEX (NO Machine Learning Notebooks, Cloud Shell)
-Q6 Oracle Autonomous JSON Database: It's a cloud document database service; It supports NoSQL-style document APIs, which enable developers to creat JSON-centric applications; It supports application developed using SODA.
-Q7 Procedure that can be used to move the Data Pump Import log file from ADB to Oracle Cloud Object Storage: DBMS_CLOUD.PUT_OBJECT
+Q1  Two infrastucture options supported for an ADB: Shared Exadata Infrastructure & Dedicated Exadata Infrastructure
+Q2  Retention period for the backups in ADB: 60 days
+Q3  Three resources included in ADB Dedicated Infrastructure: Autonomous Database, Autonomous Container Database, Autonomous Exadata Infrastructure
+Q4  Scaling on demand: Scale compute or storage independently; Resizing doesn't need to restart; Resizing occurs instantly, fully online.
+Q5  Four tools that can be accessed from the Database Actions Page: SQL, Data Modeler, Data Load, APEX (NO Machine Learning Notebooks, Cloud Shell)
+Q6  Oracle Autonomous JSON Database: It's a cloud document database service; It supports NoSQL-style document APIs, which enable developers to creat JSON-centric applications; It supports application developed using SODA.
+Q7  Procedure that can be used to move the Data Pump Import log file from ADB to Oracle Cloud Object Storage: DBMS_CLOUD.PUT_OBJECT
+Q8  Three that are used by IAM service to authenticate a principal: Resource Principal, API signing key, Username and Password
+Q9  Topic is used to refer to a communication channel for sending messages to a subscription, such as email or SMS.
+Q10 OCI Command Line Interface: is easy to use and ilghtweight to install; calls OCI REST APIs.
+Q11 "EXEC DBMS_AUTO_INDEX.CONFIGURE('AUTO_INDEX_MODE','REPORT ONLY');" enable automatic indexing in a database, but any new auto indexes should be created as invisible indexes, so that they cannot be used in SQL statements.
+Q12 REPORTADB is a refreshable clone of PRODADB. If you do not perform a refresh within seven days, then REPORTADB will be no longer refreshable. APEX URLs will not work for REPORTADB. REPORTADB cannot be changed to READ WRITE without disconnecting it from PRODADB. It is not possible to create cascading refreshable clones.
+Q13 APEX can be used to build web applications rapidly.
+Q14 API Signing Key: It can be generated without a passphrase. It is required when using OCI API in conjunction with SDK/CLI. An RSA key pair in PEM format does not need a minimum of 1024 bits. It is an RSA key pair in PEM format.
+Q15 Provisioning an Autonomous Database: It is deployed on a private software-defined network. The provisioned database does not automatically mask user data. The provisioned database has a scalable RAC cluster running on Exadata. The provisioned database is fully encrypted.
+Q16 Low, Medium and High are the predefined database service names available in an Autonomous Data Warehouse.
+Q17 Oracle Autonomous Transaction Processing database: It stores data in Row Format. Memory configuration, data formats, indexes, and access structures are automatically optimized to optimize response time. It is not best suited for Analytics Workload. Use data summaries such as storage indexes on the Exadata storage cells to quickly answer the data that is not needed in the query.
+Q18 Transparent is used when the ENCRYPTION parameter is DATA_ONLY and Oracle Encryption Wallet is open.
+Q19 Autonomous JSON Database: There is no storage limit for JSON collections. They are schemaless. You cannot promote an Autonomous JSON Database service to an Autonomous Data Warehouse service. In a SODA collection, you cannot have a collection of image documents or a collection that contains both JSON documents and image documents.
+Q20 Five Network Security Groups (NSGs) can be configured for an Autonomous Database.
+Q21 DBSRV1 is an Autonomous Database with the display name PRODDB. "backup_dbsrv1" must be the name of the bucket that will be used to store manual backups.
+Q22 Oracle Spatial with Autonomous Database: Spatial supports the use of JSON and GeoJSON objects. Spatial consists of a schema (MDSYS) that prescribes the storage, syntax, and semantics of supported geometric data types. Open Geospatial Consortium Web Services is not available in Autonomous Database. Oracle Spatial with Autonomous Database does not come with integrated Network Model and Data Model.
+Q23 Oracle Package DBMS_CLOUD is used to load data to an ADB from object storage.
+Q24 Cloning an Autonomous Database: A new autonomous database can be cloned from a live running database instance. You can change the licensing type during cloning. A refreshable (read-only) clone of the source database cannot be from its backup. The cloned database version can be higher than the source database version.
+Q25 "POST /20160918/autonomousDatabases" can be used to create an Autonomous Database.
+Q26 Prerequisites to configure a private endpoint with Autonomous Databases (ADBs): There must be a private subnet with DHCP option. There must be at least one Network Security Group (NSG) within your VCN. There must be a VCN within the region of the ADB.
+Q27 Private endpoints: You can configure a private endpoint while cloning your ADB. You can change the network access of an autonomous database in a shared Exadata infrastructure from private endpoint to public endpoint. You can configure an existing Autonomous Database (ADB) to use a private endpoint. You don't need to set up transit routing in your VCN and use a service gateway to connect. 
+Q28 "SCALING IN PROGRESS" is shown as the status when increasing the number of OCPUs in Autonomous Database.
+Q29 
 
 Q1.1 Operations that are included in automated data center operations: Provisioning a database; Patching a database; Online backups of a database; Automatically handling failures and errors.
 Q1.2 Autonomous Data Warehouse: Data is stored in columnar format. Complex SQL queries are optimized.
