@@ -13,12 +13,11 @@ import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
 
-#CREDENTIALS_FILE = "UWBC-Credentials.json"
-#API_KEY = ""
 CREDENTIALS_FILE = "WednesdayNiteCredentials.json"
-API_KEY = "AIzaSyCk6V1k-BLOMdO1LeGd5--v6cTiLwKdtfE"
-#CREDENTIALS_FILE = "Test.json"
-#API_KEY = "AIzaSyCEjFom9hJbAiBEIqXM_MelgYu-BNizydA"
+
+calendarToken = "calendarToken.pickle"
+youtubeToken = "youtubeToken.pickle"
+
 
 def accessGoogleCalendarAPIService():
     # If modifying these scopes, delete the file token.pickle
@@ -26,8 +25,9 @@ def accessGoogleCalendarAPIService():
     creds = None
     # The file token.pickle stores the user's access and refresh tokens.
     # It is created automatically when the authorization flow completes for the first time.
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+
+    if os.path.exists(calendarToken):
+        with open(calendarToken, 'rb') as token:
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
@@ -39,7 +39,7 @@ def accessGoogleCalendarAPIService():
             creds = flow.run_local_server(port=0)
 
         # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
+        with open(calendarToken, 'wb') as token:
             pickle.dump(creds, token)
 
     service = build('calendar', 'v3', credentials=creds)
@@ -54,35 +54,38 @@ def accessYouTubeLiveStreamingAPIService():
 
     # Disable OAuthlib's HTTPS verification when running locally.
     # *DO NOT* leave this option enabled in production.
-    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "0"
+    #os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
-#https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=PLVL8S3lUHf0RqD7TZ6hohWk8Sd3asaqnY&maxResults=20&key={YOUR_API_KEY}
-    """
     creds = None
     # The file token.pickle stores the user's access and refresh tokens.
     # It is created automatically when the authorization flow completes for the first time.
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+    if os.path.exists(youtubeToken):
+        with open(youtubeToken, 'rb') as token:
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(CREDENTIALS_FILE, SCOPES)
-            creds = flow.run_console()
+            flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
+                CREDENTIALS_FILE,
+                SCOPES,
+                redirect_uri='urn:ietf:wg:oauth:2.0:oob'
+            )
+            authorization_url, state = flow.authorization_url(
+                access_type='offline', prompt='consent', include_granted_scopes='true')
+            #print('please go to this URL: {}'.format(authorization_url))
+            # https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
+            code = '4/1AX4XfWh0hQCOvXKZ2FqKA5GsGuXvsZziK1RyadrEL2V5O7Qyw_7z6oOd9Bg'
+            flow.fetch_token(code=code)
+            creds = flow.credentials
 
         # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
+        with open(youtubeToken, 'wb') as token:
             pickle.dump(creds, token)
 
-    """
-    # Get credentials and create an API client
-    flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
-        CREDENTIALS_FILE, SCOPES)
-    credentials = flow.run_console()
-    
-    youtube = googleapiclient.discovery.build('youtube', 'v3', credentials=credentials) #, developerKey=API_KEY)
+    youtube = googleapiclient.discovery.build(
+        'youtube', 'v3', credentials=creds)
     return youtube
 
 
@@ -165,29 +168,28 @@ def youtubeInsert(event):
     request = youtube.liveBroadcasts().insert(
         part="snippet,contentDetails,status",
         body={
-          "contentDetails": {
-            "enableClosedCaptions": True,
-            "enableContentEncryption": True,
-            "enableDvr": True,
-            "enableEmbed": True,
-            "recordFromStart": True,
-            "startWithSlate": True,
-            "enableAutoStart": True,
-            "enableAutoStop": True,
-            "enableLowLatency": True
-          },
-          "snippet": {
-            "title": event.get('title'),
-            "description": event.get('description'),
-            "scheduledStartTime": moveStartTime15MinForward(event.get('startDate8601')),
-            "scheduledEndTime": moveEndTime15MinBackward(event.get('endDate8601'))
-          },
-          "status": {
-            "privacyStatus": "private",
-            "selfDeclaredMadeForKids": False
-          }
-        },
-        key=API_KEY
+            "contentDetails": {
+                "enableClosedCaptions": True,
+                "enableContentEncryption": True,
+                "enableDvr": True,
+                "enableEmbed": True,
+                "recordFromStart": True,
+                "startWithSlate": True,
+                "enableAutoStart": True,
+                "enableAutoStop": True,
+                "enableLowLatency": True
+            },
+            "snippet": {
+                "title": event.get('title'),
+                "description": event.get('description'),
+                "scheduledStartTime": moveStartTime15MinForward(event.get('startDate8601')),
+                "scheduledEndTime": moveEndTime15MinBackward(event.get('endDate8601'))
+            },
+            "status": {
+                "privacyStatus": "private",
+                "selfDeclaredMadeForKids": False
+            }
+        }
     )
     response = request.execute()
 
@@ -216,8 +218,6 @@ def compareEvent(todayEvents, existedEvents):
         for deletedEvent in existedEvents:
             calendarDelete(deletedEvent)
             youtubeDelete()
-
-# remove the events that has passed
 
 
 def removePastEvent(existedEvents):
@@ -254,26 +254,22 @@ def loadUnpassedTodayEventsFromWeb():
 
 def getCalendar():
     # get today's events
-    #todayEvents = loadUnpassedTodayEventsFromWeb()
+    todayEvents = loadUnpassedTodayEventsFromWeb()
 
     # today's date in string format of "2021-Aug-16"
     today = date.today().strftime("%Y-%b-%d")
     # file name for today's .json
     jsonFileName = 'Calendar-' + today + '.json'
 
-    testTodayEvents = json.loads(open(jsonFileName, "r").read())
-    for event in testTodayEvents:
-        calendarInsert(event)
-        youtubeInsert(event)
-    """
-    # check .json file: 
+    # check .json file:
     # if not existed, create today's .json and remove yesterday's .json
     # if existed, see if it needs update
     if os.path.exists(jsonFileName):
         # get existedEvents and remove those has passed
         #existedEvents = json.loads(open(jsonFileName, "r").read())
         # get existedEvents and remove those has passed
-        existedEvents = removePastEvent(json.loads(open(jsonFileName, "r").read()))
+        existedEvents = removePastEvent(
+            json.loads(open(jsonFileName, "r").read()))
         compareEvent(todayEvents, existedEvents)
     else:
         # yesterday's date in string
@@ -285,8 +281,6 @@ def getCalendar():
     # update .json (inserting new, deleting old / past)
     with open(jsonFileName, "w") as outfile:
         json.dump(todayEvents, outfile)
-    """
-    print("Test")
 
 
 def main():
