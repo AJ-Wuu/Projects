@@ -103,61 +103,75 @@ def moveEndTime15MinBackward(end):
     return end
 
 
-def calendarUpdate(todayEvent, existedEvent):
-    # update the event to tomorrow 9 AM IST
+def calendarGetEventID(targetEvent):
     service = accessGoogleCalendarAPIService()
-
-    d = date.now().date()
-    tomorrow = date(d.year, d.month, d.day, 9)+timedelta(days=1)
-    start = tomorrow.isoformat()
-    end = (tomorrow + timedelta(hours=2)).isoformat()
-
-    event_result = service.events().update(
-        calendarId='primary',
-        eventId='<place your event ID here>',
-        body={
-            "summary": 'Updated Automating calendar',
-            "description": 'This is a tutorial example of automating google calendar with python, updated time.',
-            "start": {"dateTime": start, "timeZone": 'Asia/Kolkata'},
-            "end": {"dateTime": end, "timeZone": 'Asia/Kolkata'},
-        },
-    ).execute()
-
-    print("updated event")
-    print("id: ", event_result['id'])
-    print("summary: ", event_result['summary'])
-    print("starts at: ", event_result['start']['dateTime'])
-    print("ends at: ", event_result['end']['dateTime'])
+    page_token = None
+    while True:
+        events = service.events().list(calendarId='primary', pageToken=page_token).execute()
+        for tempEvent in events['items']:
+            if ((tempEvent['summary'] == targetEvent['title']) and (tempEvent['start']['dateTime'] == targetEvent['startDate8601']) and (tempEvent['end']['dateTime'] == targetEvent['endDate8601'])):
+                return tempEvent['id']
+        page_token = events.get('nextPageToken')
+        if not page_token:
+            break
 
 
 def calendarInsert(todayEvent):
     # creates one hour event tomorrow 10 AM IST
     service = accessGoogleCalendarAPIService()
-    service.events().insert(calendarId='primary',
-                            body={
-                                'summary': todayEvent.get('title'),
-                                'start': {"dateTime": moveStartTime15MinForward(todayEvent.get('startDate8601'))},
-                                'end': {"dateTime": moveEndTime15MinBackward(todayEvent.get('endDate8601'))},
-                            }
-                            ).execute()
+    request = service.events().insert(
+        calendarId='primary',
+        body={
+            'summary': todayEvent.get('title'),
+            'start': {"dateTime": moveStartTime15MinForward(todayEvent.get('startDate8601'))},
+            'end': {"dateTime": moveEndTime15MinBackward(todayEvent.get('endDate8601'))}
+        }
+    )
+    request.execute()
+
+
+def calendarUpdate(todayEvent, existedEvent):
+    # update the event to tomorrow 9 AM IST
+    service = accessGoogleCalendarAPIService()
+    try:
+        request = service.events().update(
+            calendarId='primary',
+            eventId=calendarGetEventID(existedEvent),
+            body={
+                "summary": todayEvent.get('title'),
+                'start': {"dateTime": moveStartTime15MinForward(todayEvent.get('startDate8601'))},
+                'end': {"dateTime": moveEndTime15MinBackward(todayEvent.get('endDate8601'))}
+            }
+        )
+        request.execute()
+    except:
+        print("Failed to update event")
 
 
 def calendarDelete(deletedEvent):
     # Delete the event
     service = accessGoogleCalendarAPIService()
     try:
-        service.events().delete(
+        request = service.events().delete(
             calendarId='primary',
-            eventId='<place your event ID here>',
-        ).execute()
+            eventId=calendarGetEventID(deletedEvent),
+        )
+        request.execute()
     except googleapiclient.errors.HttpError:
         print("Failed to delete event")
 
-    print("Event deleted")
 
-
-def youtubeUpdate():
-    print("Test")
+def youtubeGetEventID(targetEvent):
+    youtube = accessYouTubeLiveStreamingAPIService()
+    while True:
+        events = youtube.liveBroadcasts().list(
+            part="snippet,contentDetails,status",
+            broadcastType="all",
+            mine=True
+        )
+        for tempEvent in events['items']:
+            if ((tempEvent['summary'] == targetEvent['title']) and (tempEvent['start']['dateTime'] == targetEvent['startDate8601']) and (tempEvent['end']['dateTime'] == targetEvent['endDate8601'])):
+                return tempEvent['id']
 
 
 def youtubeInsert(event):
@@ -186,49 +200,74 @@ def youtubeInsert(event):
                 "scheduledEndTime": moveEndTime15MinBackward(event.get('endDate8601'))
             },
             "status": {
-                "privacyStatus": "private",
+                "privacyStatus": "public",
                 "selfDeclaredMadeForKids": False
             }
         }
     )
-    response = request.execute()
+    request.execute()
 
 
-def youtubeDelete():
-    print("Test")
+def youtubeUpdate(event):
+    youtube = accessYouTubeLiveStreamingAPIService()
+    request = youtube.liveBroadcasts().update(
+        part="snippet",
+        body={
+            "snippet": {
+                "title": event.get('title'),
+                "description": event.get('description'),
+                "scheduledStartTime": moveStartTime15MinForward(event.get('startDate8601')),
+                "scheduledEndTime": moveEndTime15MinBackward(event.get('endDate8601'))
+            },
+            "id": youtubeGetEventID(event)
+        }
+    )
+    request.execute()
+
+
+def youtubeDelete(event):
+    youtube = accessYouTubeLiveStreamingAPIService()
+    request = youtube.liveBroadcasts().delete(
+        id=youtubeGetEventID(event)
+    )
+    request.execute()
 
 
 def compareEvent(todayEvents, existedEvents):
     flag = False  # if found the same event, then change to True
-    for todayEvent in todayEvents:
-        for existedEvent in existedEvents:
-            # compare the same event (select by title)
-            if (todayEvent["title"] == existedEvent["title"]):
-                if (todayEvent["startDate"] != existedEvent["startDate"] or todayEvent["endDate"] != existedEvent["endDate"]):
-                    calendarUpdate(todayEvent, existedEvent)
-                    youtubeUpdate()
-                    flag = True
-                    existedEvents.remove(existedEvent)
-        if (flag == False):  # new event added
+    if (len(existedEvents) == 0):
+        for todayEvent in todayEvents:
             calendarInsert(todayEvent)
-            youtubeInsert()
-        else:
-            flag = False
-    if (len(existedEvents) > 0):  # old event deleted
-        for deletedEvent in existedEvents:
-            calendarDelete(deletedEvent)
-            youtubeDelete()
+            youtubeInsert(todayEvent)
+    else:
+        for todayEvent in todayEvents:
+            for existedEvent in existedEvents:
+                # compare the same event (select by title)
+                if (todayEvent["title"] == existedEvent["title"]):
+                    if (todayEvent["startDate"] != existedEvent["startDate"] or todayEvent["endDate"] != existedEvent["endDate"]):
+                        calendarUpdate(todayEvent, existedEvent)
+                        youtubeUpdate(todayEvent, existedEvent)
+                        flag = True
+                        existedEvents.remove(existedEvent)
+            if (flag == False):  # new event added
+                calendarInsert(todayEvent)
+                youtubeInsert(todayEvent)
+            else:
+                flag = False
+        if (len(existedEvents) > 0):  # old event deleted
+            for deletedEvent in existedEvents:
+                calendarDelete(deletedEvent)
+                youtubeDelete(deletedEvent)
 
 
 def removePastEvent(existedEvents):
     for existedEvent in existedEvents:
-        existedEventTime = time.strptime(
-            existedEvent.get("endDate")[11:19], '%H:%M:%S')
-        if (existedEventTime < time.datetime.now().strftime('%H:%M:%S')):
+        existedEventTime = existedEvent.get("endDate")[11:19]
+        if (existedEventTime < datetime.now().strftime('%H:%M:%S')):
             existedEvents.remove(existedEvent)
         else:
             break
-    return existedEvent
+    return existedEvents
 
 
 def loadUnpassedTodayEventsFromWeb():
@@ -245,14 +284,13 @@ def loadUnpassedTodayEventsFromWeb():
     for event in events:
         if (today in event['startDate']) and ('Auditorium' in event['location']):
             todayEvents.append(event)
-            i += 1
             if (i == 10):
                 break
 
     return todayEvents
 
 
-def getCalendar():
+def main():
     # get today's events
     todayEvents = loadUnpassedTodayEventsFromWeb()
 
@@ -274,17 +312,14 @@ def getCalendar():
     else:
         # yesterday's date in string
         yesterday = (date.today() - timedelta(days=1)).strftime("%Y-%b-%d")
-        os.remove('Calendar-' + yesterday + '.json')
+        #os.remove('Calendar-' + yesterday + '.json')
         for event in todayEvents:
             calendarInsert(event)
+            youtubeInsert(event)
 
     # update .json (inserting new, deleting old / past)
     with open(jsonFileName, "w") as outfile:
         json.dump(todayEvents, outfile)
-
-
-def main():
-    getCalendar()
 
 
 if __name__ == "__main__":
