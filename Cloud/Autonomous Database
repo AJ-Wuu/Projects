@@ -1,7 +1,7 @@
 • https://www.oracle.com/database/technologies/datawarehouse-bigdata/adb-faqs.html
 • https://quizlet.com/549478277/1z0-931-autonomous-database-specialist-flash-cards/
 • https://quizlet.com/br/561349454/1z0-931-20-flash-cards/
-• https://quizlet.com/99207670/oracle-1z0-432-21-40-flash-cards/
+
 • Oracle Autonomous DB: Complete Infrastructure Automation + Complete database Automation + Automated datacenter Operations and Machine learning. It includes provisioning, patching, upgrading, and online backups, monitoring, scaling, diagnosing, performance tuning, optimizing, testing, and change management of complex applications and workloads, and automatically handling failures and errors. 99.95% SLA
 • Customer Workloads Example for OCI Cloud: Oracle Enterprise Applications (Siebel, E-Business Suite, PeopleSoft, Hyperion, etc.), Customer and ISV Apps on Oracle DB, Performance Intensive Workloads, Cloud Native Apps
 • Autonomous Data Warehouse (ADW): Best for fast complex analytic workloads like Data Warehouse, Data Mart, Data Lake, Machine Learning. Has a columnar data format. For memory usage does parallel joins and aggregations. It ignore hints in SQL statements.
