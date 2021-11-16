@@ -3,3 +3,7 @@ RESTful API: https://www.youtube.com/watch?v=QpAhXa12xvU
 
 Python FreeIPA: https://python-freeipa.readthedocs.io/en/latest/
 RedHat IDM CLI: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/linux_domain_identity_authentication_and_policy_guide/managing-idm-cli
+
+Web API:
+    https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+    https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options
