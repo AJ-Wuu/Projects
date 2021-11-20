@@ -23,7 +23,7 @@ Once a node confirms a transaction, it is permanently added to a block on the bl
 
 Miners receive bitcoins for mining blocks on the blockchain. This cycle essentially mints new currency as existing currency is transacted. Bitcoins are essentially complex computer files that can be linked to one's address.
 
-### Pros and Cons
+# Pros and Cons
 
 ### Pros
 * **They are distributed.** This means that one could perform transactions relatively quickly and cheaply with any member of a blockchain network, regardless of geographic location. It also means that, for financial applications like Bitcoin, they are decetralized. This is amazing because no one organization/agency can determine the value of a cryptocurrency. Additionally, third party transactions are not needed. You exchange blockchain with an individual, with no entity looking over your shoulder.
@@ -37,7 +37,7 @@ Miners receive bitcoins for mining blocks on the blockchain. This cycle essentia
 * **Scalability.** One block is created every 10 minutes on the bitcoin network. This means that a potential transaction could take 10 minutes, minimum, to be recorded in the ledger. This provides major scalability issues, especially when you compare this to something like Visa, which processes thousands of transactions per second.
 * **Memory issues.** As mentioned earlier, nodes in most blockchain networks are required to store the entire transaction history of the network before they can transact. In bitcoins case, this exceeds 100GB. What's worse is this 100GB is redundantly replicated across all nodes. This is why users typically do not try to use a locally stored wallet for crypto, opting for sites like coinbase.com. However, as much as they might like to disclaim it, using these sites essentially creates a third-party in any transaction performed. For a currency that claims to be totally peer-to-peer, this is somewhat of an issue.
 
-### How are blockchains private?
+# How are blockchains private?
 A key aspect of privacy in blockchains is the use of private and public keys. These keys are random strings of numbers and are cryptographically related. However, it is mathematically impossible for a user to guess another user's private key from their public key. This provides an increase in security and protects users from hackers. Public keys can be shared with other users in the network because they give away no personal data. Each user has an address that is derived from the public key using a hash function. These addresses are used to send and receive assets on the blockchain, such as cryptocurrency.
 
 A somewhat decent privacy analogy is reddit. Let's say you create a reddit account with no relation to your name or anything, say AnonymousUser. Anyone on reddit could see what you have posted, and could send you messages. However, no one could see who you are. Also, no one would be able to forge messages on your behalf without your password, which is impossible to guess by just knowing your username. The only difference is that, on a blockchain, your reddit posts would be encrypted.
