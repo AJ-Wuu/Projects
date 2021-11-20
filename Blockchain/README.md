@@ -54,4 +54,4 @@ Digital elections: Some developers are working on blockchain technology to be ap
 
 Property transactions: Proponents say blockchain technology can be applied to a wide range of asset sales, be it real estate, autos or investment portfolios.
 
-### Copyright: https://github.com/evanwire/ExtraTopicDiscussions/tree/Master/Topic3
+### Copyright: @evanwire
