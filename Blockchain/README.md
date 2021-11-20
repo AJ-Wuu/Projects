@@ -53,3 +53,5 @@ Smart contracts: With blockchain technology, contract terms can automatically be
 Digital elections: Some developers are working on blockchain technology to be applied to elections.
 
 Property transactions: Proponents say blockchain technology can be applied to a wide range of asset sales, be it real estate, autos or investment portfolios.
+
+Copyright: https://github.com/evanwire/ExtraTopicDiscussions/tree/Master/Topic3
