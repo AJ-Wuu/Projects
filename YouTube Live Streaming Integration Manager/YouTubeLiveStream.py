@@ -14,6 +14,19 @@ import googleapiclient.discovery
 import googleapiclient.errors
 from apscheduler.schedulers.blocking import BlockingScheduler
 
+"""
+Preparation for this project:
+1. Get the credential file from https://console.cloud.google.com/apis -> Credentials -> Download OAuth Client
+2. Go to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
+   to get the initial code
+3. Create an empty json file with yesterday's date, eg. "Calendar-2021-Aug-16.json"
+4. Add the calendar synchronization to HELO
+   (Google Calendar -> Setting -> Settings for my calendars -> Access permisions for events -> Make available to public
+                                                            -> Integrate calendar -> Public address in iCal format)
+5. Connect the HELO to YouTube account
+"""
+
+
 CREDENTIALS_FILE = "WednesdayNiteCredentials.json"
 
 calendarToken = "calendarToken.pickle"
@@ -77,7 +90,7 @@ def accessYouTubeLiveStreamingAPIService():
                 access_type='offline', prompt='consent', include_granted_scopes='true')
             #print('please go to this URL: {}'.format(authorization_url))
             # https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
-            code = '4/1AX4XfWh0hQCOvXKZ2FqKA5GsGuXvsZziK1RyadrEL2V5O7Qyw_7z6oOd9Bg'
+            code = '4/1AX4XfWhomeIDaxaC6l_y8MNGjeEmKXlkOpJruzE1iNcYVUU5Heh3nK4n0JA'
             flow.fetch_token(code=code)
             creds = flow.credentials
 
