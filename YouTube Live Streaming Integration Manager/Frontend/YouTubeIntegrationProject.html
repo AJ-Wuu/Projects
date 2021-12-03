@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="AJWuu">
+    <title>YouTube Integration Project</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div id="instructions">
+        <p>This is an integration project to automatically schedule YouTube live for events.</p>
+        <p>It helps you to connect your Google Calendar with your YouTube Channel (not necessarily in the same account).
+        </p>
+        <p>Input the following required criteria and get started with this awesome project!</p>
+    </div>
+
+    <div id="getCredentialFiles">
+        <p>
+            Get the credential file from <a href="https://console.cloud.google.com/apis">API Console</a> -> Credentials
+            -> Download OAuth Client
+        </p>
+    </div>
+
+    <div id="getInitialCode">
+        <p>
+            Come <a
+                href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true">here</a>
+            to get your initial code, and paste it here:
+        </p>
+    </div>
+
+    <div id="note">
+        <p>
+            Delete previous .pickle when resume the program.
+        </p>
+    </div>
+
+    <div id="buttonDiv"><button id="button" onclick="buttonAction()">Gooo</button></div>
+    <script src="YouTubeIntegration.js"></script>
+</body>
+
+</html>
