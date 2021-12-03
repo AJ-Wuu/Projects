@@ -12,6 +12,7 @@ from google.auth.transport.requests import Request
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 CREDENTIALS_FILE = "WednesdayNiteCredentials.json"
 
@@ -265,6 +266,7 @@ def removePastEvent(existedEvents):
         existedEventTime = existedEvent.get("endDate")[11:19]
         if (existedEventTime < datetime.now().strftime('%H:%M:%S')):
             existedEvents.remove(existedEvent)
+            calendarDelete(existedEvent)
         else:
             break
     return existedEvents
@@ -312,7 +314,7 @@ def main():
     else:
         # yesterday's date in string
         yesterday = (date.today() - timedelta(days=1)).strftime("%Y-%b-%d")
-        #os.remove('Calendar-' + yesterday + '.json')
+        os.remove('Calendar-' + yesterday + '.json')
         for event in todayEvents:
             calendarInsert(event)
             youtubeInsert(event)
@@ -323,4 +325,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    scheduler = BlockingScheduler()
+    scheduler.add_job(main(), 'interval', hours=1)
+    scheduler.start()
