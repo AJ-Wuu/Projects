@@ -316,28 +316,30 @@ def main(code):
     # today's date in string format of "2021-Aug-16"
     today = date.today().strftime("%Y-%b-%d")
     # file name for today's .json
-    jsonFileName = 'Calendar-' + today + '.json'
+    todayJsonFileName = 'Calendar-' + today + '.json'
 
     # check .json file:
     # if not existed, create today's .json and remove yesterday's .json
     # if existed, see if it needs update
-    if os.path.exists(jsonFileName):
+    if os.path.exists(todayJsonFileName):
         # get existedEvents and remove those has passed
         #existedEvents = json.loads(open(jsonFileName, "r").read())
         # get existedEvents and remove those has passed
         existedEvents = removePastEvent(
-            json.loads(open(jsonFileName, "r").read()))
+            json.loads(open(todayJsonFileName, "r").read()))
         compareEvent(todayEvents, existedEvents)
     else:
         # yesterday's date in string
         yesterday = (date.today() - timedelta(days=1)).strftime("%Y-%b-%d")
-        os.remove('Calendar-' + yesterday + '.json')
+        yesterdayJsonFileName = 'Calendar-' + yesterday + '.json'
+        if (os.path.exists(yesterdayJsonFileName)):
+            os.remove(yesterdayJsonFileName)
         for event in todayEvents:
             calendarInsert(event)
             youtubeInsert(event)
 
     # update .json (inserting new, deleting old / past)
-    with open(jsonFileName, "w") as outfile:
+    with open(todayJsonFileName, "w") as outfile:
         json.dump(todayEvents, outfile)
 
 
