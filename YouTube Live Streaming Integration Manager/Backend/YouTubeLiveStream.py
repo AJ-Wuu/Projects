@@ -135,7 +135,6 @@ def calendarGetEventID(targetEvent):
 
 
 def calendarInsert(todayEvent):
-    # creates one hour event tomorrow 10 AM IST
     service = accessGoogleCalendarAPIService()
     request = service.events().insert(
         calendarId='primary',
@@ -149,7 +148,6 @@ def calendarInsert(todayEvent):
 
 
 def calendarUpdate(todayEvent, existedEvent):
-    # update the event to tomorrow 9 AM IST
     service = accessGoogleCalendarAPIService()
     try:
         request = service.events().update(
@@ -167,7 +165,6 @@ def calendarUpdate(todayEvent, existedEvent):
 
 
 def calendarDelete(deletedEvent):
-    # Delete the event
     service = accessGoogleCalendarAPIService()
     try:
         request = service.events().delete(
@@ -346,5 +343,7 @@ def main(code):
 
 if __name__ == "__main__":
     scheduler = BlockingScheduler()
-    scheduler.add_job(main(), 'interval', hours=1)
+    scheduler.add_job(main(
+        "4/1AX4XfWjmLeCsEZKzxUdBdWtdWz7DmOTQrR18nSrVBfAknvXybpVqD7ZbV_Q"), 'interval', hours=1)
     scheduler.start()
+    # https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
