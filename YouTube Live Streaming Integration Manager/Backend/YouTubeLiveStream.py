@@ -33,6 +33,8 @@ CREDENTIALS_FILE = "WednesdayNiteCredentials.json"
 calendarToken = "calendarToken.pickle"
 youtubeToken = "youtubeToken.pickle"
 CredentialCode = ""
+startTimeBuffer = 2  # start live 2 minutes ahead of the schedule
+endTimeBuffer = 1  # end live 1 minute behind the schedule
 
 
 def accessGoogleCalendarAPIService():
@@ -105,16 +107,16 @@ def accessYouTubeLiveStreamingAPIService():
     return youtube
 
 
-def moveStartTime15MinForward(start):
+def moveStartTimeForwards(start):
     startTime = (datetime.strptime(
-        start[11:19], '%H:%M:%S') - timedelta(minutes=15)).strftime("%H:%M:%S")
+        start[11:19], '%H:%M:%S') - timedelta(minutes=startTimeBuffer)).strftime("%H:%M:%S")
     start = start[:11] + startTime + start[19:]
     return start
 
 
-def moveEndTime15MinBackward(end):
+def moveEndTimeBackwards(end):
     endTime = (datetime.strptime(
-        end[11:19], '%H:%M:%S') + timedelta(minutes=15)).strftime("%H:%M:%S")
+        end[11:19], '%H:%M:%S') + timedelta(minutes=endTimeBuffer)).strftime("%H:%M:%S")
     end = end[:11] + endTime + end[19:]
     return end
 
@@ -139,8 +141,8 @@ def calendarInsert(todayEvent):
         calendarId='primary',
         body={
             'summary': todayEvent.get('title'),
-            'start': {"dateTime": moveStartTime15MinForward(todayEvent.get('startDate8601'))},
-            'end': {"dateTime": moveEndTime15MinBackward(todayEvent.get('endDate8601'))}
+            'start': {"dateTime": moveStartTimeForwards(todayEvent.get('startDate8601'))},
+            'end': {"dateTime": moveEndTimeBackwards(todayEvent.get('endDate8601'))}
         }
     )
     request.execute()
@@ -155,8 +157,8 @@ def calendarUpdate(todayEvent, existedEvent):
             eventId=calendarGetEventID(existedEvent),
             body={
                 "summary": todayEvent.get('title'),
-                'start': {"dateTime": moveStartTime15MinForward(todayEvent.get('startDate8601'))},
-                'end': {"dateTime": moveEndTime15MinBackward(todayEvent.get('endDate8601'))}
+                'start': {"dateTime": moveStartTimeForwards(todayEvent.get('startDate8601'))},
+                'end': {"dateTime": moveEndTimeBackwards(todayEvent.get('endDate8601'))}
             }
         )
         request.execute()
@@ -212,8 +214,8 @@ def youtubeInsert(event):
             "snippet": {
                 "title": event.get('title'),
                 "description": event.get('description'),
-                "scheduledStartTime": moveStartTime15MinForward(event.get('startDate8601')),
-                "scheduledEndTime": moveEndTime15MinBackward(event.get('endDate8601'))
+                "scheduledStartTime": moveStartTimeForwards(event.get('startDate8601')),
+                "scheduledEndTime": moveEndTimeBackwards(event.get('endDate8601'))
             },
             "status": {
                 "privacyStatus": "public",
@@ -232,8 +234,8 @@ def youtubeUpdate(event):
             "snippet": {
                 "title": event.get('title'),
                 "description": event.get('description'),
-                "scheduledStartTime": moveStartTime15MinForward(event.get('startDate8601')),
-                "scheduledEndTime": moveEndTime15MinBackward(event.get('endDate8601'))
+                "scheduledStartTime": moveStartTimeForwards(event.get('startDate8601')),
+                "scheduledEndTime": moveEndTimeBackwards(event.get('endDate8601'))
             },
             "id": youtubeGetEventID(event)
         }
