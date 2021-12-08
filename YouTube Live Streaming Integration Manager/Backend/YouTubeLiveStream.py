@@ -352,12 +352,17 @@ def main():
 
 def on_press(key):
     if key == keyboard.Key.esc:
-        # Stop listener
+        # stop listener
         return False
     else:
         main()
         schedule.every(20).minutes.do(main)
-        while 1:
+        while True:
+            # "while True" keeps schedule.run_pending() running
+            # schedule.run_pending() runs all jobs that are scheduled to run, similar to crontab
+            # Potential problem with this method:
+            # 1. job shouldn't be an infinite loop
+            # 2. if the scheduled time period is shorter than job's need, it will cause threads to pile up and system to break
             schedule.run_pending()
             time.sleep(1)
 
@@ -365,6 +370,6 @@ def on_press(key):
 if __name__ == '__main__':
     print("Please remember to delete the pickle file in this directory.")
     print("Press ESC to stop; press any other key to get started.")
-    # Collect events until released
+    # collect events until released
     with keyboard.Listener(on_press=on_press) as listener:
         listener.join()
