@@ -349,8 +349,3 @@ if __name__ == '__main__':
     while 1:
         schedule.run_pending()
         time.sleep(1)
-
-#scheduler = BlockingScheduler()
-#scheduler.add_job(main, 'interval', hours=1)
-# scheduler.start()
-# https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
