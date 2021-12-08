@@ -17,8 +17,7 @@ import schedule
 """
 Preparation for this project:
 1. Get the credential file from https://console.cloud.google.com/apis -> Credentials -> Download OAuth Client
-2. Go to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
-   to get the initial code, paste it in the parameter of schedule()
+2. Go to the authorization url to get the initial code, paste it in the box
 3. Add the calendar synchronization to HELO
    (Google Calendar -> Setting -> Settings for my calendars -> Access permisions for events -> Make available to public
                                                             -> Integrate calendar -> Public address in iCal format)
@@ -31,7 +30,6 @@ CREDENTIALS_FILE = "WednesdayNiteCredentials.json"
 
 calendarToken = "calendarToken.pickle"
 youtubeToken = "youtubeToken.pickle"
-CredentialCode = ""
 startTimeBuffer = 2  # start live 2 minutes ahead of the schedule
 endTimeBuffer = 1  # end live 1 minute behind the schedule
 
@@ -91,9 +89,8 @@ def accessYouTubeLiveStreamingAPIService():
             )
             authorization_url, state = flow.authorization_url(
                 access_type='offline', prompt='consent', include_granted_scopes='true')
-            #print('please go to this URL: {}'.format(authorization_url))
-            # https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
-            code = CredentialCode
+            print('Please go to this URL: {}\n'.format(authorization_url))
+            code = input('Enter the authorization code: ')
             flow.fetch_token(code=code)
             creds = flow.credentials
 
@@ -104,6 +101,16 @@ def accessYouTubeLiveStreamingAPIService():
     youtube = googleapiclient.discovery.build(
         'youtube', 'v3', credentials=creds)
     return youtube
+
+
+def compareCurrentTime(eventTime):
+    eventTime = datetime.strptime(
+        eventTime, '%Y-%m-%dT%H:%M:%S%z').replace(tzinfo=None)
+    currentTime = datetime.now()
+    if (eventTime < currentTime):
+        return False
+    else:
+        return True
 
 
 def moveStartTimeForwards(start):
@@ -189,6 +196,8 @@ def youtubeGetEventID(targetEvent):
 
 
 def youtubeInsert(event):
+    if not compareCurrentTime(event.get('startDate8601')):
+        return None
     youtube = accessYouTubeLiveStreamingAPIService()
     # "part" identifies the properties that the write operation will set as well as the properties that the API response will include
     # The parameter values can be included are id, snippet, cdn, contentDetails and status
@@ -305,10 +314,7 @@ def loadUnpassedTodayEventsFromWeb():
     return todayEvents
 
 
-def job(code):
-    # update CredentialCode
-    CredentialCode = code
-
+def job():
     # get today's events
     todayEvents = loadUnpassedTodayEventsFromWeb()
 
@@ -322,7 +328,7 @@ def job(code):
     # if existed, see if it needs update
     if os.path.exists(todayJsonFileName):
         # get existedEvents and remove those has passed
-        #existedEvents = json.loads(open(jsonFileName, "r").read())
+        # existedEvents = json.loads(open(jsonFileName, "r").read())
         # get existedEvents and remove those has passed
         existedEvents = removePastEvent(
             json.loads(open(todayJsonFileName, "r").read()))
@@ -343,8 +349,8 @@ def job(code):
 
 
 if __name__ == '__main__':
-    schedule.every(20).minutes.do(
-        job, "4/1AX4XfWjmLeCsEZKzxUdBdWtdWz7DmOTQrR18nSrVBfAknvXybpVqD7ZbV_Q")
+    job()
+    schedule.every(20).minutes.do(job)
 
     while 1:
         schedule.run_pending()
