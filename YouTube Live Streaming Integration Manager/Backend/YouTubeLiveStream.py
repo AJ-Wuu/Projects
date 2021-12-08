@@ -368,8 +368,21 @@ def on_press(key):
 
 
 if __name__ == '__main__':
+    '''
+    # keyboard-control mode
     print("Please remember to delete the pickle file in this directory.")
     print("Press ESC to stop; press any other key to get started.")
     # collect events until released
     with keyboard.Listener(on_press=on_press) as listener:
         listener.join()
+    '''
+    # auto mode
+    if os.path.exists(calendarToken):
+        os.remove(calendarToken)
+    if os.path.exists(youtubeToken):
+        os.remove(youtubeToken)
+    main()
+    schedule.every(20).minutes.do(main)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
