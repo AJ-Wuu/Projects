@@ -13,16 +13,18 @@ import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
 import schedule
+from pynput import keyboard
 
 """
 Preparation for this project:
-1. Get the credential file from https://console.cloud.google.com/apis -> Credentials -> Download OAuth Client
-2. Go to the authorization url to get the initial code, paste it in the box
-3. Add the calendar synchronization to HELO
+1. Get the credential file from https://console.cloud.google.com/apis -> Credentials -> Download OAuth Client,
+   and put it in the same directory as this script
+2. Add the calendar synchronization to HELO
    (Google Calendar -> Setting -> Settings for my calendars -> Access permisions for events -> Make available to public
                                                             -> Integrate calendar -> Public address in iCal format)
-4. Connect the HELO to YouTube account (add Stream Key and Stream URL)
-5. Delete previous .pickle when resume the program
+3. Connect the HELO to YouTube account (add Stream Key and Stream URL)
+4. Delete previous .pickle when resume the program
+5. Go to the authorization url to get the initial code, paste it in the box (follow the printed instructions)
 """
 
 
@@ -89,7 +91,7 @@ def accessYouTubeLiveStreamingAPIService():
             )
             authorization_url, state = flow.authorization_url(
                 access_type='offline', prompt='consent', include_granted_scopes='true')
-            print('Please go to this URL: {}\n'.format(authorization_url))
+            print('Please go to this URL: {}'.format(authorization_url))
             code = input('Enter the authorization code: ')
             flow.fetch_token(code=code)
             creds = flow.credentials
@@ -314,7 +316,7 @@ def loadUnpassedTodayEventsFromWeb():
     return todayEvents
 
 
-def job():
+def main():
     # get today's events
     todayEvents = loadUnpassedTodayEventsFromWeb()
 
@@ -348,10 +350,21 @@ def job():
         json.dump(todayEvents, outfile)
 
 
-if __name__ == '__main__':
-    job()
-    schedule.every(20).minutes.do(job)
+def on_press(key):
+    if key == keyboard.Key.esc:
+        # Stop listener
+        return False
+    else:
+        main()
+        schedule.every(20).minutes.do(main)
+        while 1:
+            schedule.run_pending()
+            time.sleep(1)
 
-    while 1:
-        schedule.run_pending()
-        time.sleep(1)
+
+if __name__ == '__main__':
+    print("Please remember to delete the pickle file in this directory.")
+    print("Press ESC to stop; press any other key to get started.")
+    # Collect events until released
+    with keyboard.Listener(on_press=on_press) as listener:
+        listener.join()
