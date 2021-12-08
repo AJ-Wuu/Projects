@@ -1,4 +1,4 @@
-# Auto-Scheduler for multiple broadcasts for YouTube Auto Live Streaming.  
+# Auto-Scheduler for Multiple Live Streaming on YouTube  
 Preparation for this project:
 1. Get the credential file from https://console.cloud.google.com/apis -> Credentials -> Download OAuth Client
 2. Go to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
