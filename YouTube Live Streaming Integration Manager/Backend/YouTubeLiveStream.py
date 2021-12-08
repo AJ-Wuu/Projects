@@ -1,8 +1,8 @@
 '''@author AJWuu'''
 
-from datetime import date, datetime, timedelta, time
+from datetime import date, datetime, timedelta
+import time
 import os
-from google.auth import credentials
 import requests
 import json
 import pickle
@@ -12,19 +12,18 @@ from google.auth.transport.requests import Request
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
-from apscheduler.schedulers.blocking import BlockingScheduler
+import schedule
 
 """
 Preparation for this project:
 1. Get the credential file from https://console.cloud.google.com/apis -> Credentials -> Download OAuth Client
 2. Go to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
-   to get the initial code
-3. Create an empty json file with yesterday's date, eg. "Calendar-2021-Aug-16.json"
-4. Add the calendar synchronization to HELO
+   to get the initial code, paste it in the parameter of schedule()
+3. Add the calendar synchronization to HELO
    (Google Calendar -> Setting -> Settings for my calendars -> Access permisions for events -> Make available to public
                                                             -> Integrate calendar -> Public address in iCal format)
-5. Connect the HELO to YouTube account
-6. Delete previous .pickle when resume the program
+4. Connect the HELO to YouTube account (add Stream Key and Stream URL)
+5. Delete previous .pickle when resume the program
 """
 
 
@@ -306,9 +305,9 @@ def loadUnpassedTodayEventsFromWeb():
     return todayEvents
 
 
-def main():
+def job(code):
     # update CredentialCode
-    CredentialCode = "4/1AX4XfWjmLeCsEZKzxUdBdWtdWz7DmOTQrR18nSrVBfAknvXybpVqD7ZbV_Q"
+    CredentialCode = code
 
     # get today's events
     todayEvents = loadUnpassedTodayEventsFromWeb()
@@ -343,7 +342,15 @@ def main():
         json.dump(todayEvents, outfile)
 
 
-if __name__ == "__main__":
-    scheduler = BlockingScheduler()
-    scheduler.add_job(main, 'interval', hours=1)
-    scheduler.start()
+if __name__ == '__main__':
+    schedule.every(20).minutes.do(
+        job, "4/1AX4XfWjmLeCsEZKzxUdBdWtdWz7DmOTQrR18nSrVBfAknvXybpVqD7ZbV_Q")
+
+    while 1:
+        schedule.run_pending()
+        time.sleep(1)
+
+#scheduler = BlockingScheduler()
+#scheduler.add_job(main, 'interval', hours=1)
+# scheduler.start()
+# https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
