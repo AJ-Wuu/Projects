@@ -23,7 +23,7 @@ Used as a reference in the future transactions.
 3. Condition to transfer (User needs to provide a Signature with their private key)  
 Note: The output can also contain complex conditions (e.g. multiple signatures of multiple people) to acquire ownership.
 
-# Transfer
+# Transfer Transaction
 ## Input
 1. Reference of the Output of the Create Transaction
 2. Signature of the previous User to satisfy the condition to transfer
