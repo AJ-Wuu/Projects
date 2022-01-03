@@ -1,2 +1,2 @@
 # Projects
-Small Projects from Exercises
+Small Projects for Exercises and Work
