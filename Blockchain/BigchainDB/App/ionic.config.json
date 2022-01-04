@@ -1,0 +1,7 @@
+{
+  "name": "bigchaindb-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
