@@ -1,4 +1,0 @@
-Open Command Prompt or Terminal, and run the following pip command to install pyinstall.
-  pip install pyinstaller
-From the location of .py file, run the following command, to build and create .exe file from python file.
-  pyinstaller --onefile -w hello_world.py
