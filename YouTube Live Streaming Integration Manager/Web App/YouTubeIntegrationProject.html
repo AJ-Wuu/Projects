@@ -1,0 +1,42 @@
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <meta name="AJWuu">
+        <title>YouTube Integration Project</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="YouTubeIntegrationManager.py"></script>
+    </head>
+    
+    <body>
+        <div id="instructions">
+            <p>This is an integration manager for automatically scheduling YouTube live streams of multiple events.</p>
+            <p>It helps you to connect your Google Calendar with your YouTube Channel (in the same account).
+            </p>
+            <p>Input the following required contents and get started with this awesome project!</p>
+        </div>
+    
+        <form id="getContents" method="post">
+            <label for="getCredentialFile">
+                Get the credential file from <a href="https://console.cloud.google.com/apis">API Console</a> -> Credentials
+                -> Download OAuth Client. <br>The credential file should be put into this app's running directory. Paste the credential file name here: 
+            </label>
+            <input type="text" id="getCredentialFile" required>.json<br><br>
+            <label for="getEventsFile">
+                Your events should be in a JSON file (online or local). Paste the event file address / name here: 
+            </label>
+            <input type="text" id="getEventsFile" required>.json<br>
+            <label for="getEventsFileType">Choose the type of your events file: </label>
+            <select id="getEventsFileType">
+                <option value="online">Online</option>
+                <option value="local">Local File</option>
+            </select><br><br>
+            <label for="startTimeBuffer">Take </label>
+            <input type="number" id="startTimeBuffer" required> minutes ahead of your events starting time to begin streaming (suggest input: "2").<br><br>
+            <label for="endTimeBuffer">Take </label>
+            <input type="number" id="endTimeBuffer" required> minutes after your events ending time to stop streaming (suggest input: "1").<br><br>
+        </form>
+    
+        <div id="buttonDiv"><button id="button" onclick="run()">Gooo</button></div>
+    </body>
+</html>
