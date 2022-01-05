@@ -1,8 +1,8 @@
 '''@author AJWuu'''
 
-from datetime import date, datetime, timedelta, time
+from datetime import date, datetime, timedelta
+import time
 import os
-from google.auth import credentials
 import requests
 import json
 import pickle
@@ -12,18 +12,19 @@ from google.auth.transport.requests import Request
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
-from apscheduler.schedulers.blocking import BlockingScheduler
+import schedule
+from pynput import keyboard
 
 """
 Preparation for this project:
-1. Get the credential file from https://console.cloud.google.com/apis -> Credentials -> Download OAuth Client
-2. Go to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
-   to get the initial code
-3. Create an empty json file with yesterday's date, eg. "Calendar-2021-Aug-16.json"
-4. Add the calendar synchronization to HELO
+1. Get the credential file from https://console.cloud.google.com/apis -> Credentials -> Download OAuth Client,
+   and put it in the same directory as this script
+2. Add the calendar synchronization to HELO
    (Google Calendar -> Setting -> Settings for my calendars -> Access permisions for events -> Make available to public
                                                             -> Integrate calendar -> Public address in iCal format)
-5. Connect the HELO to YouTube account
+3. Connect the HELO to YouTube account (add Stream Key and Stream URL)
+4. Delete previous .pickle when resume the program
+5. Go to the authorization url to get the initial code, paste it in the box (follow the printed instructions)
 """
 
 
@@ -31,6 +32,8 @@ CREDENTIALS_FILE = "WednesdayNiteCredentials.json"
 
 calendarToken = "calendarToken.pickle"
 youtubeToken = "youtubeToken.pickle"
+startTimeBuffer = 2  # start live 2 minutes ahead of the schedule
+endTimeBuffer = 1  # end live 1 minute behind the schedule
 
 
 def accessGoogleCalendarAPIService():
@@ -88,9 +91,8 @@ def accessYouTubeLiveStreamingAPIService():
             )
             authorization_url, state = flow.authorization_url(
                 access_type='offline', prompt='consent', include_granted_scopes='true')
-            #print('please go to this URL: {}'.format(authorization_url))
-            # https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=330008079846-2q81f3b9t5944jqfhrbiaihkv33gltcs.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&state=K4nH8YUMZAYOqYJwmzg5jUfP0GQnUH&access_type=offline&prompt=consent&include_granted_scopes=true
-            code = '4/1AX4XfWhomeIDaxaC6l_y8MNGjeEmKXlkOpJruzE1iNcYVUU5Heh3nK4n0JA'
+            print('Please go to this URL: {}'.format(authorization_url))
+            code = input('Enter the authorization code: ')
             flow.fetch_token(code=code)
             creds = flow.credentials
 
@@ -103,16 +105,26 @@ def accessYouTubeLiveStreamingAPIService():
     return youtube
 
 
-def moveStartTime15MinForward(start):
+def compareCurrentTime(eventTime):
+    eventTime = datetime.strptime(
+        eventTime, '%Y-%m-%dT%H:%M:%S%z').replace(tzinfo=None)
+    currentTime = datetime.now()
+    if (eventTime < currentTime):
+        return False
+    else:
+        return True
+
+
+def moveStartTimeForwards(start):
     startTime = (datetime.strptime(
-        start[11:19], '%H:%M:%S') - timedelta(minutes=15)).strftime("%H:%M:%S")
+        start[11:19], '%H:%M:%S') - timedelta(minutes=startTimeBuffer)).strftime("%H:%M:%S")
     start = start[:11] + startTime + start[19:]
     return start
 
 
-def moveEndTime15MinBackward(end):
+def moveEndTimeBackwards(end):
     endTime = (datetime.strptime(
-        end[11:19], '%H:%M:%S') + timedelta(minutes=15)).strftime("%H:%M:%S")
+        end[11:19], '%H:%M:%S') + timedelta(minutes=endTimeBuffer)).strftime("%H:%M:%S")
     end = end[:11] + endTime + end[19:]
     return end
 
@@ -131,21 +143,19 @@ def calendarGetEventID(targetEvent):
 
 
 def calendarInsert(todayEvent):
-    # creates one hour event tomorrow 10 AM IST
     service = accessGoogleCalendarAPIService()
     request = service.events().insert(
         calendarId='primary',
         body={
             'summary': todayEvent.get('title'),
-            'start': {"dateTime": moveStartTime15MinForward(todayEvent.get('startDate8601'))},
-            'end': {"dateTime": moveEndTime15MinBackward(todayEvent.get('endDate8601'))}
+            'start': {"dateTime": moveStartTimeForwards(todayEvent.get('startDate8601'))},
+            'end': {"dateTime": moveEndTimeBackwards(todayEvent.get('endDate8601'))}
         }
     )
     request.execute()
 
 
 def calendarUpdate(todayEvent, existedEvent):
-    # update the event to tomorrow 9 AM IST
     service = accessGoogleCalendarAPIService()
     try:
         request = service.events().update(
@@ -153,8 +163,8 @@ def calendarUpdate(todayEvent, existedEvent):
             eventId=calendarGetEventID(existedEvent),
             body={
                 "summary": todayEvent.get('title'),
-                'start': {"dateTime": moveStartTime15MinForward(todayEvent.get('startDate8601'))},
-                'end': {"dateTime": moveEndTime15MinBackward(todayEvent.get('endDate8601'))}
+                'start': {"dateTime": moveStartTimeForwards(todayEvent.get('startDate8601'))},
+                'end': {"dateTime": moveEndTimeBackwards(todayEvent.get('endDate8601'))}
             }
         )
         request.execute()
@@ -163,7 +173,6 @@ def calendarUpdate(todayEvent, existedEvent):
 
 
 def calendarDelete(deletedEvent):
-    # Delete the event
     service = accessGoogleCalendarAPIService()
     try:
         request = service.events().delete(
@@ -189,6 +198,8 @@ def youtubeGetEventID(targetEvent):
 
 
 def youtubeInsert(event):
+    if not compareCurrentTime(event.get('startDate8601')):
+        return None
     youtube = accessYouTubeLiveStreamingAPIService()
     # "part" identifies the properties that the write operation will set as well as the properties that the API response will include
     # The parameter values can be included are id, snippet, cdn, contentDetails and status
@@ -210,8 +221,8 @@ def youtubeInsert(event):
             "snippet": {
                 "title": event.get('title'),
                 "description": event.get('description'),
-                "scheduledStartTime": moveStartTime15MinForward(event.get('startDate8601')),
-                "scheduledEndTime": moveEndTime15MinBackward(event.get('endDate8601'))
+                "scheduledStartTime": moveStartTimeForwards(event.get('startDate8601')),
+                "scheduledEndTime": moveEndTimeBackwards(event.get('endDate8601'))
             },
             "status": {
                 "privacyStatus": "public",
@@ -230,8 +241,8 @@ def youtubeUpdate(event):
             "snippet": {
                 "title": event.get('title'),
                 "description": event.get('description'),
-                "scheduledStartTime": moveStartTime15MinForward(event.get('startDate8601')),
-                "scheduledEndTime": moveEndTime15MinBackward(event.get('endDate8601'))
+                "scheduledStartTime": moveStartTimeForwards(event.get('startDate8601')),
+                "scheduledEndTime": moveEndTimeBackwards(event.get('endDate8601'))
             },
             "id": youtubeGetEventID(event)
         }
@@ -312,32 +323,66 @@ def main():
     # today's date in string format of "2021-Aug-16"
     today = date.today().strftime("%Y-%b-%d")
     # file name for today's .json
-    jsonFileName = 'Calendar-' + today + '.json'
+    todayJsonFileName = 'Calendar-' + today + '.json'
 
     # check .json file:
     # if not existed, create today's .json and remove yesterday's .json
     # if existed, see if it needs update
-    if os.path.exists(jsonFileName):
+    if os.path.exists(todayJsonFileName):
         # get existedEvents and remove those has passed
-        #existedEvents = json.loads(open(jsonFileName, "r").read())
+        # existedEvents = json.loads(open(jsonFileName, "r").read())
         # get existedEvents and remove those has passed
         existedEvents = removePastEvent(
-            json.loads(open(jsonFileName, "r").read()))
+            json.loads(open(todayJsonFileName, "r").read()))
         compareEvent(todayEvents, existedEvents)
     else:
         # yesterday's date in string
         yesterday = (date.today() - timedelta(days=1)).strftime("%Y-%b-%d")
-        os.remove('Calendar-' + yesterday + '.json')
+        yesterdayJsonFileName = 'Calendar-' + yesterday + '.json'
+        if (os.path.exists(yesterdayJsonFileName)):
+            os.remove(yesterdayJsonFileName)
         for event in todayEvents:
             calendarInsert(event)
             youtubeInsert(event)
 
     # update .json (inserting new, deleting old / past)
-    with open(jsonFileName, "w") as outfile:
+    with open(todayJsonFileName, "w") as outfile:
         json.dump(todayEvents, outfile)
 
 
-if __name__ == "__main__":
-    scheduler = BlockingScheduler()
-    scheduler.add_job(main(), 'interval', hours=1)
-    scheduler.start()
+def on_press(key):
+    if key == keyboard.Key.esc:
+        # stop listener
+        return False
+    else:
+        main()
+        schedule.every(20).minutes.do(main)
+        while True:
+            # "while True" keeps schedule.run_pending() running
+            # schedule.run_pending() runs all jobs that are scheduled to run, similar to crontab
+            # Potential problem with this method:
+            # 1. job shouldn't be an infinite loop
+            # 2. if the scheduled time period is shorter than job's need, it will cause threads to pile up and system to break
+            schedule.run_pending()
+            time.sleep(1)
+
+
+if __name__ == '__main__':
+    '''
+    # keyboard-control mode
+    print("Please remember to delete the pickle file in this directory.")
+    print("Press ESC to stop; press any other key to get started.")
+    # collect events until released
+    with keyboard.Listener(on_press=on_press) as listener:
+        listener.join()
+    '''
+    # auto mode
+    if os.path.exists(calendarToken):
+        os.remove(calendarToken)
+    if os.path.exists(youtubeToken):
+        os.remove(youtubeToken)
+    main()
+    schedule.every(20).minutes.do(main)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
