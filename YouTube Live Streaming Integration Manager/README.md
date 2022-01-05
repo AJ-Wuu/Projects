@@ -1,5 +1,5 @@
 # YouTube Live Streaming Integration Manager
-## --> Auto-Scheduler for Multiple Live Streaming on YouTube  
+**Auto-Scheduler for Live Streaming Multiple Events on YouTube**  
 Preparation for this project:
 1. Get the credential file from https://console.cloud.google.com/apis -> Credentials -> Download OAuth Client
 2. Prepare your own python code for generating your events into JSON file (with title, description, startDate8601, endDate8601)
