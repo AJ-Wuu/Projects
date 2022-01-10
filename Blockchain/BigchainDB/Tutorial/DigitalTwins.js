@@ -1,8 +1,9 @@
+const BigchainDB = require('bigchaindb-driver')
+const API_PATH = 'https://test.ipdb.io/api/v1/'
 const bip39 = require('bip39')
-const seed = bip39.mnemonicToSeed('seedPhrase').slice(0, 32)
-const alice = new BigchainDB.Ed25519Keypair(seed) // create a key pair
-
+const seed = bip39.mnemonicToSeedSync(bip39.generateMnemonic()).slice(0,32)
 const Orm = require('bigchaindb-orm')
+//npm install --save @babel/runtime babel-runtime
 
 class DID extends Orm {
     // create DID class
@@ -10,12 +11,13 @@ class DID extends Orm {
     // They do not dependent on a centralized registry, identity provider, or certificate authority.
     constructor(entity) {
         super(API_PATH)
-        this.entity = entity
+        this.entity = entity //public key of the object itself
     }
 }
 
-const car = new BigchainDB.Ed25519Keypair()
-const sensorGPS = new BigchainDB.Ed25519Keypair()
+const alice = new BigchainDB.Ed25519Keypair(seed)
+const car = new BigchainDB.Ed25519Keypair(seed)
+const sensorGPS = new BigchainDB.Ed25519Keypair(seed)
 
 const userDID = new DID(alice.publicKey)
 const carDID = new DID(car.publicKey)
