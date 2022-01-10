@@ -1,15 +1,21 @@
-// Create Tokens
+const BigchainDB = require('bigchaindb-driver')
+const bip39 = require('bip39')
+const seed = bip39.mnemonicToSeedSync(bip39.generateMnemonic()).slice(0,32)
+const API_PATH = 'https://test.ipdb.io/api/v1/'
+const conn = new BigchainDB.Connection(API_PATH)
+
 const nTokens = 10000
 let tokensLeft
-const tokenCreator = new BigchainDB
-    .Ed25519Keypair(bip39.mnemonicToSeed('seedPhrase').slice(0, 32))
+const tokenCreator = new BigchainDB.Ed25519Keypair(seed)
 let createTxId
+const amountToSend = 200
+
 function tokenLaunch() {
     // Construct a transaction payload
     const tx = BigchainDB.Transaction.makeCreateTransaction({
-        token: 'TT (Tutorial Tokens)',
-        number_tokens: nTokens
-    },
+            token: 'TT (Tutorial Tokens)',
+            number_tokens: nTokens
+        },
         // Metadata field, contains information about the transaction itself
         // (can be `null` if not needed)
         {
@@ -17,32 +23,26 @@ function tokenLaunch() {
         },
         // Output: Divisible asset, include nTokens as parameter
         [BigchainDB.Transaction.makeOutput(BigchainDB.Transaction
-            .makeEd25519Condition(tokenCreator.publicKey), nTokens.toString())],
+          .makeEd25519Condition(tokenCreator.publicKey), nTokens.toString())],
         tokenCreator.publicKey
     )
 
     // Sign the transaction with the private key of the token creator
     const txSigned = BigchainDB.Transaction
-        .signTransaction(tx, tokenCreator.privateKey)
+      .signTransaction(tx, tokenCreator.privateKey)
 
     // Send the transaction off to BigchainDB
     conn.postTransactionCommit(txSigned)
         .then(res => {
             createTxId = res.id
             tokensLeft = nTokens
-            document.body.innerHTML = '<h3>Transaction created</h3>';
+            document.body.innerHTML ='<h3>Transaction created</h3>';
             // txSigned.id corresponds to the asset id of the tokens
-            document.body.innerHTML += txSigned.id
+            document.body.innerHTML +=txSigned.id
         })
 }
 
-// Distribute Tokens
-const amountToSend = 200
-
-const newUser = new BigchainDB
-    .Ed25519Keypair(bip39.mnemonicToSeed('newUserseedPhrase')
-        .slice(0, 32))
-
+const newUser = new BigchainDB.Ed25519Keypair(seed)
 function transferTokens() {
     // User who will receive the 200 tokens
     const newUser = new BigchainDB.Ed25519Keypair()
@@ -61,13 +61,13 @@ function transferTokens() {
                     // Transaction output: Two outputs, because the whole input
                     // must be spent
                     [BigchainDB.Transaction.makeOutput(
-                        BigchainDB.Transaction
+                            BigchainDB.Transaction
                             .makeEd25519Condition(tokenCreator.publicKey),
-                        (tokensLeft - amountToSend).toString()),
-                    BigchainDB.Transaction.makeOutput(
-                        BigchainDB.Transaction
+                            (tokensLeft - amountToSend).toString()),
+                        BigchainDB.Transaction.makeOutput(
+                            BigchainDB.Transaction
                             .makeEd25519Condition(newUser.publicKey),
-                        amountToSend)
+                            amountToSend)
                     ],
                     // Metadata (optional)
                     {
@@ -91,9 +91,7 @@ function transferTokens() {
 
 }
 
-// Combine Transactions
-const bestFriend = new driver.Ed25519Keypair()
-
+const bestFriend = new BigchainDB.Ed25519Keypair()
 function combineTokens(transaction1, outputIndex1, transaction2, outputIndex2,
     totalTokens) {
     const combineTranfer = BigchainDB.Transaction.makeTransferTransaction(
@@ -109,8 +107,8 @@ function combineTokens(transaction1, outputIndex1, transaction2, outputIndex2,
             BigchainDB.Transaction.makeEd25519Condition(
                 bestFriend.publicKey),
             (totalTokens).toString())], {
-        transfer_to: 'my best friend'
-    }
+            transfer_to: 'my best friend'
+        }
     )
 
     // Sign the transaction with the newUser key
