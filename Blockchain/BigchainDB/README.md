@@ -29,3 +29,6 @@ Note: The output can also contain complex conditions (e.g. multiple signatures o
 2. Signature of the previous User to satisfy the condition to transfer
 ## Output
 Same as Create Transaction, just replace the previous User with the current User
+
+# Website
+http://docs.bigchaindb.com/projects/js-driver/en/latest/usage.html
