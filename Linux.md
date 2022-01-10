@@ -8,3 +8,6 @@ The simple answer is to not use the systemctl command. Instead, use the equivale
 | systemctl status service_name | service service_name status |
 | systemctl enable service_name | chkconfig service_name on |
 | systemctl disable service_name | chkconfig service_name off |
+
+# Couldn't connect to Docker daemon at http+docker://localhost - is it running?
+Add ```sudo``` before the command.
