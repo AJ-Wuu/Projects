@@ -10,4 +10,4 @@ The simple answer is to not use the systemctl command. Instead, use the equivale
 | systemctl disable service_name | chkconfig service_name off |
 
 # Couldn't connect to Docker daemon at http+docker://localhost - is it running?
-Add ```sudo``` before the command.
+Add ```sudo``` before the command (```sudo service docker start```).
