@@ -1,3 +1,23 @@
+# Regression
+## Types
+* Simple Regression
+* Multiple Regression
+* Linear Regression
+* Non-linear Regression
+## Regression Algorithms
+* Ordinal regression
+* Poisson regression
+* Fast forest quantile regression
+* Linear, Polynomial, Lasso, Stepwise, Ridge regression
+* Bayesian linear regression
+* Neutral network regression
+* Decision forest regression
+* Boosted decision tree regression
+* KNN (K-nearest neighbors)
+## Simple Linear Regression
+
+## Multiple Linear Regression
+## Non-linear Regression
 # Recommender Systems
 ## Types
 * Content-based: "Show me more of the same of what I've liked before"  
