@@ -1,4 +1,27 @@
-# Major Machine Learning Techniques
+# AI, Machine Learning & Deep Learning
+## AI
+## Machine Learning
+### Major Machine Learning Techniques
+* Regression/Estimation: predicting continuous values
+* Classification: predicting the item class/category of a case
+* Clustering: finding the structure of data; summarization; group
+* Association: associating frequent co-occurring items/events
+* Anomaly Detection: discovering abnormal and unusual cases
+* Sequence Mining: predicting next events; click-stream (Markov Model, HMM)
+* Dimension Reduction: reducing the size of data (PCA)
+* Recommendation Systems: recommending items
+## Deep Learning
+# Supervised & Unsupervised Learning
+## Supervised
+* Classification: classifies labeled data
+* Regression: predicates trends using previous labeled data
+* Advantages
+  * Has more evaluation methods than unsupervised learning
+  * Controlled environment
+## Unsupervised
+* Clustering: finds patterns and groupings from unlabeled data
+* Features:
+  * Has fewer evaluation methods tha
 # Regression
 ## Types
 * Simple Regression
