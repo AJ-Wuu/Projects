@@ -30,11 +30,6 @@
   * Has fewer evaluation methods than supervised learning
   * Less controlled environment
 # Regression
-## Types
-* Simple Regression
-* Multiple Regression
-* Linear Regression
-* Non-linear Regression
 ## Regression Algorithms
 * Ordinal regression
 * Poisson regression
@@ -46,9 +41,41 @@
 * Boosted decision tree regression
 * KNN (K-nearest neighbors)
 ## Simple Linear Regression
-
+* Definition: One x & One y
+* Goal: minimize MSE
+* Pros: fast; no parameter tuning; easy to understand; highly interpretable
 ## Multiple Linear Regression
+* Definition: Multiple x & One y
+* 
 ## Non-linear Regression
+## Model Evaluation Approaches
+### Train&Test on the same dataset
+* Definition: train the model on the entire dataset, then test it using a portion of the same dataset
+* High training accuracy
+  * Training accuracy is the percentage of correct predictions that the model makes when using the test dataset. 
+  * Having a high training accuracy may result in an ‘over-fit’ of the data. 
+  * If a model is overly trained to the dataset, it may capture noise and produce a non-generalized model.
+* Low out-of-sample accuracy
+  * Out-of-sample accuracy is the percentage of correct predictions that the model makes on data that the model has not been trained on.
+### Train/Test split
+* Definition: splitting the dataset into training and testing sets respectively, which are mutually exclusive
+* More accurate evaluation on out-of-sample accuracy
+* More realistic for real-world problems
+* Highly dependent on the datasets on which the data was trained and tested
+### K-fold cross-validation
+* Use the same dataset where each split is different
+* Process
+  * 1st fold: trained with \[0, 1/k) data, and tested with \[1/k, 1) data
+  * 2nd fold: trained with \[1/k, 2/k) data, and tested with \[0, 1/k) ∪ \[2/k, 1) data
+  * keep going until the kth fold
+  * average the accuracy of each fold
+## Evaluation Metrics
+* MAE: Mean Absolute Error
+* MSE: Mean Square Error
+* RMSE: Root Mean Square Error -> square root of MSE
+* RAE: Relative Absolute Error
+* RSE: Relative Squared Error
+* R^2 -> NOT an error
 # Recommender Systems
 ## Types
 * Content-based: "Show me more of the same of what I've liked before"  
