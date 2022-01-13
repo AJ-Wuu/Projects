@@ -99,7 +99,18 @@ Decision Trees (ID3, C4.5, C5.0); Naive Bayes; Linear Discriminant Analysis; k-N
   * Predict the response of the unknown data point using the most popular response value from the K-nearest neighbors
 ## Decision Trees
 ## Logistic Regression
-## Support Vector Machine
+## Support Vector Machine (SVM)
+* Definition: SVM is a supervised algorithm that classifies cases by finding a separator
+* Process
+  * Mapping data to a high-dimensional feature space
+  * Finding a separator
+* Data Transformation: Kernelling
+  * Mapping data into a higher dimensional space that can change a linearly inseparable dataset into a linearly separable dataset
+  * Linear; Polynomial; RBF; Sigmoid
+* Hyperplane is learned from training data using an optimization procedure that maximizes the margin
+* Pros: accurate in high-dimensional spaces; memory efficient
+* Cons: prone to over-fitting; no probability estimation; only works for small datasets
+* Applications: Image recognition; Text category assignment; Detecting spam; Sentiment analysis; Gene Expression Classification; Regression, outlier detection and clustering
 ## Evaluation Metrics
 * Jaccard index
   * J(y, y_hat) = |y ∩ y_hat| / |y ∪ y_hat|
