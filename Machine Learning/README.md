@@ -45,9 +45,22 @@
 * Goal: minimize MSE
 * Pros: fast; no parameter tuning; easy to understand; highly interpretable
 ## Multiple Linear Regression
-* Definition: Multiple x & One y
-* 
+* Definition: Multiple x & One y, predicting a continuous variable
+* Implementation:
+  * identify the strength of the effect that the independent variables have on the dependent variable
+  * predict the impact of changes (how the dependent variable changes when we change the independent variables)
+* Estimate θ
+  * Ordinary Least Squares: linear algebra operations (takes a long time, only works for datasets less than 10k rows)
+  * Optimization algorithm: gradient descent (proper for a very large dataset)
 ## Non-linear Regression
+* Definition: y_hat must be a non-linear function of the parameter θ, not necessarily the features x
+* Modeled by a polynomial regression
+  * can be transformed into linear regression model
+  * can fit the curve using the method of least squares
+## Linear VS Non-linear
+1. Visualization
+2. Calculate the correlation coefficient between independent and dependent variables (greater than or equal to 0.7 -> linear tendency)
+3. Choose non-linear if we cannot accurately model the relationship with linear parameters
 ## Model Evaluation Approaches
 ### Train&Test on the same dataset
 * Definition: train the model on the entire dataset, then test it using a portion of the same dataset
