@@ -1,3 +1,4 @@
+# Major Machine Learning Techniques
 # Regression
 ## Types
 * Simple Regression
