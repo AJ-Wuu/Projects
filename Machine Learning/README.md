@@ -31,15 +31,7 @@
   * Less controlled environment
 # Regression
 ## Regression Algorithms
-* Ordinal regression
-* Poisson regression
-* Fast forest quantile regression
-* Linear, Polynomial, Lasso, Stepwise, Ridge regression
-* Bayesian linear regression
-* Neutral network regression
-* Decision forest regression
-* Boosted decision tree regression
-* KNN (K-nearest neighbors)
+Ordinal regression; Poisson regression; Fast forest quantile regression; Linear, Polynomial, Lasso, Stepwise, Ridge regression; Bayesian linear regression; Neutral network regression; Decision forest regression; Boosted decision tree regression; KNN (K-nearest neighbors)
 ## Simple Linear Regression
 * Definition: One x & One y
 * Goal: minimize MSE
@@ -89,6 +81,38 @@
 * RAE: Relative Absolute Error
 * RSE: Relative Squared Error
 * R^2 -> NOT an error
+# Classification
+## Definition
+1. Categorize unlabeled items into classes
+2. The target attribute is a categorical variable
+3. Multi-Class Classification: a classifier that can predict a field with multiple discrete values
+## Classification Algorithms
+Decision Trees (ID3, C4.5, C5.0); Naive Bayes; Linear Discriminant Analysis; k-Nearest Neighbor; Logistic Regression; Neural Networks; Support Vector Machines (SVM)
+## K-Nearest Neighbors (KNN)
+* A method for classifying cases based on their similarity to other cases.
+* Cases that are near each other are said to be "neighbors".
+* Based on similar cases with same class labels are near each other.
+* Algorithm
+  * Pick a value for K
+  * Calculate the distance of unknown case from all cases
+  * Select the K-observations in the training data that are "nearest" to the unknown data point
+  * Predict the response of the unknown data point using the most popular response value from the K-nearest neighbors
+## Decision Trees
+## Logistic Regression
+## Support Vector Machine
+## Evaluation Metrics
+* Jaccard index
+  * J(y, y_hat) = |y ∩ y_hat| / |y ∪ y_hat|
+  * J(y, y_hat) = 1 -> highest accuracy; J(y, y_hat) = 0 -> lowest accuracy
+* F1-score
+  * Confusion matrix
+  * Precision is a measure of the accuracy, provided that a class label has been predicted -> Precision: TP / (TP + FP)
+  * Recall is the true positive rate -> Recall = TP / (TP + FN)
+  * F1-score = 2 × (prc × rec) / (prc + rec)
+  * F1-score = 1 -> highest accuracy; F1-score = 0 -> lowest accuracy
+* Log Loss
+  * LogLoss = -(1/n) * sum(y × log(y_hat) + (1-y) × log(1-y_hat))
+  * LogLoss = 0 -> highest accuracy; LogLoss = 1 -> lowest accuracy
 # Recommender Systems
 ## Types
 * Content-based: "Show me more of the same of what I've liked before"  
