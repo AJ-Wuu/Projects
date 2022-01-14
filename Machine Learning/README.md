@@ -98,6 +98,20 @@ Decision Trees (ID3, C4.5, C5.0); Naive Bayes; Linear Discriminant Analysis; k-N
   * Select the K-observations in the training data that are "nearest" to the unknown data point
   * Predict the response of the unknown data point using the most popular response value from the K-nearest neighbors
 ## Decision Trees
+* Definition: Decision trees are built by splitting the training set into distinct nodes, where one node contains all of or most of one category of the data.
+* Algorithms
+  * Step 1: Choose an attribute from the dataset
+  * Step 2: Calculate the significance of attribute in splitting of data
+  * Step 3: Split data based on the value of the best attribute
+  * Step 4: Go to Step 1
+* Predictiveness is based on decrease in impurity of nodes
+* Entropy is the measure of randomness or uncertainty
+* More predictiveness, purer (less impurity), lower entropy, less uniform of the distribution
+* Information gain
+  * is the information that can increase the level of certainty after splitting
+  * information gain = entropy before split - weighted entropy after split
+  * can be seen as the "opposite" of the entropy (entropy = information disorder)
+  * after a split, information gain should increase
 ## Logistic Regression
 ## Support Vector Machine (SVM)
 * Definition: SVM is a supervised algorithm that classifies cases by finding a separator
