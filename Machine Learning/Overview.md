@@ -125,7 +125,8 @@ Decision Trees (ID3, C4.5, C5.0); Naive Bayes; Linear Discriminant Analysis; k-N
 * Training Steps
   * Step 1: Initialize the parameters randomly
   * Step 2: Feed the cost function with training set, and calculate the error
-  * Step 3: Calculate the gradient of cost function (expensive) -- gradient descent is a technique to use derivative of a cost function to change the parameter values, to minimize the cost
+  * Step 3: Calculate the gradient of cost function (expensive)
+    * Gradient Descent is a technique to use derivative of a cost function to change the parameter values to minimize the cost
   * Step 4: Update weights with new values
   * Step 5: Go to Step 2 until cost is small enough
   * Step 6: Predict the new customer X
@@ -158,6 +159,32 @@ Logistic predicts a variable which is binary (eg. yes/no, true/false), in a cate
 * Log Loss
   * LogLoss = -(1/n) * sum(y × log(y_hat) + (1-y) × log(1-y_hat))
   * LogLoss = 0 -> highest accuracy; LogLoss = 1 -> lowest accuracy
+# Clustering
+## Definition
+The process of finding clusters in a dataset, unsupervised.
+A cluster is a group of data points or objects in a dataset that are similar to other objects in the group, and dissimilar to datapoints in other clusters.
+## Implementation
+* Exploratory data analysis
+* Summary generation
+* Outlier detection
+* Finding duplicates
+* Pre-processing step
+## Algorithm Types
+* Partitioned-Based
+  * Relatively effcient
+  * Eg. k-Means, k-Median, Fuzzy c-Means
+* Hierarchical
+  * Produces trees of clusters
+  * Eg. Agglomerative, Divisive
+* Density-Based
+  * Produces arbitrary shaped clusters
+  * Eg. DBSCAN
+## Clustering VS Classification
+classification is a supervised learning where each training data instance belongs to a particular class.
+Clustering is an unsupervised learning where the data is unlabeled.
+## K-Means Clustering
+## Hierarchical Clustering
+## Density-Based Clustering
 # Recommender Systems
 ## Types
 * Content-based: "Show me more of the same of what I've liked before"  
