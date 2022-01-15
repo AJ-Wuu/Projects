@@ -11,6 +11,15 @@
     * sum up the weighted rating and normalize it (by similarity matrix) to get recommendation matrix
   * item-based: based on items' similarity
   * Challenges: data sparsity (users only rate a limited number of items), cold start (hard to recommend to new users), scalability (increase in number of users or items)
+  * Advantages
+    * Takes other user's ratings into consideration
+    * Doesn't need to study or extract information from the recommended item
+    * Adapts to the user's interests which might change over time
+  * Disadvantages
+    * Approximation function can be slow
+    * There might be a low amount of users to approximate
+    * Privacy issues when trying to learn the user's preferences
+
 ## Implementation
 * Memory-based
   * Uses the entire user-item dataset to generate a recommendation
