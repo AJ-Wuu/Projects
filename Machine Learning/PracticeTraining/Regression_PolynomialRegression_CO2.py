@@ -6,7 +6,6 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn import linear_model
 from sklearn.metrics import r2_score
 
-# data source: !wget -O FuelConsumption.csv https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-ML0101EN-SkillsNetwork/labs/Module%202/data/FuelConsumptionCo2.csv
 df = pd.read_csv("FuelConsumption.csv")
 cdf = df[['ENGINESIZE', 'CYLINDERS', 'FUELCONSUMPTION_COMB', 'CO2EMISSIONS']]
 cdf.head(9)
