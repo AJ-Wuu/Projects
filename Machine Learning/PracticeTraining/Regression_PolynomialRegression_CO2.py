@@ -7,7 +7,6 @@ from sklearn.metrics import r2_score
 
 df = pd.read_csv("FuelConsumption.csv")
 cdf = df[['ENGINESIZE', 'CYLINDERS', 'FUELCONSUMPTION_COMB', 'CO2EMISSIONS']]
-# cdf.head(9)
 
 # create train and test datasets
 msk = np.random.rand(len(df)) < 0.8
