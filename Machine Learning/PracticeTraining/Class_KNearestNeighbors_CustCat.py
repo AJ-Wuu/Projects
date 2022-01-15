@@ -9,7 +9,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 # data source: !wget -O teleCust1000t.csv https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-ML0101EN-SkillsNetwork/labs/Module%203/data/teleCust1000t.csv
 df = pd.read_csv('teleCust1000t.csv')
-df.head()
+# df.head()
 # calculate the number of customers of each class
 # df['custcat'].value_counts()
 df.hist(column='income', bins=50)
