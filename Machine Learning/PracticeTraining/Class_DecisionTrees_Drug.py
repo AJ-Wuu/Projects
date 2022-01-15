@@ -40,7 +40,7 @@ print('Shape of X training set {}'.format(X_trainset.shape),
 print('Shape of X training set {}'.format(X_testset.shape),
       '&', ' Size of Y training set {}'.format(y_testset.shape))
 
-# modelling
+# modeling
 drugTree = DecisionTreeClassifier(criterion="entropy", max_depth=4)
 drugTree  # it shows the default parameters
 drugTree.fit(X_trainset, y_trainset)
