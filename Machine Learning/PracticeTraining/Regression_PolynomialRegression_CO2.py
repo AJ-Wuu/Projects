@@ -7,14 +7,14 @@ from sklearn.metrics import r2_score
 
 df = pd.read_csv("FuelConsumption.csv")
 cdf = df[['ENGINESIZE', 'CYLINDERS', 'FUELCONSUMPTION_COMB', 'CO2EMISSIONS']]
-cdf.head(9)
+# cdf.head(9)
 
 # create train and test datasets
 msk = np.random.rand(len(df)) < 0.8
 train = cdf[msk]
 test = cdf[~msk]
 
-# modelling
+# modeling
 # degree = 2
 train_x = np.asanyarray(train[['ENGINESIZE']])
 train_y = np.asanyarray(train[['CO2EMISSIONS']])
