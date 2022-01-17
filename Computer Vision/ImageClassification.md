@@ -31,3 +31,27 @@
   * At the end of each epoch we calculate the accuracy on the validation data We repeat the process for the next iteration
     * If the accuracy decreases we have trained too much (overfitting)
 # SoftMax and Multi-Class Classification
+* Softmax Function = a function that turns a vector of K real values into a vector of K real values that sum to 1
+* Training for SoftMax is almost identical to logistic regression
+* Other methods to convert a two-class classifier to multi-class classifier:
+  * one-vs-rest
+  * one-vs-one
+# Support Vector Machines (SVM)
+* Kernel types:
+  * Linear
+  * Polynomial
+  * Radial basis function (RBF)
+    * most widely used
+    * finds the difference between two inputs X and X’ (called a support vector)
+    * has the parameter gamma (higher gamma == overfit)
+* Maximize Margin
+  * the hyperplane is learned from training data using an optimization procedure that maximizes the margin
+  * this optimization problem can also be solved by gradient descent
+# Image Features
+* In practice, using the image intensities for classification does not function well
+* Color is not always the best tool for classification
+* Histogram of Oriented Gradients (H.O.G.) = a combination of all pixel-level histograms and used with SVM to classify the image
+  * counts occurrences of gradient orientation in localized portions of an image
+  * HOG would generate a histogram for each of these regions separately
+  * the histograms are created using the gradients and orientations of the pixel values
+  * to improve imbalance to highlights and shadows in the image, cells are block normalized
